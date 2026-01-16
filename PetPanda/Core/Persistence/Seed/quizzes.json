@@ -1,0 +1,136 @@
+{
+  "quizzes": [
+    {
+      "id": "protect_pandas_quiz_01",
+      "title": "How to Help Protect Pandas?",
+      "description": "A fun and insightful quiz that tests your knowledge of panda protection and everyday conservation actions.",
+      "categoryId": "population",
+      "tags": ["Habitat", "Behavior", "Population"],
+      "duration": 10,
+      "lastUpdated": "2026-01-01",
+      "coverImage": "panda_help_quiz_cover",
+      "questions": [
+        {
+          "id": "q1",
+          "text": "What is the biggest threat to wild pandas?",
+          "answers": [
+            "Lack of predators",
+            "Habitat loss and bamboo decline",
+            "Too much tourism",
+            "Excessive meat consumption"
+          ],
+          "correctIndex": 1,
+          "explanation": "Deforestation and land expansion destroy the bamboo forests pandas rely on for survival."
+        },
+        {
+          "id": "q2",
+          "text": "How can reserves help pandas most effectively?",
+          "answers": [
+            "Feed them only fruits",
+            "Protect and restore bamboo forests",
+            "Keep pandas indoors",
+            "Limit their bamboo intake"
+          ],
+          "correctIndex": 1,
+          "explanation": "Healthy bamboo ecosystems are the foundation of panda conservation."
+        },
+        {
+          "id": "q3",
+          "text": "What can individuals do to support panda conservation?",
+          "answers": [
+            "Donate to verified conservation programs",
+            "Plant any type of tree anywhere",
+            "Adopt a real panda home",
+            "Feed pandas online"
+          ],
+          "correctIndex": 0,
+          "explanation": "Supporting established organizations ensures funds go to real-world habitat protection."
+        },
+        {
+          "id": "q4",
+          "text": "Why is bamboo forest protection critical?",
+          "answers": [
+            "It protects only pandas",
+            "It supports whole ecosystems pandas depend on",
+            "Bamboo grows too fast",
+            "Forests harm panda migration"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pandas are an 'umbrella species'—protecting them saves many other animals in the same habitat."
+        },
+        {
+          "id": "q5",
+          "text": "What helps reduce climate impact on panda habitats?",
+          "answers": [
+            "Reducing carbon emissions and protecting forests",
+            "Building more roads",
+            "Growing bamboo in cities only",
+            "Moving pandas to zoos permanently"
+          ],
+          "correctIndex": 0,
+          "explanation": "Climate change affects bamboo growth, so global environmental efforts are key."
+        },
+        {
+          "id": "q6",
+          "text": "Which action raises global awareness the most?",
+          "answers": [
+            "Sharing educational content about pandas",
+            "Keeping conservation facts private",
+            "Posting unrelated memes",
+            "Ignoring environmental topics"
+          ],
+          "correctIndex": 0,
+          "explanation": "Education helps people understand why saving pandas is important for the planet."
+        },
+        {
+          "id": "q7",
+          "text": "What is symbolic adoption of a panda?",
+          "answers": [
+            "Taking a panda home",
+            "A fundraising method supporting conservation",
+            "A breeding technique",
+            "Feeding pandas bamboo remotely"
+          ],
+          "correctIndex": 1,
+          "explanation": "It's a way to donate where you 'adopt' a panda and receive updates, while the money funds field work."
+        },
+        {
+          "id": "q8",
+          "text": "How do pandas mainly get hydration?",
+          "answers": [
+            "Drinking milk daily",
+            "Eating fresh bamboo and accessing natural streams",
+            "Drinking soda in reserves",
+            "Rarely consuming water"
+          ],
+          "correctIndex": 1,
+          "explanation": "Fresh bamboo is about 40-50% water, and they supplement this with mountain streams."
+        },
+        {
+          "id": "q9",
+          "text": "What improves panda population growth long-term?",
+          "answers": [
+            "One-year campaigns",
+            "Decades-long habitat and science programs",
+            "Feeding pandas more meat",
+            "Removing bamboo forests"
+          ],
+          "correctIndex": 1,
+          "explanation": "Panda recovery is slow and requires consistent protection over many years."
+        },
+        {
+          "id": "q10",
+          "text": "How can communities near habitats help pandas?",
+          "answers": [
+            "Expand farmland into forests",
+            "Support eco-tourism, avoid deforestation, protect bamboo zones",
+            "Relocate pandas away from mountains",
+            "Reduce bamboo to build towns"
+          ],
+          "correctIndex": 1,
+          "explanation": "When local people benefit from eco-tourism, they become the best guardians of the forests."
+        }
+      ]
+    }
+  ]
+}
