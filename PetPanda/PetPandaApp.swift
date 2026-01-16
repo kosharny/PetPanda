@@ -10,12 +10,29 @@ import CoreData
 
 @main
 struct PetPandaApp: App {
-    let persistenceController = PersistenceController.shared
+//    let persistenceController = PersistenceController.shared
+    
+    let coreDataStack = CoreDataStack()
+    var importer: ContentImporter {
+            ContentImporter(coreDataStack: coreDataStack)
+        }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ContentView(coreDataStack: coreDataStack, importer: importer)
+//                .onAppear {
+//                    importContentIfNeeded()
+//                }
         }
     }
+    
+//    private func importContentIfNeeded() {
+//        let importer = ContentImporter(
+//            coreDataStack: coreDataStack
+//        )
+//        
+//        DispatchQueue.global(qos: .userInitiated).async {
+////            try? importer.importAll()
+//        }
+//    }
 }

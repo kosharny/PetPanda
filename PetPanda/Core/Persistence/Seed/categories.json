@@ -1,0 +1,34 @@
+{
+  "categories": [
+    {
+      "id": "habitat",
+      "name": "Habitat",
+      "icon": "habitat_icon",
+      "order": 1
+    },
+    {
+      "id": "diet",
+      "name": "Diet",
+      "icon": "diet_icon",
+      "order": 2
+    },
+    {
+      "id": "behavior",
+      "name": "Behavior",
+      "icon": "behavior_icon",
+      "order": 3
+    },
+    {
+      "id": "fun_facts",
+      "name": "Fun Facts",
+      "icon": "fun_facts_icon",
+      "order": 4
+    },
+    {
+      "id": "health",
+      "name": "Health",
+      "icon": "health_icon",
+      "order": 5
+    }
+  ]
+}

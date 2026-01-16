@@ -1,0 +1,79 @@
+{
+  "guides": [
+    {
+      "id": "panda_diet_01",
+      "title": "What Do Giant Pandas Eat?",
+      "difficulty": "easy",
+      "category": "Diet",
+      "duration": 10,
+      "tags": [
+        "Diet",
+        "Nutrition",
+        "Bamboo"
+      ],
+      "steps": [
+        {
+          "id": "step_1",
+          "title": "Main diet",
+          "content": [
+            "Bamboo — 99% of daily food",
+            "Pandas eat: Bamboo stalks, leaves, and shoots (their favorite)"
+          ],
+          "image": "panda_eating_bamboo",
+          "hint": "Shoots are the richest in nutrients."
+        },
+        {
+          "id": "step_2",
+          "title": "Occasional extras",
+          "content": [
+            "Sometimes pandas may eat: Small rodents, Birds, Eggs, Insects"
+          ],
+          "image": "panda_extra_food",
+          "hint": "This makes up only 1% of their diet."
+        },
+        {
+          "id": "step_3",
+          "title": "Daily intake",
+          "content": [
+            "Pandas eat 12–38 kg (26–84 lbs) of bamboo per day",
+            "Feeding takes 10–14 hours a day",
+            "They prefer young shoots in spring and leaves in winter"
+          ],
+          "image": "panda_daily_cycle",
+          "hint": "Feeding is their main activity during the day."
+        },
+        {
+          "id": "step_4",
+          "title": "Why bamboo?",
+          "content": [
+            "Fiber supports digestion",
+            "Protein (especially in shoots)",
+            "Calcium & phosphorus for strong bones",
+            "Water — up to 50% of hydration"
+          ],
+          "image": "panda_pseudo_thumb",
+          "hint": "They have a 'pseudo-thumb' to hold bamboo like a hand!"
+        }
+      ],
+      "summary": [
+        "Pandas must eat huge amounts because bamboo is low-calorie.",
+        "Without bamboo forests, pandas cannot survive.",
+        "Conservation = protecting bamboo ecosystems."
+      ],
+      "faq": [
+        {
+          "question": "Are pandas herbivores?",
+          "answer": "Not biologically — they are classified as carnivores, but functionally they eat like herbivores."
+        },
+        {
+          "question": "Do pandas eat meat regularly?",
+          "answer": "No. Their bodies are not adapted to digest much animal protein."
+        },
+        {
+          "question": "Why do they eat so much?",
+          "answer": "Bamboo contains very few calories, so they need large quantities for energy."
+        }
+      ]
+    }
+  ]
+}

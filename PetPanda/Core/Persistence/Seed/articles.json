@@ -1,0 +1,79 @@
+{
+  "articles": [
+    {
+      "id": "panda_conservation_success_2026",
+      "title": "Panda Conservation Success Story",
+      "categoryId": "habitat",
+      "tags": [
+        "Population",
+        "Conservation",
+        "Habitat"
+      ],
+      "readTime": 10,
+      "coverImage": "panda_population_cover",
+      "lastUpdated": "2026-01-01",
+      "contentBlocks": [
+        {
+          "type": "text",
+          "value": "A global conservation success story showing how habitat protection and science helped giant pandas recover. Giant pandas were once on the brink of extinction. Today, their recovery is considered one of the most successful conservation efforts in history — a result of habitat protection, scientific programs, and global awareness."
+        },
+        {
+          "type": "text",
+          "value": "Native only to China’s mountain forests, pandas depend almost entirely on bamboo, making their survival directly tied to the health of this ecosystem."
+        },
+        {
+          "type": "list",
+          "title": "How the comeback happened",
+          "value": [
+            "Habitat loss was the main threat due to deforestation and land expansion.",
+            "China created a national protection strategy focused on rebuilding forests and isolating safe zones.",
+            "Protected reserves grew to more than 60, later unified into the Giant Panda National Park.",
+            "Scientific breeding and health monitoring programs improved survival rates of newborn cubs.",
+            "International cooperation and symbolic adoption programs helped fund protection initiatives."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "The panda story proves that conservation can work when governments, scientists, and communities act together."
+        },
+        {
+          "type": "fact",
+          "title": "Key facts you should know",
+          "value": [
+            "Giant pandas are still classified as vulnerable, not fully safe.",
+            "Bamboo forests are essential — protecting pandas means protecting entire ecosystems.",
+            "Panda reproduction is slow, so population growth takes decades, not years.",
+            "Climate change remains a long-term risk to bamboo availability.",
+            "Poaching has decreased dramatically but requires constant monitoring.",
+            "Conservation success is ongoing, and public support still matters."
+          ]
+        },
+        {
+          "type": "qa",
+          "value": [
+            {
+              "question": "Why were pandas endangered?",
+              "answer": "The biggest reason was habitat destruction from deforestation, which reduced bamboo forests — their primary food source."
+            },
+            {
+              "question": "How many pandas are in the wild now?",
+              "answer": "Around 1,800+ giant pandas live in the wild today thanks to conservation and habitat protection."
+            },
+            {
+              "question": "Do breeding programs release pandas into nature?",
+              "answer": "Yes, but only a small percentage. Pandas must learn survival skills first — bamboo foraging, climbing, and self-defense."
+            },
+            {
+              "question": "Why does population grow so slowly?",
+              "answer": "Pandas reproduce rarely. Females are fertile only 2–3 days a year, and usually raise one cub at a time."
+            },
+            {
+              "question": "How does bamboo protection help other species?",
+              "answer": "Bamboo forests support red pandas, golden monkeys, birds, insects, and many rare plant species. Protecting pandas protects them too."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
