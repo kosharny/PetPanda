@@ -11,15 +11,16 @@ import CoreData
 @main
 struct PetPandaApp: App {
 //    let persistenceController = PersistenceController.shared
-    
-    let coreDataStack = CoreDataStack()
-    var importer: ContentImporter {
-            ContentImporter(coreDataStack: coreDataStack)
-        }
+    let container = PersistenceController.shared.container
+//    let coreDataStack = CoreDataStack()
+//    var importer: ContentImporter {
+//            ContentImporter(coreDataStack: coreDataStack)
+//        }
 
     var body: some Scene {
         WindowGroup {
-            ContentView(coreDataStack: coreDataStack, importer: importer)
+            RootView(conteiner: container)
+//            ContentView(coreDataStack: coreDataStack, importer: importer)
 //                .onAppear {
 //                    importContentIfNeeded()
 //                }
