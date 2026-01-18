@@ -56,7 +56,7 @@ struct HomeView: View {
                             .padding(.horizontal)
                         }
                         
-                        Spacer(minLength: 100) // Место под TabBar
+                        Spacer(minLength: 100)
                     }
                     .padding(.top)
                 }
