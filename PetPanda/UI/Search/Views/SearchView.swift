@@ -21,26 +21,29 @@ struct SearchView: View {
                 
                 HeaderView(tilte: "Search", leftBarButton: "chevron.left", rightBarButton: "gearshape.fill")
                 
-                if !isLoading {
-                    EmptyView(title: "Uh-oh, no pandas know this one :( Try another search.", imageName: "emptyImage", isButtonNeeded: false)
-                } else {
+                
                     ScrollView(showsIndicators: false) {
                         SearchBarView(isSearchView: true, searchText: $searchText, showFilters: $showFilters)
-                        Spacer(minLength: 200)
-                        
-                        Text("Recent searches")
-                            .font(.customSen(.semiBold, size: 16))
-                            .foregroundStyle(.mainGreen)
-                        
-                        
-                        RecentSearchButtonView(title: "Bamboo nutrition facts")
-                        RecentSearchButtonView(title: "Giant panda population 2025")
-                        RecentSearchButtonView(title: "Panda habitat conservation tips")
-                        RecentSearchButtonView(title: "Baby panda weight at birth")
-                        RecentSearchButtonView(title: "Bamboo forest ecosystem species")
-                        
+                        Spacer(minLength: 150)
+                        if !isLoading {
+                            EmptyView(title: "Uh-oh, no pandas know this one :( Try another search.", imageName: "emptyImage", isButtonNeeded: false)
+                        } else {
+                            VStack {
+                                
+                                Text("Recent searches")
+                                    .font(.customSen(.semiBold, size: 16))
+                                    .foregroundStyle(.mainGreen)
+                                    .padding(.bottom)
+                                
+                                
+                                RecentSearchButtonView(title: "Bamboo nutrition facts")
+                                RecentSearchButtonView(title: "Giant panda population 2025")
+                                RecentSearchButtonView(title: "Panda habitat conservation tips")
+                                RecentSearchButtonView(title: "Baby panda weight at birth")
+                                RecentSearchButtonView(title: "Bamboo forest ecosystem species")
+                            }
+                        }
                         Spacer(minLength: 100)
-                    }
                 }
             }
         }

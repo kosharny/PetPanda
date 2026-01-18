@@ -18,27 +18,30 @@ struct FavoritesView: View {
                 
                 HeaderView(tilte: "Favorites", leftBarButton: "chevron.left", rightBarButton: "gearshape.fill")
                 
-                if !isLoading {
-                    EmptyView(title: "Add articles and guides here", imageName: "favoriteEmptyImage", isButtonNeeded: false)
-                } else {
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 20) {
-                            HStack {
-                                CotegoryButton(title: "All")
-                                CotegoryButton(title: "Articles")
-                                CotegoryButton(title: "Guides")
-                                CotegoryButton(title: "Quizzes")
-                            }
-                            .padding(.vertical)
-                            ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
-                            ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
-                            ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
-                            ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
+                
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 20) {
+                        HStack {
+                            CotegoryButton(title: "All")
+                            CotegoryButton(title: "Articles")
+                            CotegoryButton(title: "Guides")
+                            CotegoryButton(title: "Quizzes")
                         }
-                        .padding(.horizontal)
-                        Spacer(minLength: 100)
+                        .padding(.vertical)
+                        if !isLoading {
+                            EmptyView(title: "Add articles and guides here", imageName: "favoriteEmptyImage", isButtonNeeded: false)
+                        } else {
+                            VStack(spacing: 20) {
+                                ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
+                                ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
+                                ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
+                                ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
+                            }
+                        }
                     }
-                }
+                    Spacer(minLength: 100)
+                } 
+                .padding(.horizontal)
             }
         }
     }
