@@ -48,60 +48,9 @@ struct ArticleCard: View {
                         RoundedRectangle(cornerRadius: 28)
                             .stroke(Color.mainGreen.opacity(0.3), lineWidth: 1)
                     )
-                Text("10 min")
-                    .font(.customSen(.regular, size: 10))
-                    .foregroundStyle(.mainGreen)
-                    .padding(4)
-                    .padding(.horizontal)
-                    .background(
-                        RoundedRectangle(cornerRadius: 28)
-                            .fill(Material.ultraThinMaterial)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 28)
-                                    .fill(Color.mainGreen)
-                                )
-                            .opacity(0.1)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 28)
-                            .stroke(Color.mainGreen.opacity(0.3), lineWidth: 1)
-                    )
-                Text(tag)
-                    .font(.customSen(.regular, size: 10))
-                    .foregroundStyle(.mainGreen)
-                    .padding(4)
-                    .padding(.horizontal)
-                    .background(
-                        RoundedRectangle(cornerRadius: 28)
-                            .fill(Material.ultraThinMaterial)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 28)
-                                    .fill(Color.mainGreen)
-                                )
-                            .opacity(0.1)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 28)
-                            .stroke(Color.mainGreen.opacity(0.3), lineWidth: 1)
-                    )
-                Text(type)
-                    .font(.customSen(.regular, size: 10))
-                    .foregroundStyle(.mainGreen)
-                    .padding(4)
-                    .padding(.horizontal)
-                    .background(
-                        RoundedRectangle(cornerRadius: 28)
-                            .fill(Material.ultraThinMaterial)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 28)
-                                    .fill(Color.mainGreen)
-                                )
-                            .opacity(0.1)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 28)
-                            .stroke(Color.mainGreen.opacity(0.3), lineWidth: 1)
-                    )
+                TagView(title: "10 min")
+                TagView(title: tag)
+                TagView(title: type)
             }
             .foregroundColor(.gray)
         }
