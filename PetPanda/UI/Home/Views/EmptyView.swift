@@ -8,27 +8,31 @@
 import SwiftUI
 
 struct EmptyView: View {
+    let title: String
+    let imageName: String
+    let isButtonNeeded: Bool
     var body: some View {
         ZStack {
             BackgroundView()
             VStack {
-                Text("Uh-oh, pandas couldn’t deliver this page :(")
+                Text(title)
                     .font(.customSen(.medium, size: 18))
                     .foregroundStyle(.text)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
-                Image("emptyImage")
+                Image(imageName)
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 350)
-                
-                MainButtonsView(title: "Retry")
-                    .padding(.horizontal)
+                if isButtonNeeded {
+                    MainButtonsView(title: "Retry")
+                        .padding(.horizontal)
+                }
             }
         }
     }
 }
 
 #Preview {
-    EmptyView()
+    EmptyView(title: "Uh-oh, pandas couldn’t deliver this page :(", imageName: "emptyImage", isButtonNeeded: false)
 }
