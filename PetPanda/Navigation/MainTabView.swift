@@ -16,7 +16,6 @@ struct MainTabView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-//            BackgroundView()
             TabView(selection: $selectedTab) {
                 HomeView()
                     .tag(0)
@@ -24,7 +23,7 @@ struct MainTabView: View {
                     .tag(1)
                 Text("Search")
                     .tag(2)
-                Text("Favorite")
+                FavoritesView()
                     .tag(3)
                 Text("Stats")
                     .tag(4)

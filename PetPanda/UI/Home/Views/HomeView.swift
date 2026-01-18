@@ -14,31 +14,11 @@ struct HomeView: View {
             BackgroundView()
             
             VStack(alignment: .leading, spacing: 20) {
-                ZStack {
-                    Text("Home")
-                        .font(.customSen(.semiBold, size: 20))
-                        .foregroundStyle(.text)
-                              
-                    HStack {
-                        Spacer()
-                        Image(systemName: "gearshape.fill")
-                            .frame(maxWidth: 25)
-                            .foregroundStyle(.textButton)
-                            .padding()
-                            .background(
-                                Circle()
-                                    .fill(Material.ultraThinMaterial)
-                                    .opacity(0.2)
-                            )
-                            .overlay(
-                                Circle()
-                                    .stroke(Color.textButton.opacity(0.3), lineWidth: 1)
-                            )
-                    }
-                }
-                .padding(.horizontal)
+                
+                HeaderView(tilte: "Home", leftBarButton: nil, rightBarButton: "gearshape.fill")
+                
                 if !isLoading {
-                    EmptyView()
+                    EmptyView(title: "Uh-oh, pandas couldn’t deliver this page :(", imageName: "emptyImage", isButtonNeeded: true)
                 } else {
                     ScrollView(showsIndicators: false) {
                         FactCardView()
