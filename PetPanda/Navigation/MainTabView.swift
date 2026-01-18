@@ -25,7 +25,7 @@ struct MainTabView: View {
                     .tag(2)
                 FavoritesView()
                     .tag(3)
-                Text("Stats")
+                StatsView()
                     .tag(4)
             }
             
