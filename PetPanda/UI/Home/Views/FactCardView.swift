@@ -1,0 +1,53 @@
+//
+//  FactCardView.swift
+//  PetPanda
+//
+//  Created by Maksim Kosharny on 18.01.2026.
+//
+
+import SwiftUI
+
+struct FactCardView: View {
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 15) {
+                HStack {
+                    Image("pandaFact")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 30)
+                        .offset(x: 2, y: 2)
+                    Text("Fact of the Day")
+                }
+                .font(.caption).bold()
+                .foregroundStyle(.mainGreen)
+                .padding(2)
+                .padding(.horizontal)
+                .background(
+                    RoundedRectangle(cornerRadius: 28)
+                        .fill(Material.ultraThinMaterial)
+                        .opacity(0.2)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 28)
+                        .stroke(Color.textButton.opacity(0.3), lineWidth: 1)
+                )
+                
+                Text("Only 1,864 giant pandas remain in the wild today.")
+                    .font(.customSen(.medium, size: 18))
+                    .foregroundStyle(.text)
+                MainButtonsView(title: "Open")
+            }
+            Spacer()
+            Image("factImage")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: 120)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.ultraThinMaterial.opacity(0.2))
+        .cornerRadius(25)
+        .padding(.horizontal)
+    }
+}
