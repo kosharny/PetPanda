@@ -115,20 +115,20 @@ struct GlassToggleStyle: ToggleStyle {
             
             ZStack {
                 Capsule()
-                    .fill(Color.white.opacity(0.05))
-                    .frame(width: 64, height: 34)
+                    .fill(Color.text.opacity(0.05))
+                    .frame(width: 84, height: 34)
                     .overlay(
                         Capsule()
-                            .stroke(Color.white.opacity(0.1), lineWidth: 1.5)
+                            .stroke(Color.text.opacity(0.1), lineWidth: 1.5)
                     )
                 
                 Capsule()
                     .fill(.ultraThinMaterial)
                     .overlay(
                         Capsule()
-                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                            .fill(Color.mainGreen.opacity(configuration.isOn ? 1 : 0.1))
                     )
-                    .frame(width: 34, height: 28)
+                    .frame(width: 54, height: 28)
                     .offset(x: configuration.isOn ? 12 : -12)
                     .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
             }

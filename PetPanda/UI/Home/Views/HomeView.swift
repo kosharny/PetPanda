@@ -23,7 +23,6 @@ struct HomeView: View {
                     ScrollView(showsIndicators: false) {
                         FactCardView()
                             .padding(.vertical)
-                        // Grid Categories
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                             QuickAccessButton(icon: "population", title: "Population")
                             QuickAccessButton(icon: "guides", title: "Care guides")
@@ -42,7 +41,6 @@ struct HomeView: View {
                         }
                         .padding(.vertical)
                         .padding(.leading)
-                        // Recommended Section
                         VStack(alignment: .leading) {
                             Text("Recommended")
                                 .font(.customSen(.semiBold, size: 16))
