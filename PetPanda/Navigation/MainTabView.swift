@@ -19,7 +19,7 @@ struct MainTabView: View {
             TabView(selection: $selectedTab) {
                 HomeView()
                     .tag(0)
-                Text("Journal")
+                JournalView()
                     .tag(1)
                 Text("Search")
                     .tag(2)

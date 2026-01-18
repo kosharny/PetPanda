@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainButtonsView: View {
+struct MainButtonsFillView: View {
     let title: String
     var body: some View {
         Button(title) { }
