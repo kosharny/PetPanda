@@ -21,7 +21,7 @@ struct MainTabView: View {
                     .tag(0)
                 JournalView()
                     .tag(1)
-                Text("Search")
+                SearchView()
                     .tag(2)
                 FavoritesView()
                     .tag(3)

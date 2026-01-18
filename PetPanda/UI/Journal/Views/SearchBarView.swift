@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchBarView: View {
+    let isSearchView: Bool
     @Binding var searchText: String
     @Binding var showFilters: Bool
     
@@ -43,7 +44,7 @@ struct SearchBarView: View {
                     .padding(.horizontal, 16)
             }
             .popover(isPresented: $showFilters) {
-                FilterMenuView()
+                FilterMenuView(isSearchView: isSearchView)
                     .presentationCompactAdaptation(.popover)
             }
         }

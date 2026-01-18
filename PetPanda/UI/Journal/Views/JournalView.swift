@@ -24,7 +24,7 @@ struct JournalView: View {
                     EmptyView(title: "Here you will find articles read and quizzes completed.", imageName: "journalEmptyImage", isButtonNeeded: false)
                 } else {
                     ScrollView(showsIndicators: false) {
-                        SearchBarView(searchText: $searchText, showFilters: $showFilters)
+                        SearchBarView(isSearchView: false, searchText: $searchText, showFilters: $showFilters)
                         VStack(spacing: 20) {
                             HStack {
                                 CotegoryButton(title: "All")

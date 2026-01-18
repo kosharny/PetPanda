@@ -8,8 +8,56 @@
 import SwiftUI
 
 struct SearchView: View {
+    
+    let isLoading = true
+    @State private var searchText = ""
+    @State private var showFilters = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            BackgroundView()
+            
+            VStack(alignment: .leading, spacing: 20) {
+                
+                HeaderView(tilte: "Search", leftBarButton: "chevron.left", rightBarButton: "gearshape.fill")
+                
+                if !isLoading {
+                    EmptyView(title: "Uh-oh, no pandas know this one :( Try another search.", imageName: "emptyImage", isButtonNeeded: false)
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        SearchBarView(isSearchView: true, searchText: $searchText, showFilters: $showFilters)
+                        Spacer(minLength: 200)
+                        
+                        Text("Recent searches")
+                            .font(.customSen(.semiBold, size: 16))
+                            .foregroundStyle(.mainGreen)
+                        
+                        
+                        RecentSearchButtonView(title: "Bamboo nutrition facts")
+                        RecentSearchButtonView(title: "Giant panda population 2025")
+                        RecentSearchButtonView(title: "Panda habitat conservation tips")
+                        RecentSearchButtonView(title: "Baby panda weight at birth")
+                        RecentSearchButtonView(title: "Bamboo forest ecosystem species")
+                        
+                        Spacer(minLength: 100)
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct RecentSearchButtonView: View {
+    let title: String
+    var body: some View {
+        Text(title)
+            .font(.customSen(.regular, size: 14))
+            .foregroundStyle(.text)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(.ultraThinMaterial.opacity(0.1))
+            .cornerRadius(25)
+            .padding(.horizontal)
     }
 }
 

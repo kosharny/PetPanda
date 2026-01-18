@@ -8,15 +8,28 @@
 import SwiftUI
 
 struct FilterMenuView: View {
+    let isSearchView: Bool
+    @State private var unreadOnly = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            FilterGroup(title: "By title:") {
-                HStack {
-                    CotegoryButton(title: "A - Z")
-                    CotegoryButton(title: "Z - A")
+            if !isSearchView {
+                FilterGroup(title: "By title:") {
+                    HStack {
+                        CotegoryButton(title: "A - Z")
+                        CotegoryButton(title: "Z - A")
+                    }
                 }
             }
-            
+            if isSearchView {
+                FilterGroup(title: "Type:") {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
+                        CotegoryButton(title: "Articles")
+                        CotegoryButton(title: "Guides")
+                        CotegoryButton(title: "Quizzes")
+                    }
+                }
+            }
             FilterGroup(title: "Categories:") {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
                     CotegoryButton(title: "Habitat")
@@ -33,12 +46,19 @@ struct FilterMenuView: View {
                     CotegoryButton(title: "10+ min")
                 }
             }
-            FilterGroup(title: "By progress:") {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                    CotegoryButton(title: "< 20%")
-                    CotegoryButton(title: "20 - 70%")
-                    CotegoryButton(title: "70 - 100%")
+            if !isSearchView {
+                FilterGroup(title: "By progress:") {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
+                        CotegoryButton(title: "< 20%")
+                        CotegoryButton(title: "20 - 70%")
+                        CotegoryButton(title: "70 - 100%")
+                    }
                 }
+            }
+            HStack {
+                Toggle("Unread only", isOn: $unreadOnly)
+                    .toggleStyle(GlassToggleStyle())
+                    .padding(.horizontal, 20)
             }
             HStack {
                 MainButtonTransparentView(title: "Reset")
@@ -81,5 +101,42 @@ struct FilterGroup<Content: View>: View {
             content
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct GlassToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label
+                .font(.customSen(.semiBold, size: 16))
+                .foregroundColor(.text)
+            
+            Spacer()
+            
+            ZStack {
+                Capsule()
+                    .fill(Color.white.opacity(0.05))
+                    .frame(width: 64, height: 34)
+                    .overlay(
+                        Capsule()
+                            .stroke(Color.white.opacity(0.1), lineWidth: 1.5)
+                    )
+                
+                Capsule()
+                    .fill(.ultraThinMaterial)
+                    .overlay(
+                        Capsule()
+                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                    )
+                    .frame(width: 34, height: 28)
+                    .offset(x: configuration.isOn ? 12 : -12)
+                    .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 1)
+            }
+            .onTapGesture {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                    configuration.isOn.toggle()
+                }
+            }
+        }
     }
 }
