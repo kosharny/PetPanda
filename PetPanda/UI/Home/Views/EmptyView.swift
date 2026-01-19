@@ -23,7 +23,7 @@ struct EmptyView: View {
                 .scaledToFit()
                 .frame(maxWidth: 350)
             if isButtonNeeded {
-                MainButtonsFillView(title: "Retry")
+                MainButtonsFillView(title: "Retry", onReady: {})
                     .padding(.horizontal)
             }
         }

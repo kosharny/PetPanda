@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct AboutView: View {
+    let onBackTap: () -> Void
+    
     var body: some View {
         ZStack {
             BackgroundView()
             
             VStack(spacing: 20) {
                 
-                HeaderView(tilte: "About App", leftBarButton: "chevron.left", rightBarButton: nil)
+                HeaderView(
+                    tilte: "About App",
+                    leftBarButton: "chevron.left",
+                    rightBarButton: nil,
+                    onRightTap: {
+                    },
+                    onLeftTap: {
+                        onBackTap()
+                    })
                 
                 Image("mainLogo")
                     .resizable()
@@ -95,10 +105,11 @@ struct AboutView: View {
                 
                 Spacer(minLength: 100)
             }
+            .navigationBarHidden(true)
         }
     }
 }
 
 #Preview {
-    AboutView()
+    AboutView(onBackTap: {})
 }

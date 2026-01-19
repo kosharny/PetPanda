@@ -9,13 +9,26 @@ import SwiftUI
 
 struct HomeView: View {
     let isLoading = true
+    
+    let onSettingsTap: () -> Void
+    let onArticleTap: (String) -> Void
+    let onCategoryTap: ([String]) -> Void
+    let onQuickAccessTap: ([String]) -> Void
+    
     var body: some View {
         ZStack {
             BackgroundView()
             
             VStack(alignment: .leading, spacing: 20) {
                 
-                HeaderView(tilte: "Home", leftBarButton: nil, rightBarButton: "gearshape.fill")
+                HeaderView(
+                    tilte: "Home",
+                    leftBarButton: nil,
+                    rightBarButton: "gearshape.fill",
+                    onRightTap: {
+                        onSettingsTap()
+                    },
+                    onLeftTap: {})
                 
                 if !isLoading {
                     EmptyView(title: "Uh-oh, pandas couldn’t deliver this page :(", imageName: "emptyImage", isButtonNeeded: true)
@@ -24,19 +37,37 @@ struct HomeView: View {
                         FactCardView()
                             .padding(.vertical)
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                            QuickAccessButton(icon: "population", title: "Population")
-                            QuickAccessButton(icon: "guides", title: "Care guides")
-                            QuickAccessButton(icon: "quizzes", title: "Quizzes")
-                            QuickAccessButton(icon: "journal", title: "Journal")
+                            QuickAccessButton(icon: "population", title: "Population", onTap: {
+                                onQuickAccessTap([""])
+                            })
+                            QuickAccessButton(icon: "guides", title: "Care guides", onTap: {
+                                onQuickAccessTap([""])
+                            })
+                            QuickAccessButton(icon: "quizzes", title: "Quizzes", onTap: {
+                                onQuickAccessTap([""])
+                            })
+                            QuickAccessButton(icon: "journal", title: "Journal", onTap: {
+                                onQuickAccessTap([""])
+                            })
                         }
                         .padding(.horizontal)
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack{
-                                CotegoryButton(title: "Habitat")
-                                CotegoryButton(title: "Diet")
-                                CotegoryButton(title: "Behavior")
-                                CotegoryButton(title: "Fun Facts")
-                                CotegoryButton(title: "Health")
+                                CotegoryButton(title: "Habitat", onTap: {
+                                    onCategoryTap([""])
+                                })
+                                CotegoryButton(title: "Diet", onTap: {
+                                    onCategoryTap([""])
+                                })
+                                CotegoryButton(title: "Behavior", onTap: {
+                                    onCategoryTap([""])
+                                })
+                                CotegoryButton(title: "Fun Facts", onTap: {
+                                    onCategoryTap([""])
+                                })
+                                CotegoryButton(title: "Health", onTap: {
+                                    onCategoryTap([""])
+                                })
                             }
                         }
                         .padding(.vertical)
@@ -48,8 +79,24 @@ struct HomeView: View {
                                 .padding(.horizontal)
                             
                             VStack(spacing: 12) {
-                                ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
-                                ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
+                                ArticleCard(
+                                    category: "Article",
+                                    title: "Panda Conservation Success Story",
+                                    tag: "Population",
+                                    type: "Habitat",
+                                    onTap: {
+                                        onArticleTap("")
+                                    }
+                                )
+                                ArticleCard(
+                                    category: "Guides",
+                                    title: "What Do Giant Pandas Eat?",
+                                    tag: "Diet",
+                                    type: "Care guides",
+                                    onTap: {
+                                        onArticleTap("")
+                                    }
+                                )
                             }
                             .padding(.horizontal)
                         }
@@ -64,5 +111,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(onSettingsTap: {}, onArticleTap: {_ in }, onCategoryTap: {_ in }, onQuickAccessTap: {_ in })
 }
