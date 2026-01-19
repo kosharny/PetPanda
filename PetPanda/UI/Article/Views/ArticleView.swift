@@ -8,13 +8,28 @@
 import SwiftUI
 
 struct ArticleView: View {
+    
+    let articleId: String
+    let onBackTap: () -> Void
+    let onReady: () -> Void
+    
+    
     var body: some View {
         ZStack {
             BackgroundView()
             
             VStack(alignment: .leading, spacing: 20) {
                 
-                HeaderView(tilte: "Article", leftBarButton: "chevron.left", rightBarButton: "star.fill")
+                HeaderView(
+                    tilte: "Article",
+                    leftBarButton: "chevron.left",
+                    rightBarButton: "star.fill",
+                    onRightTap: {
+                        
+                    },
+                    onLeftTap: {
+                        onBackTap()
+                    })
                 
                 
                 ScrollView(showsIndicators: false) {
@@ -61,9 +76,9 @@ struct ArticleView: View {
                         .padding(.horizontal)
                         
                         HStack {
-                            CotegoryButton(title: "Habitat")
-                            CotegoryButton(title: "Diet")
-                            CotegoryButton(title: "Behavior")
+                            CotegoryButton(title: "Habitat", onTap: {})
+                            CotegoryButton(title: "Diet", onTap: {})
+                            CotegoryButton(title: "Behavior", onTap: {})
                         }
                         .padding(.horizontal)
                         
@@ -122,14 +137,15 @@ struct ArticleView: View {
                         )
                         
                         HStack {
-                            MainButtonTransparentView(title: "Share")
-                            MainButtonsFillView(title: "Mark as read")
+                            MainButtonTransparentView(title: "Share", onTap: {})
+                            MainButtonsFillView(title: "Mark as read", onReady: onBackTap)
                         }
                         .padding(.horizontal)
                     }
                     Spacer(minLength: 100)
                 }
             }
+            .navigationBarHidden(true)
         }
     }
 }
@@ -155,5 +171,5 @@ struct ArticleTextView: View {
 }
 
 #Preview {
-    ArticleView()
+    ArticleView(articleId: "", onBackTap: {}, onReady: {})
 }

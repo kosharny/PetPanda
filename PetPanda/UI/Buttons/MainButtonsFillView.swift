@@ -9,8 +9,10 @@ import SwiftUI
 
 struct MainButtonsFillView: View {
     let title: String
+    let onReady: () -> Void
+    
     var body: some View {
-        Button(title) { }
+        Button(title) { onReady() }
             .font(.customSen(.medium, size: 18))
             .foregroundStyle(.text)
             .frame(maxWidth: .infinity)

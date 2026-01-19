@@ -27,7 +27,7 @@ struct RootView: View {
                 )
                 
             case .main:
-                Text("Main")
+                MainTabView()
 //                MainTabView(container: conteiner)
             }
         }

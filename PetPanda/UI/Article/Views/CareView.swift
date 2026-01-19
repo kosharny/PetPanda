@@ -11,13 +11,25 @@ struct CareView: View {
     @State private var currentStep = 0
     @State private var notesText: String = ""
     
+    let careId: String
+    let onBackTap: () -> Void
+    let onReady: () -> Void
+    
     var body: some View {
         ZStack {
             BackgroundView()
             
             VStack(spacing: 20) {
                 
-                HeaderView(tilte: "What Do Giant Pandas Eat?", leftBarButton: "chevron.left", rightBarButton: "star.fill")
+                HeaderView(
+                    tilte: "What Do Giant Pandas Eat?",
+                    leftBarButton: "chevron.left",
+                    rightBarButton: "star.fill",
+                    onRightTap: {
+                    },
+                    onLeftTap: {
+                        onBackTap()
+                    })
                 
                 Text("Steps 1 of 4")
                     .font(.customSen(.semiBold, size: 18))
@@ -69,9 +81,9 @@ struct CareView: View {
                         NotesFieldView(notesText: $notesText)
                         
                         HStack {
-                            MainButtonTransparentView(title: "Back")
-                            MainButtonsFillView(title: "Next")
-                            MainButtonTransparentView(title: "Complited")
+                            MainButtonTransparentView(title: "Back", onTap: {})
+                            MainButtonsFillView(title: "Next", onReady: {})
+                            MainButtonTransparentView(title: "Complited", onTap: {})
                         }
                         .padding(.horizontal)
                         Spacer(minLength: 100)
@@ -129,5 +141,5 @@ struct NotesFieldView: View {
 }
 
 #Preview {
-    CareView()
+    CareView(careId: "", onBackTap: {}, onReady: {})
 }

@@ -12,186 +12,203 @@ struct SettingsView: View {
     @State private var unreadOnly = false
     @State private var selection: Int = 1
     
+    let onBackTap: () -> Void
+    let onAboutTap: () -> Void
+    
     var body: some View {
         ZStack {
             BackgroundView()
             
             VStack(alignment: .leading, spacing: 20) {
                 
-                HeaderView(tilte: "Settings", leftBarButton: "chevron.left", rightBarButton: nil)
-                
-                Text("Themes")
-                    .font(.customSen(.regular, size: 15))
-                    .foregroundStyle(.text)
-                    .padding()
-                HStack(spacing: 16) {
+                HeaderView(
+                    tilte: "Settings",
+                    leftBarButton: "chevron.left",
+                    rightBarButton: nil,
+                    onRightTap: {
+                    },
+                    onLeftTap: {
+                        onBackTap()
+                    })
+                ScrollView(showsIndicators: false) {
+                    Text("Themes")
+                        .font(.customSen(.regular, size: 15))
+                        .foregroundStyle(.text)
+                        .padding()
+                    HStack(spacing: 16) {
+                        VStack {
+                            Image("checkTheme")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: 50)
+                                .padding()
+                                .frame(minWidth: 120, minHeight: 150, alignment: .center)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(Material.ultraThinMaterial.opacity(0.2))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 25)
+                                                .fill(Color.endBg.opacity(0))
+                                        )
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color.text.opacity(0.3), lineWidth: 1)
+                                )
+                            Text("Classic")
+                                .font(.customSen(.regular, size: 15))
+                                .foregroundStyle(.mainGreen)
+                        }
+                        VStack {
+                            Image("payLock")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: 50)
+                                .padding()
+                                .frame(minWidth: 120, minHeight: 150, alignment: .center)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(Material.ultraThinMaterial.opacity(0.2))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 25)
+                                                .fill(
+                                                    LinearGradient(colors: [.startBg, .endBg], startPoint: .bottomLeading, endPoint: .topTrailing)
+                                                )
+                                        )
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color.text.opacity(0.3), lineWidth: 1)
+                                )
+                            Text("Bamboo Night")
+                                .font(.customSen(.regular, size: 15))
+                                .foregroundStyle(.mainGreen.opacity(0.2))
+                        }
+                    }
+                    .padding(.horizontal)
+                    
+                    Text("Preferences")
+                        .font(.customSen(.regular, size: 15))
+                        .foregroundStyle(.text)
+                        .padding()
+                    
                     VStack {
-                        Image("checkTheme")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: 50)
+                        Toggle("Notifications “Fact of the Day”", isOn: $unreadOnly)
+                            .toggleStyle(GlassToggleStyle())
+                            .padding(.horizontal, 20)
+                        
+                        Divider()
                             .padding()
-                            .frame(minWidth: 120, minHeight: 150, alignment: .center)
-                            .background(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .fill(Material.ultraThinMaterial.opacity(0.2))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 25)
-                                            .fill(Color.endBg.opacity(0))
-                                    )
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(Color.text.opacity(0.3), lineWidth: 1)
-                            )
-                        Text("Classic")
-                            .font(.customSen(.regular, size: 15))
-                            .foregroundStyle(.mainGreen)
+                            .frame(height: 1)
+                            .background(.text.opacity(0.5))
+                        
+                        HStack {
+                            Text("Font size")
+                                .font(.customSen(.semiBold, size: 16))
+                                .foregroundStyle(.text)
+                            Spacer()
+                            Text("S")
+                                .font(.customSen(.regular, size: 13))
+                                .foregroundStyle(.text)
+                            FontSizeSlider(selection: $selection)
+                            Text("L")
+                                .font(.customSen(.regular, size: 13))
+                                .foregroundStyle(.text)
+                        }
+                        .padding(.top)
+                        .padding(.horizontal)
+                        
                     }
-                    VStack {
-                        Image("payLock")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: 50)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: 28)
+                            .fill(Material.ultraThinMaterial.opacity(0.2))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 28)
+                                    .fill(Color.mainGreen.opacity(0))
+                            )
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 28)
+                            .stroke(Color.text.opacity(0.1), lineWidth: 1)
+                    )
+                    .padding(.horizontal)
+                    
+                    Text("Data")
+                        .font(.customSen(.regular, size: 15))
+                        .foregroundStyle(.text)
+                        .padding()
+                    
+                    VStack(spacing: 16) {
+                        HStack {
+                            Text("Export Data (PDF)")
+                                .font(.customSen(.regular, size: 13))
+                                .foregroundStyle(.text)
+                            Spacer()
+                            Image("payLock")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                        }
+                        .padding(.horizontal)
+                        Divider()
                             .padding()
-                            .frame(minWidth: 120, minHeight: 150, alignment: .center)
-                            .background(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .fill(Material.ultraThinMaterial.opacity(0.2))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 25)
-                                            .fill(
-                                                LinearGradient(colors: [.startBg, .endBg], startPoint: .bottomLeading, endPoint: .topTrailing)
-                                            )
-                                    )
-                            )
+                            .frame(height: 1)
+                            .background(.text.opacity(0.5))
+                        
+                        HStack {
+                            Text("Restore Purchases")
+                                .font(.customSen(.regular, size: 13))
+                                .foregroundStyle(.text)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.title3.bold())
+                                .foregroundStyle(.mainGreen)
+                                .padding(.trailing, 4)
+                        }
+                        .padding(.horizontal)
+                        Divider()
+                            .padding()
+                            .frame(height: 1)
+                            .background(.text.opacity(0.5))
+                        
+                        Button {
+                            onAboutTap()
+                        } label: {
+                            HStack {
+                                Text("About App")
+                                    .font(.customSen(.regular, size: 13))
+                                    .foregroundStyle(.text)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.title3.bold())
+                                    .foregroundStyle(.mainGreen)
+                                    .padding(.trailing, 4)
+                            }
+                            .padding(.horizontal)
+                        }
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: 28)
+                            .fill(Material.ultraThinMaterial.opacity(0.2))
                             .overlay(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(Color.text.opacity(0.3), lineWidth: 1)
+                                RoundedRectangle(cornerRadius: 28)
+                                    .fill(Color.mainGreen.opacity(0))
                             )
-                        Text("Bamboo Night")
-                            .font(.customSen(.regular, size: 15))
-                            .foregroundStyle(.mainGreen.opacity(0.2))
-                    }
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 28)
+                            .stroke(Color.text.opacity(0.1), lineWidth: 1)
+                    )
+                    .padding(.horizontal)
+                    
+                    Spacer(minLength: 100)
                 }
-                .padding(.horizontal)
-                
-                Text("Preferences")
-                    .font(.customSen(.regular, size: 15))
-                    .foregroundStyle(.text)
-                    .padding()
-                
-                VStack {
-                    Toggle("Notifications “Fact of the Day”", isOn: $unreadOnly)
-                        .toggleStyle(GlassToggleStyle())
-                        .padding(.horizontal, 20)
-                    
-                    Divider()
-                        .padding()
-                        .frame(height: 1)
-                        .background(.text.opacity(0.5))
-                    
-                    HStack {
-                        Text("Font size")
-                            .font(.customSen(.semiBold, size: 16))
-                            .foregroundStyle(.text)
-                        Spacer()
-                        Text("S")
-                            .font(.customSen(.regular, size: 13))
-                            .foregroundStyle(.text)
-                        FontSizeSlider(selection: $selection)
-                        Text("L")
-                            .font(.customSen(.regular, size: 13))
-                            .foregroundStyle(.text)
-                    }
-                    .padding(.top)
-                    .padding(.horizontal)
-                    
-                }
-                .padding()
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(
-                    RoundedRectangle(cornerRadius: 28)
-                        .fill(Material.ultraThinMaterial.opacity(0.2))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 28)
-                                .fill(Color.mainGreen.opacity(0))
-                        )
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 28)
-                        .stroke(Color.text.opacity(0.1), lineWidth: 1)
-                )
-                .padding(.horizontal)
-                
-                Text("Data")
-                    .font(.customSen(.regular, size: 15))
-                    .foregroundStyle(.text)
-                    .padding()
-                
-                VStack(spacing: 16) {
-                    HStack {
-                        Text("Export Data (PDF)")
-                            .font(.customSen(.regular, size: 13))
-                            .foregroundStyle(.text)
-                        Spacer()
-                        Image("payLock")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 30, height: 30)
-                    }
-                    .padding(.horizontal)
-                    Divider()
-                        .padding()
-                        .frame(height: 1)
-                        .background(.text.opacity(0.5))
-                    
-                    HStack {
-                        Text("Restore Purchases")
-                            .font(.customSen(.regular, size: 13))
-                            .foregroundStyle(.text)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.title3.bold())
-                            .foregroundStyle(.mainGreen)
-                            .padding(.trailing, 4)
-                    }
-                    .padding(.horizontal)
-                    Divider()
-                        .padding()
-                        .frame(height: 1)
-                        .background(.text.opacity(0.5))
-                    
-                    HStack {
-                        Text("About App")
-                            .font(.customSen(.regular, size: 13))
-                            .foregroundStyle(.text)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.title3.bold())
-                            .foregroundStyle(.mainGreen)
-                            .padding(.trailing, 4)
-                    }
-                    .padding(.horizontal)
-                }
-                .padding()
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(
-                    RoundedRectangle(cornerRadius: 28)
-                        .fill(Material.ultraThinMaterial.opacity(0.2))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 28)
-                                .fill(Color.mainGreen.opacity(0))
-                        )
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 28)
-                        .stroke(Color.text.opacity(0.1), lineWidth: 1)
-                )
-                .padding(.horizontal)
-                
-                Spacer(minLength: 100)
             }
+            .navigationBarBackButtonHidden()
         }
     }
 }
@@ -247,5 +264,5 @@ struct FontSizeSlider: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(onBackTap: {}, onAboutTap: {})
 }

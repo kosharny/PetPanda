@@ -8,21 +8,77 @@
 import SwiftUI
 
 struct ResultsSearchView: View {
+    let articleIds: [String]
+    let onArticleTap: (String) -> Void
+    let onBackTap: () -> Void
+    let onFilterTap: () -> Void
+    
     var body: some View {
         ZStack {
             BackgroundView()
             
             VStack(alignment: .leading) {
                 
-                HeaderView(tilte: "Result", leftBarButton: "chevron.left", rightBarButton: "slider.horizontal.3")
+                HeaderView(
+                    tilte: "Result",
+                    leftBarButton: "chevron.left",
+                    rightBarButton: "slider.horizontal.3",
+                    onRightTap: {
+                        onFilterTap()
+                    },
+                    onLeftTap: {
+                        onBackTap()
+                    })
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 16) {
-                        ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
-                        ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
-                        ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
-                        ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
-                        ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
-                        ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
+                        ArticleCard(
+                            category: "Article",
+                            title: "Panda Conservation Success Story",
+                            tag: "Population",
+                            type: "Habitat",
+                            onTap: {
+                                onArticleTap("")
+                            })
+                        ArticleCard(
+                            category: "Guides",
+                            title: "What Do Giant Pandas Eat?",
+                            tag: "Diet",
+                            type: "Care guides",
+                            onTap: {
+                                onArticleTap("")
+                            })
+                        ArticleCard(
+                            category: "Article",
+                            title: "Panda Conservation Success Story",
+                            tag: "Population",
+                            type: "Habitat",
+                            onTap: {
+                                onArticleTap("")
+                            })
+                        ArticleCard(
+                            category: "Guides",
+                            title: "What Do Giant Pandas Eat?",
+                            tag: "Diet",
+                            type: "Care guides",
+                            onTap: {
+                                onArticleTap("")
+                            })
+                        ArticleCard(
+                            category: "Article",
+                            title: "Panda Conservation Success Story",
+                            tag: "Population",
+                            type: "Habitat",
+                            onTap: {
+                                onArticleTap("")
+                            })
+                        ArticleCard(
+                            category: "Guides",
+                            title: "What Do Giant Pandas Eat?",
+                            tag: "Diet",
+                            type: "Care guides",
+                            onTap: {
+                                onArticleTap("")
+                            })
                     }
                     Spacer(minLength: 100)
                 }
@@ -30,9 +86,10 @@ struct ResultsSearchView: View {
                 .padding(.horizontal)
             }
         }
+        .navigationBarHidden(true)
     }
 }
 
 #Preview {
-    ResultsSearchView()
+    ResultsSearchView(articleIds: [""], onArticleTap: {_ in}, onBackTap: {}, onFilterTap: {})
 }

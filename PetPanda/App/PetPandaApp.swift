@@ -16,7 +16,8 @@ struct PetPandaApp: App {
 //    var importer: ContentImporter {
 //            ContentImporter(coreDataStack: coreDataStack)
 //        }
-
+    
+    
     var body: some Scene {
         WindowGroup {
             RootView(conteiner: container)

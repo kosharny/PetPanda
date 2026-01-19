@@ -12,23 +12,38 @@ struct JournalView: View {
     @State private var searchText = ""
     @State private var showFilters = false
     
+    
+    let onSettingsTap: () -> Void
+    let onBackTap: () -> Void
+    let onFilterTap: () -> Void
+    let onArticleTap: (String) -> Void
+    
     var body: some View {
         ZStack {
             BackgroundView()
             
             VStack(alignment: .leading, spacing: 20) {
                 
-                HeaderView(tilte: "Journal", leftBarButton: "chevron.left", rightBarButton: "gearshape.fill")
+                HeaderView(
+                    tilte: "Journal",
+                    leftBarButton: "chevron.left",
+                    rightBarButton: "gearshape.fill",
+                    onRightTap: {
+                        onSettingsTap()
+                    },
+                    onLeftTap: {
+                        onBackTap()
+                    })
                 
                 
                 ScrollView(showsIndicators: false) {
                     SearchBarView(isSearchView: false, searchText: $searchText, showFilters: $showFilters)
                     VStack(spacing: 20) {
                         HStack {
-                            CotegoryButton(title: "All")
-                            CotegoryButton(title: "Articles")
-                            CotegoryButton(title: "Guides")
-                            CotegoryButton(title: "Quizzes")
+                            CotegoryButton(title: "All", onTap: { onFilterTap()})
+                            CotegoryButton(title: "Articles", onTap: { onFilterTap()})
+                            CotegoryButton(title: "Guides", onTap: { onFilterTap()})
+                            CotegoryButton(title: "Quizzes", onTap: { onFilterTap()})
                         }
                         .padding(.vertical)
                         if !isLoading {
@@ -46,12 +61,43 @@ struct JournalView: View {
                                         .foregroundStyle(.text)
                                 }
                                 
-                                ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
-                                ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
-                                ArticleCard(category: "Article", title: "Panda Conservation Success Story", tag: "Population", type: "Habitat")
-                                ArticleCard(category: "Guides", title: "What Do Giant Pandas Eat?", tag: "Diet", type: "Care guides")
+                                ArticleCard(
+                                    category: "Article",
+                                    title: "Panda Conservation Success Story",
+                                    tag: "Population",
+                                    type: "Habitat",
+                                    onTap: {
+                                        onArticleTap("")
+                                    })
+                                ArticleCard(
+                                    category: "Guides",
+                                    title: "What Do Giant Pandas Eat?",
+                                    tag: "Diet",
+                                    type: "Care guides",
+                                    onTap: {
+                                        onArticleTap("")
+                                    }
+                                )
+                                ArticleCard(
+                                    category: "Article",
+                                    title: "Panda Conservation Success Story",
+                                    tag: "Population",
+                                    type: "Habitat",
+                                    onTap: {
+                                        onArticleTap("")
+                                    }
+                                )
+                                ArticleCard(
+                                    category: "Guides",
+                                    title: "What Do Giant Pandas Eat?",
+                                    tag: "Diet",
+                                    type: "Care guides",
+                                    onTap: {
+                                        onArticleTap("")
+                                    }
+                                )
                                 ZStack {
-                                    MainButtonsFillView(title: "Export Data (PDF)")
+                                    MainButtonsFillView(title: "Export Data (PDF)", onReady: { })
                                     HStack {
                                         Spacer()
                                         Image("lock")
@@ -73,5 +119,5 @@ struct JournalView: View {
 }
 
 #Preview {
-    JournalView()
+    JournalView(onSettingsTap: {}, onBackTap: {}, onFilterTap: {}, onArticleTap: {_ in })
 }

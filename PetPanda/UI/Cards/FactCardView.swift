@@ -36,7 +36,7 @@ struct FactCardView: View {
                 Text("Only 1,864 giant pandas remain in the wild today.")
                     .font(.customSen(.medium, size: 18))
                     .foregroundStyle(.text)
-                MainButtonsFillView(title: "Open")
+                MainButtonsFillView(title: "Open", onReady: {})
             }
             Spacer()
             Image("factImage")

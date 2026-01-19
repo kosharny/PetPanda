@@ -10,13 +10,25 @@ import SwiftUI
 struct QuizView: View {
     @State private var currentStep = 0
     
+    let careId: String
+    let onBackTap: () -> Void
+    let onReady: () -> Void
+    
     var body: some View {
         ZStack {
             BackgroundView()
             
             VStack(spacing: 20) {
                 
-                HeaderView(tilte: "How to Help Protect Pandas?", leftBarButton: "chevron.left", rightBarButton: "star.fill")
+                HeaderView(
+                    tilte: "How to Help Protect Pandas?",
+                    leftBarButton: "chevron.left",
+                    rightBarButton: "star.fill",
+                    onRightTap: {
+                    },
+                    onLeftTap: {
+                        onBackTap()
+                    })
                 
                 Text("Question 1 of 10")
                     .font(.customSen(.semiBold, size: 18))
@@ -80,9 +92,9 @@ struct QuizView: View {
                         .padding(.horizontal)
                         
                         HStack {
-                            MainButtonTransparentView(title: "Back")
-                            MainButtonTransparentView(title: "Next")
-                            MainButtonsFillView(title: "Complited")
+                            MainButtonTransparentView(title: "Back", onTap: {})
+                            MainButtonTransparentView(title: "Next", onTap: {})
+                            MainButtonsFillView(title: "Complited", onReady: {onReady()})
                         }
                         .padding(.horizontal)
                         Spacer(minLength: 100)
@@ -94,5 +106,5 @@ struct QuizView: View {
 }
 
 #Preview {
-    QuizView()
+    QuizView(careId: "", onBackTap: {}, onReady: {})
 }

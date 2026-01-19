@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainButtonTransparentView: View {
     let title: String
+    let onTap: () -> Void
     
     var body: some View {
         Button(title) { }
@@ -29,5 +30,5 @@ struct MainButtonTransparentView: View {
 }
 
 #Preview {
-    MainButtonTransparentView(title: "Reset")
+    MainButtonTransparentView(title: "Reset", onTap: {})
 }

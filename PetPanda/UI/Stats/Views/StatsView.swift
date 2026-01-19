@@ -10,20 +10,33 @@ import Charts
 
 struct StatsView: View {
     
+    let onSettingsTap: () -> Void
+    let onBackTap: () -> Void
+    let onFilterTap: () -> Void
+    
     var body: some View {
         ZStack {
             BackgroundView()
             
             VStack(alignment: .leading, spacing: 20) {
                 
-                HeaderView(tilte: "Stats", leftBarButton: "chevron.left", rightBarButton: "gearshape.fill")
+                HeaderView(
+                    tilte: "Stats",
+                    leftBarButton: "chevron.left",
+                    rightBarButton: "gearshape.fill",
+                    onRightTap: {
+                        onSettingsTap()
+                    },
+                    onLeftTap: {
+                        onBackTap()
+                    })
                 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
                         HStack {
-                            CotegoryButton(title: "All time")
-                            CotegoryButton(title: "Week")
-                            CotegoryButton(title: "Month")
+                            CotegoryButton(title: "All time", onTap: { onFilterTap() })
+                            CotegoryButton(title: "Week", onTap: { onFilterTap() })
+                            CotegoryButton(title: "Month", onTap: { onFilterTap() })
                         }
                         .padding()
                     }
@@ -61,5 +74,5 @@ struct StatsView: View {
 }
 
 #Preview {
-    StatsView()
+    StatsView(onSettingsTap: {}, onBackTap: {}, onFilterTap: {})
 }

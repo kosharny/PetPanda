@@ -12,18 +12,46 @@ struct SearchView: View {
     let isLoading = true
     @State private var searchText = ""
     @State private var showFilters = false
+    let onSettingsTap: () -> Void
+    let onBackTap: () -> Void
+    let onSerachTap: ([String]) -> Void
+    
+    @FocusState private var isSearchFocused: Bool
     
     var body: some View {
         ZStack {
             BackgroundView()
+                .onTapGesture {
+                    if isSearchFocused {
+                        isSearchFocused = false
+                        onSerachTap([""])
+                    }
+                }
             
             VStack(alignment: .leading, spacing: 20) {
                 
-                HeaderView(tilte: "Search", leftBarButton: "chevron.left", rightBarButton: "gearshape.fill")
+                HeaderView(
+                    tilte: "Search",
+                    leftBarButton: "chevron.left",
+                    rightBarButton: "gearshape.fill",
+                    onRightTap: {
+                        onSettingsTap()
+                    },
+                    onLeftTap: {
+                        onBackTap()
+                    })
                 
                 
                     ScrollView(showsIndicators: false) {
                         SearchBarView(isSearchView: true, searchText: $searchText, showFilters: $showFilters)
+                            .focused($isSearchFocused)
+                            .searchKeyboardToolbar(
+                                isFocused: $isSearchFocused,
+                                onSearch: {
+                                    let results = [" "]//vm.search(text: searchText)
+                                    onSerachTap(results)
+                                }
+                            )
                         Spacer(minLength: 150)
                         if !isLoading {
                             EmptyView(title: "Uh-oh, no pandas know this one :( Try another search.", imageName: "emptyImage", isButtonNeeded: false)
@@ -47,6 +75,7 @@ struct SearchView: View {
                 }
             }
         }
+        .contentShape(Rectangle())
     }
 }
 
@@ -65,5 +94,5 @@ struct RecentSearchButtonView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchView(onSettingsTap: { }, onBackTap: { }, onSerachTap: { _ in })
 }

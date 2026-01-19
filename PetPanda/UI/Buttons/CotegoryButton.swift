@@ -10,9 +10,11 @@ import SwiftUI
 struct CotegoryButton: View {
     let title: String
     @State var isPressed: Bool = false
+    let onTap: () -> Void
     
     var body: some View {
         Button {
+            onTap()
             isPressed.toggle()
         } label: {
             Text(title)
@@ -37,5 +39,5 @@ struct CotegoryButton: View {
 }
 
 #Preview {
-    CotegoryButton(title: "All", isPressed: true)
+    CotegoryButton(title: "All", isPressed: true, onTap: {})
 }
