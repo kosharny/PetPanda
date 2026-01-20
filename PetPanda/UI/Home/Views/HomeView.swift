@@ -85,7 +85,7 @@ struct HomeView: View {
                                     tag: "Population",
                                     type: "Habitat",
                                     onTap: {
-                                        onArticleTap("")
+                                        onArticleTap("panda_diet_01")
                                     }
                                 )
                                 ArticleCard(
@@ -94,7 +94,7 @@ struct HomeView: View {
                                     tag: "Diet",
                                     type: "Care guides",
                                     onTap: {
-                                        onArticleTap("")
+                                        onArticleTap("panda_diet_01")
                                     }
                                 )
                             }

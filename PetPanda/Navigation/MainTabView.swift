@@ -8,10 +8,25 @@
 import SwiftUI
 
 struct MainTabView: View {
+    
+    let articlesRepository: ArticlesRepository
+    let contentImporter: ContentImporting
+    let careRepository: CareGuideRepository
+    let quizRepository: QuizRepository
+    
     @State private var selectedTab = 0
     @StateObject private var router = AppRouter()
     
-    init() {
+    init(
+        articlesRepository: ArticlesRepository,
+        contentImporter: ContentImporting,
+        careRepository: CareGuideRepository,
+        quizRepository: QuizRepository
+    ) {
+        self.articlesRepository = articlesRepository
+        self.contentImporter = contentImporter
+        self.careRepository = careRepository
+        self.quizRepository = quizRepository
         UITabBar.appearance().isHidden = true
     }
     
@@ -24,7 +39,9 @@ struct MainTabView: View {
                             router.homePath.append(AppRouter.Route.settings)
                         },
                         onArticleTap: { articleId in
-                            router.homePath.append(AppRouter.Route.article(id: articleId))
+//                            router.homePath.append(AppRouter.Route.article(id: articleId))
+                            router.homePath.append(AppRouter.Route.care(id: articleId))
+//                            router.homePath.append(AppRouter.Route.quiz(id: articleId))
                         },
                         onCategoryTap: { category in
                             router.homePath.append(AppRouter.Route.results(articleIds: category))
@@ -157,10 +174,14 @@ struct MainTabView: View {
         case .article(let id):
             ArticleView(
                 articleId: id,
+                repository: articlesRepository,
+                importer: contentImporter,
                 onBackTap: {
                     popCurrentPath()
                 },
-                onReady: { }
+                onReady:  {
+                    resetCurrentPathAndGoHome()
+                }
             )
 
         case .about:
@@ -173,19 +194,25 @@ struct MainTabView: View {
         case .care(let id):
             CareView(
                 careId: id,
+                repository: careRepository,
                 onBackTap: {
                     popCurrentPath()
                 },
-                onReady: { }
+                onReady:  {
+                    resetCurrentPathAndGoHome()
+                }
             )
 
         case .quiz(let id):
             QuizView(
-                careId: id,
+                quizId: id,
+                repository: quizRepository,
                 onBackTap: {
                     popCurrentPath()
                 },
-                onReady: { }
+                onReady: {
+                    resetCurrentPathAndGoHome()
+                }
             )
         }
     }
@@ -212,6 +239,18 @@ struct MainTabView: View {
         }
     }
 
+    private func resetCurrentPathAndGoHome() {
+        switch selectedTab {
+        case 0: router.homePath.removeLast(router.homePath.count)
+        case 1: router.journalPath.removeLast(router.journalPath.count)
+        case 2: router.searchPath.removeLast(router.searchPath.count)
+        case 3: router.favoritesPath.removeLast(router.favoritesPath.count)
+        case 4: router.statsPath.removeLast(router.statsPath.count)
+        default: break
+        }
+        
+        selectedTab = 0
+    }
 }
 
 struct TabItem: View {
@@ -236,6 +275,3 @@ struct TabItem: View {
     }
 }
 
-#Preview {
-    MainTabView()
-}

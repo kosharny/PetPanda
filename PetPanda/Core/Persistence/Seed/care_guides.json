@@ -28,7 +28,7 @@
           "content": [
             "Sometimes pandas may eat: Small rodents, Birds, Eggs, Insects"
           ],
-          "image": "panda_extra_food",
+          "image": "panda_eating_bamboo",
           "hint": "This makes up only 1% of their diet."
         },
         {
@@ -39,7 +39,7 @@
             "Feeding takes 10–14 hours a day",
             "They prefer young shoots in spring and leaves in winter"
           ],
-          "image": "panda_daily_cycle",
+          "image": "panda_eating_bamboo",
           "hint": "Feeding is their main activity during the day."
         },
         {
@@ -51,7 +51,7 @@
             "Calcium & phosphorus for strong bones",
             "Water — up to 50% of hydration"
           ],
-          "image": "panda_pseudo_thumb",
+          "image": "panda_eating_bamboo",
           "hint": "They have a 'pseudo-thumb' to hold bamboo like a hand!"
         }
       ],
