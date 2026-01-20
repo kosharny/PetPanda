@@ -21,9 +21,11 @@ final class QuizViewModel: ObservableObject {
     
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
+    @Published var isFavorite = false
     
     private let quizId: String
     private let repository: QuizRepository
+    private let favorites: FavoritesRepository
     
     
     var currentQuestion: QuizQuestion? {
@@ -48,9 +50,14 @@ final class QuizViewModel: ObservableObject {
     }
     
     
-    init(quizId: String, repository: QuizRepository) {
+    init(
+        quizId: String,
+        repository: QuizRepository,
+        favorites: FavoritesRepository
+    ) {
         self.quizId = quizId
         self.repository = repository
+        self.favorites = favorites
     }
     
     
@@ -67,6 +74,7 @@ final class QuizViewModel: ObservableObject {
         } catch {
             self.errorMessage = error.localizedDescription
         }
+        isFavorite = favorites.isFavorite(id: quizId, type: .quiz)
         isLoading = false
     }
     
@@ -97,6 +105,11 @@ final class QuizViewModel: ObservableObject {
     
     func completeQuiz() {
         try? repository.saveResult(quizId: quizId, score: score, totalQuestions: totalSteps)
+    }
+    
+    func toggleFavorite() {
+        favorites.toggle(id: quizId, type: .quiz)
+        isFavorite = favorites.isFavorite(id: quizId, type: .quiz)
     }
     
     private func resetStepState() {

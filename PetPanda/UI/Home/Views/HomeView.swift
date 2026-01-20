@@ -19,6 +19,8 @@ struct HomeView: View {
         articlesRepo: ArticlesRepository,
         careRepo: CareGuideRepository,
         quizRepo: QuizRepository,
+        importer: ContentImporting,
+        favoritesRepo: FavoritesRepository,
         onSettingsTap: @escaping () -> Void,
         onArticleTap: @escaping (String, ContentType) -> Void,
         onCategoryTap: @escaping ([String]) -> Void,
@@ -27,7 +29,9 @@ struct HomeView: View {
         self._vm = StateObject(wrappedValue: HomeViewModel(
             articlesRepo: articlesRepo,
             careRepo: careRepo,
-            quizRepo: quizRepo
+            quizRepo: quizRepo,
+            importer: importer,
+            favoritesRepo: favoritesRepo
         ))
         self.onSettingsTap = onSettingsTap
         self.onArticleTap = onArticleTap
@@ -73,19 +77,19 @@ struct HomeView: View {
                         .padding(.horizontal)
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack{
-                                CotegoryButton(title: "Habitat", onTap: {
+                                CotegoryButton(title: "Habitat", isSelected: false, onTap: {
                                     onCategoryTap([""])
                                 })
-                                CotegoryButton(title: "Diet", onTap: {
+                                CotegoryButton(title: "Diet", isSelected: false, onTap: {
                                     onCategoryTap([""])
                                 })
-                                CotegoryButton(title: "Behavior", onTap: {
+                                CotegoryButton(title: "Behavior", isSelected: false, onTap: {
                                     onCategoryTap([""])
                                 })
-                                CotegoryButton(title: "Fun Facts", onTap: {
+                                CotegoryButton(title: "Fun Facts", isSelected: false, onTap: {
                                     onCategoryTap([""])
                                 })
-                                CotegoryButton(title: "Health", onTap: {
+                                CotegoryButton(title: "Health", isSelected: false, onTap: {
                                     onCategoryTap([""])
                                 })
                             }
@@ -106,6 +110,7 @@ struct HomeView: View {
                                             title: item.title,
                                             tag: item.tag,
                                             type: item.category,
+                                            isFavorite: item.isFavorite,
                                             onTap: {
                                                 onArticleTap(item.id, item.type)
                                             }

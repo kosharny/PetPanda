@@ -16,42 +16,42 @@ struct FilterMenuView: View {
             if !isSearchView {
                 FilterGroup(title: "By title:") {
                     HStack {
-                        CotegoryButton(title: "A - Z", onTap: {})
-                        CotegoryButton(title: "Z - A", onTap: {})
+                        CotegoryButton(title: "A - Z", isSelected: false, onTap: {})
+                        CotegoryButton(title: "Z - A", isSelected: false, onTap: {})
                     }
                 }
             }
             if isSearchView {
                 FilterGroup(title: "Type:") {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                        CotegoryButton(title: "Articles", onTap: {})
-                        CotegoryButton(title: "Guides", onTap: {})
-                        CotegoryButton(title: "Quizzes", onTap: {})
+                        CotegoryButton(title: "Articles", isSelected: false, onTap: {})
+                        CotegoryButton(title: "Guides", isSelected: false, onTap: {})
+                        CotegoryButton(title: "Quizzes", isSelected: false, onTap: {})
                     }
                 }
             }
             FilterGroup(title: "Categories:") {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                    CotegoryButton(title: "Habitat", onTap: {})
-                    CotegoryButton(title: "Diet", onTap: {})
-                    CotegoryButton(title: "Behavior", onTap: {})
-                    CotegoryButton(title: "Fun Facts", onTap: {})
-                    CotegoryButton(title: "Health", onTap: {})
+                    CotegoryButton(title: "Habitat", isSelected: false, onTap: {})
+                    CotegoryButton(title: "Diet", isSelected: false, onTap: {})
+                    CotegoryButton(title: "Behavior", isSelected: false, onTap: {})
+                    CotegoryButton(title: "Fun Facts", isSelected: false, onTap: {})
+                    CotegoryButton(title: "Health", isSelected: false, onTap: {})
                 }
             }
             FilterGroup(title: "Reading Time:") {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                    CotegoryButton(title: "< 5 min", onTap: {})
-                    CotegoryButton(title: "5 - 10 min", onTap: {})
-                    CotegoryButton(title: "10+ min", onTap: {})
+                    CotegoryButton(title: "< 5 min", isSelected: false, onTap: {})
+                    CotegoryButton(title: "5 - 10 min", isSelected: false, onTap: {})
+                    CotegoryButton(title: "10+ min", isSelected: false, onTap: {})
                 }
             }
             if !isSearchView {
                 FilterGroup(title: "By progress:") {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                        CotegoryButton(title: "< 20%", onTap: {})
-                        CotegoryButton(title: "20 - 70%", onTap: {})
-                        CotegoryButton(title: "70 - 100%", onTap: {})
+                        CotegoryButton(title: "< 20%", isSelected: false, onTap: {})
+                        CotegoryButton(title: "20 - 70%", isSelected: false, onTap: {})
+                        CotegoryButton(title: "70 - 100%", isSelected: false, onTap: {})
                     }
                 }
             }

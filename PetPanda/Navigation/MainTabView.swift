@@ -13,6 +13,7 @@ struct MainTabView: View {
     let contentImporter: ContentImporting
     let careRepository: CareGuideRepository
     let quizRepository: QuizRepository
+    let favoritesRepository: FavoritesRepository
     
     @State private var selectedTab = 0
     @StateObject private var router = AppRouter()
@@ -21,12 +22,14 @@ struct MainTabView: View {
         articlesRepository: ArticlesRepository,
         contentImporter: ContentImporting,
         careRepository: CareGuideRepository,
-        quizRepository: QuizRepository
+        quizRepository: QuizRepository,
+        favoritesRepository: FavoritesRepository
     ) {
         self.articlesRepository = articlesRepository
         self.contentImporter = contentImporter
         self.careRepository = careRepository
         self.quizRepository = quizRepository
+        self.favoritesRepository = favoritesRepository
         UITabBar.appearance().isHidden = true
     }
     
@@ -38,6 +41,8 @@ struct MainTabView: View {
                         articlesRepo: articlesRepository, 
                         careRepo: careRepository,
                         quizRepo: quizRepository,
+                        importer: contentImporter,
+                        favoritesRepo: favoritesRepository,
                         onSettingsTap: {
                             router.homePath.append(AppRouter.Route.settings)
                         },
@@ -96,18 +101,24 @@ struct MainTabView: View {
                 .tag(2)
                 NavigationStack(path: $router.favoritesPath) {
                     FavoritesView(
-                        onSettingsTap: {
-                            router.favoritesPath.append(AppRouter.Route.settings)
-                        },
+                        repository: favoritesRepository,
                         onBackTap: {
                             selectedTab = 0
                         },
-                        onFilterTap: {
-                            
+                        onSettingsTap: {
+                            router.favoritesPath.append(AppRouter.Route.settings)
                         },
-                        onArticleTap: { articleId in
-                            router.favoritesPath.append(AppRouter.Route.article(id: articleId))
-                        })
+                        onItemTap: { item in
+                            switch item.type {
+                            case .article:
+                                router.favoritesPath.append(.article(id: item.id))
+                            case .care:
+                                router.favoritesPath.append(.care(id: item.id))
+                            case .quiz:
+                                router.favoritesPath.append(.quiz(id: item.id))
+                            }
+                        }
+                    )
                     .navigationDestination(for: AppRouter.Route.self) { route in
                         destination(for: route)
                     }
@@ -181,6 +192,7 @@ struct MainTabView: View {
                 articleId: id,
                 repository: articlesRepository,
                 importer: contentImporter,
+                favorites: favoritesRepository,
                 onBackTap: {
                     popCurrentPath()
                 },
@@ -200,6 +212,7 @@ struct MainTabView: View {
             CareView(
                 careId: id,
                 repository: careRepository,
+                favorites: favoritesRepository,
                 onBackTap: {
                     popCurrentPath()
                 },
@@ -212,6 +225,7 @@ struct MainTabView: View {
             QuizView(
                 quizId: id,
                 repository: quizRepository,
+                favorites: favoritesRepository,
                 onBackTap: {
                     popCurrentPath()
                 },

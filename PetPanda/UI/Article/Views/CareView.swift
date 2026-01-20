@@ -12,8 +12,14 @@ struct CareView: View {
     let onBackTap: () -> Void
     let onReady: () -> Void
     
-    init(careId: String, repository: CareGuideRepository, onBackTap: @escaping () -> Void, onReady: @escaping () -> Void) {
-        _vm = StateObject(wrappedValue: CareViewModel(careId: careId, repository: repository))
+    init(
+        careId: String,
+        repository: CareGuideRepository,
+        favorites: FavoritesRepository,
+        onBackTap: @escaping () -> Void,
+        onReady: @escaping () -> Void
+    ) {
+        _vm = StateObject(wrappedValue: CareViewModel(careId: careId, repository: repository, favorites: favorites))
         self.onBackTap = onBackTap
         self.onReady = onReady
     }
@@ -27,8 +33,9 @@ struct CareView: View {
                 HeaderView(
                     tilte: "Guide",
                     leftBarButton: "chevron.left",
-                    rightBarButton: "star.fill",
+                    rightBarButton: vm.isFavorite ? "star.fill" : "star",
                     onRightTap: {
+                        vm.toggleFavorite()
                     },
                     onLeftTap: {
                         if vm.isGuideStarted {
@@ -46,65 +53,6 @@ struct CareView: View {
                     } else {
                         renderStepMode()
                     }
-                    
-                    //                Text("Steps 1 of 4")
-                    //                    .font(.customSen(.semiBold, size: 18))
-                    //                    .foregroundStyle(.text)
-                    //                HStack(spacing: 8) {
-                    //                    ForEach(0..<4, id: \.self) { index in
-                    //                        Capsule()
-                    //                            .fill(currentStep == index ? Color.green : Color.text.opacity(0.3))
-                    //                            .frame(maxWidth: .infinity)
-                    //                            .frame(height: 10)
-                    //                            .animation(.spring(), value: currentStep)
-                    //                    }
-                    //                }
-                    //                .padding(.horizontal)
-                    //
-                    //                ScrollView(showsIndicators: false) {
-                    //                    VStack(spacing: 20) {
-                    //                        VStack {
-                    //                            Image("panda_eating_bamboo")
-                    //                                .resizable()
-                    //                                .scaledToFit()
-                    //                                .frame(maxWidth: .infinity)
-                    //                            Text("Main diet")
-                    //                                .font(.customSen(.semiBold, size: 14))
-                    //                                .foregroundStyle(.text)
-                    //                                .padding(.top)
-                    //                            Text("""
-                    //                                Pandas eat:
-                    //                                - Bamboo stalks
-                    //                                - Bamboo leaves
-                    //                                - Bamboo shoots (their favorite, richest in nutrients)
-                    //
-                    //                                Sometimes pandas may eat:
-                    //                                - Small rodents
-                    //                                - Birds
-                    //                                - Eggs
-                    //                                - Insects
-                    //                                """)
-                    //                                .font(.customSen(.semiBold, size: 13))
-                    //                                .foregroundStyle(.text)
-                    //
-                    //                        }
-                    //                        .padding()
-                    //                        .frame(maxWidth: .infinity, minHeight: 280)
-                    //                        .background(.ultraThinMaterial.opacity(0.1))
-                    //                        .cornerRadius(25)
-                    //                        .padding(.horizontal)
-                    //
-                    //                        NotesFieldView(notesText: $notesText)
-                    //
-                    //                        HStack {
-                    //                            MainButtonTransparentView(title: "Back", onTap: {})
-                    //                            MainButtonsFillView(title: "Next", onReady: {})
-                    //                            MainButtonTransparentView(title: "Complited", onTap: {})
-                    //                        }
-                    //                        .padding(.horizontal)
-                    //                        Spacer(minLength: 100)
-                    //                    }
-                    //                }
                 }
             }
             .navigationBarHidden(true)
@@ -159,9 +107,9 @@ struct CareView: View {
                     .padding(.horizontal)
                     
                     HStack {
-                        CotegoryButton(title: guide.category, onTap: {})
-                        CotegoryButton(title: "\(guide.duration) min", onTap: {})
-                        CotegoryButton(title: guide.difficulty, onTap: {})
+                        CotegoryButton(title: guide.category, isSelected: false, onTap: {})
+                        CotegoryButton(title: "\(guide.duration) min", isSelected: false, onTap: {})
+                        CotegoryButton(title: guide.difficulty, isSelected: false, onTap: {})
                     }
                     .padding(.horizontal)
                     

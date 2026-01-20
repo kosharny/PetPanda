@@ -12,6 +12,7 @@ struct ArticleCard: View {
     let title: String
     let tag: String
     let type: String
+    let isFavorite: Bool
     let onTap: () -> Void
     
     var body: some View {
@@ -29,7 +30,7 @@ struct ArticleCard: View {
                             .foregroundStyle(.text)
                     }
                     Spacer()
-                    Image("isFavorite")
+                    Image(isFavorite ? "isFavoriteFiil" : "isFavorite")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 20)

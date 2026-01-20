@@ -40,10 +40,10 @@ struct JournalView: View {
                     SearchBarView(isSearchView: false, searchText: $searchText, showFilters: $showFilters)
                     VStack(spacing: 20) {
                         HStack {
-                            CotegoryButton(title: "All", onTap: { onFilterTap()})
-                            CotegoryButton(title: "Articles", onTap: { onFilterTap()})
-                            CotegoryButton(title: "Guides", onTap: { onFilterTap()})
-                            CotegoryButton(title: "Quizzes", onTap: { onFilterTap()})
+                            CotegoryButton(title: "All", isSelected: false, onTap: { onFilterTap()})
+                            CotegoryButton(title: "Articles", isSelected: false, onTap: { onFilterTap()})
+                            CotegoryButton(title: "Guides", isSelected: false, onTap: { onFilterTap()})
+                            CotegoryButton(title: "Quizzes", isSelected: false, onTap: { onFilterTap()})
                         }
                         .padding(.vertical)
                         if !isLoading {
@@ -66,6 +66,7 @@ struct JournalView: View {
                                     title: "Panda Conservation Success Story",
                                     tag: "Population",
                                     type: "Habitat",
+                                    isFavorite: false,
                                     onTap: {
                                         onArticleTap("")
                                     })
@@ -74,6 +75,7 @@ struct JournalView: View {
                                     title: "What Do Giant Pandas Eat?",
                                     tag: "Diet",
                                     type: "Care guides",
+                                    isFavorite: false,
                                     onTap: {
                                         onArticleTap("")
                                     }
@@ -83,6 +85,7 @@ struct JournalView: View {
                                     title: "Panda Conservation Success Story",
                                     tag: "Population",
                                     type: "Habitat",
+                                    isFavorite: false,
                                     onTap: {
                                         onArticleTap("")
                                     }
@@ -92,6 +95,7 @@ struct JournalView: View {
                                     title: "What Do Giant Pandas Eat?",
                                     tag: "Diet",
                                     type: "Care guides",
+                                    isFavorite: false,
                                     onTap: {
                                         onArticleTap("")
                                     }

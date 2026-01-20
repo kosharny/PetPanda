@@ -18,6 +18,7 @@ struct ArticleView: View {
         articleId: String,
         repository: ArticlesRepository,
         importer: ContentImporting,
+        favorites: FavoritesRepository,
         onBackTap: @escaping () -> Void,
         onReady: @escaping () -> Void
     ) {
@@ -25,7 +26,8 @@ struct ArticleView: View {
             wrappedValue: ArticleViewModel(
                 articleId: articleId,
                 repository: repository,
-                importer: importer
+                importer: importer,
+                favorites: favorites
             )
         )
         self.onBackTap = onBackTap
@@ -42,9 +44,9 @@ struct ArticleView: View {
                 HeaderView(
                     tilte: "Article",
                     leftBarButton: "chevron.left",
-                    rightBarButton: "star.fill",
+                    rightBarButton: vm.isFavorite ? "star.fill" : "star",
                     onRightTap: {
-                        
+                        vm.toggleFavorite()
                     },
                     onLeftTap: {
                         onBackTap()
@@ -99,9 +101,9 @@ struct ArticleView: View {
                             .padding(.horizontal)
                             
                             HStack {
-                                CotegoryButton(title: article.categoryId, onTap: {})
-                                CotegoryButton(title: "\(article.readTime) min", onTap: {})
-                                CotegoryButton(title: vm.lastUpdatedText, onTap: {})
+                                CotegoryButton(title: article.categoryId, isSelected: false, onTap: {})
+                                CotegoryButton(title: "\(article.readTime) min", isSelected: false, onTap: {})
+                                CotegoryButton(title: vm.lastUpdatedText, isSelected: false, onTap: {})
                             }
                             .padding(.horizontal)
                             
