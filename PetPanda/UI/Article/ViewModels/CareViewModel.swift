@@ -17,9 +17,12 @@ final class CareViewModel: ObservableObject {
     @Published var notesText: String = ""
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
+    @Published var isFavorite = false
+
 
     private let careId: String
     private let repository: CareGuideRepository
+    private let favorites: FavoritesRepository
     
     var currentStep: CareGuideStep? {
         guard let guide = guide, currentStepIndex < guide.steps.count else { return nil }
@@ -51,9 +54,14 @@ final class CareViewModel: ObservableObject {
         guide?.steps.first?.content.first?.components(separatedBy: ".").first ?? ""
     }
 
-    init(careId: String, repository: CareGuideRepository) {
+    init(
+        careId: String,
+        repository: CareGuideRepository,
+        favorites: FavoritesRepository
+    ) {
         self.careId = careId
         self.repository = repository
+        self.favorites = favorites
     }
     
     func startGuide() {
@@ -77,6 +85,7 @@ final class CareViewModel: ObservableObject {
         } catch {
             self.errorMessage = error.localizedDescription
         }
+        isFavorite = favorites.isFavorite(id: careId, type: .care)
         isLoading = false
     }
 
@@ -95,6 +104,12 @@ final class CareViewModel: ObservableObject {
     func completeGuide() {
         saveProgress(completed: true)
     }
+    
+    func toggleFavorite() {
+        favorites.toggle(id: careId, type: .care)
+        isFavorite = favorites.isFavorite(id: careId, type: .care)
+    }
+
 
     private func saveProgress(completed: Bool = false) {
         try? repository.updateProgress(

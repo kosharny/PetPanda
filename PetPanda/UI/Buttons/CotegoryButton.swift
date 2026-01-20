@@ -9,17 +9,16 @@ import SwiftUI
 
 struct CotegoryButton: View {
     let title: String
-    @State var isPressed: Bool = false
+    let isSelected: Bool
     let onTap: () -> Void
     
     var body: some View {
         Button {
             onTap()
-            isPressed.toggle()
         } label: {
             Text(title)
                 .font(.customSen(.semiBold, size: 14))
-                .foregroundStyle(isPressed ? .text : .mainGreen)
+                .foregroundStyle(isSelected ? .text : .mainGreen)
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: 60, alignment: .center)
                 .background(
@@ -27,7 +26,7 @@ struct CotegoryButton: View {
                         .fill(Material.ultraThinMaterial.opacity(0.2))
                         .overlay(
                             Capsule()
-                                .fill(Color.mainGreen.opacity(isPressed ? 0.3 : 0))
+                                .fill(Color.mainGreen.opacity(isSelected ? 0.3 : 0))
                         )
                 )
                 .overlay(
@@ -38,6 +37,3 @@ struct CotegoryButton: View {
     }
 }
 
-#Preview {
-    CotegoryButton(title: "All", isPressed: true, onTap: {})
-}

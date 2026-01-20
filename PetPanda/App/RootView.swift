@@ -31,6 +31,14 @@ struct RootView: View {
         QuizRepositoryImpl(context: container.viewContext)
     }
     
+    private var favoritesRepository: FavoritesRepository {
+        FavoritesRepositoryImpl(
+            articlesRepo: articlesRepository,
+            careRepo: careRepository,
+            quizRepo: quizRepository
+        )
+    }
+    
     private var contentImporter: ContentImporting {
         ContentImporter(coreDataStack: coreDataStack)
     }
@@ -57,7 +65,8 @@ struct RootView: View {
                     articlesRepository: articlesRepository,
                     contentImporter: contentImporter,
                     careRepository: careRepository,
-                    quizRepository: quizRepository
+                    quizRepository: quizRepository,
+                    favoritesRepository: favoritesRepository
                 )
             }
         }

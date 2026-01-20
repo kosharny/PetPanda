@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    let isLoading = true
-    let onSettingsTap: () -> Void
+    @StateObject private var vm: FavoritesViewModel
+    
     let onBackTap: () -> Void
-    let onFilterTap: () -> Void
-    let onArticleTap: (String) -> Void
+    let onSettingsTap: () -> Void
+    let onItemTap: (FavoriteItem) -> Void
+    
+    init(
+        repository: FavoritesRepository,
+        onBackTap: @escaping () -> Void,
+        onSettingsTap: @escaping () -> Void,
+        onItemTap: @escaping (FavoriteItem) -> Void
+    ) {
+        _vm = StateObject(wrappedValue: FavoritesViewModel(repository: repository))
+        self.onBackTap = onBackTap
+        self.onSettingsTap = onSettingsTap
+        self.onItemTap = onItemTap
+    }
     
     var body: some View {
         ZStack {
@@ -35,55 +47,53 @@ struct FavoritesView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
                         HStack {
-                            CotegoryButton(title: "All", onTap: {onFilterTap()})
-                            CotegoryButton(title: "Articles", onTap: {onFilterTap()})
-                            CotegoryButton(title: "Guides", onTap: {onFilterTap()})
-                            CotegoryButton(title: "Quizzes", onTap: {onFilterTap()})
+                            CotegoryButton(
+                                title: "All",
+                                isSelected: vm.selectedFilter == .all,
+                                onTap: {vm.selectFilter(.all)
+                                })
+                            CotegoryButton(
+                                title: "Articles",
+                                isSelected: vm.selectedFilter == .article,
+                                onTap: {vm.selectFilter(.article)
+                                })
+                            CotegoryButton(
+                                title: "Guides",
+                                isSelected: vm.selectedFilter == .care,
+                                onTap: {vm.selectFilter(.care)
+                                })
+                            CotegoryButton(
+                                title: "Quizzes",
+                                isSelected: vm.selectedFilter == .quiz,
+                                onTap: {vm.selectFilter(.quiz)
+                                })
                         }
                         .padding(.vertical)
-                        if !isLoading {
+                        if vm.isEmpty {
                             EmptyView(title: "Add articles and guides here", imageName: "favoriteEmptyImage", isButtonNeeded: false)
                         } else {
                             VStack(spacing: 20) {
-                                ArticleCard(
-                                    category: "Article",
-                                    title: "Panda Conservation Success Story",
-                                    tag: "Population",
-                                    type: "Habitat",
-                                    onTap: { onArticleTap("")
-                                    })
-                                ArticleCard(
-                                    category: "Guides",
-                                    title: "What Do Giant Pandas Eat?",
-                                    tag: "Diet",
-                                    type: "Care guides",
-                                    onTap: { onArticleTap("")
-                                    })
-                                ArticleCard(
-                                    category: "Article",
-                                    title: "Panda Conservation Success Story",
-                                    tag: "Population",
-                                    type: "Habitat",
-                                    onTap: { onArticleTap("")
-                                    })
-                                ArticleCard(
-                                    category: "Guides",
-                                    title: "What Do Giant Pandas Eat?",
-                                    tag: "Diet",
-                                    type: "Care guides",
-                                    onTap: { onArticleTap("")
-                                    })
+                                ForEach(vm.filteredItems) { item in
+                                    ArticleCard(
+                                        category: item.type.rawValue.capitalized,
+                                        title: item.title,
+                                        tag: item.tag,
+                                        type: item.subtitle,
+                                        isFavorite: true
+                                    ) {
+                                        onItemTap(item)
+                                    }
+                                }
                             }
                         }
                     }
                     Spacer(minLength: 100)
                 } 
                 .padding(.horizontal)
+                .onAppear {
+                    vm.load()
+                }
             }
         }
     }
-}
-
-#Preview {
-    FavoritesView(onSettingsTap: {}, onBackTap: {}, onFilterTap: {}, onArticleTap: {_ in })
 }

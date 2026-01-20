@@ -16,11 +16,13 @@ final class ArticleViewModel: ObservableObject {
     @Published private(set) var contentBlocks: [ContentBlockDTO] = []
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
+    @Published var isFavorite = false
 
     // MARK: - Dependencies
     private let articleId: String
     private let repository: ArticlesRepository
     private let importer: ContentImporting
+    private let favorites: FavoritesRepository
     
     var lastUpdatedText: String {
         guard let date = article?.lastUpdated else { return "" }
@@ -45,11 +47,13 @@ final class ArticleViewModel: ObservableObject {
     init(
         articleId: String,
         repository: ArticlesRepository,
-        importer: ContentImporting
+        importer: ContentImporting,
+        favorites: FavoritesRepository
     ) {
         self.articleId = articleId
         self.repository = repository
         self.importer = importer
+        self.favorites = favorites
     }
 
     func load() async {
@@ -77,6 +81,7 @@ final class ArticleViewModel: ObservableObject {
             errorMessage = error.localizedDescription
             
         }
+        isFavorite = favorites.isFavorite(id: articleId, type: .article)
         isLoading = false
     }
 
@@ -84,5 +89,11 @@ final class ArticleViewModel: ObservableObject {
         guard let article else { return }
         try? repository.markAsRead(articleId: article.id)
     }
+    
+    func toggleFavorite() {
+        favorites.toggle(id: articleId, type: .article)
+        isFavorite = favorites.isFavorite(id: articleId, type: .article)
+    }
+
 }
 

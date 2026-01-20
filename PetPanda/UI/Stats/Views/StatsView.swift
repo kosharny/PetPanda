@@ -34,9 +34,9 @@ struct StatsView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
                         HStack {
-                            CotegoryButton(title: "All time", onTap: { onFilterTap() })
-                            CotegoryButton(title: "Week", onTap: { onFilterTap() })
-                            CotegoryButton(title: "Month", onTap: { onFilterTap() })
+                            CotegoryButton(title: "All time", isSelected: false, onTap: { onFilterTap() })
+                            CotegoryButton(title: "Week", isSelected: false, onTap: { onFilterTap() })
+                            CotegoryButton(title: "Month", isSelected: false, onTap: { onFilterTap() })
                         }
                         .padding()
                     }

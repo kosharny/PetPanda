@@ -16,22 +16,35 @@ final class HomeViewModel: ObservableObject {
     private let articlesRepo: ArticlesRepository
     private let careRepo: CareGuideRepository
     private let quizRepo: QuizRepository
+    private let importer: ContentImporting
+    private let favoritesRepo: FavoritesRepository
     
     init(
         articlesRepo: ArticlesRepository,
         careRepo: CareGuideRepository,
-        quizRepo: QuizRepository
+        quizRepo: QuizRepository,
+        importer: ContentImporting,
+        favoritesRepo: FavoritesRepository
     ) {
         self.articlesRepo = articlesRepo
         self.careRepo = careRepo
         self.quizRepo = quizRepo
+        self.importer = importer
+        self.favoritesRepo = favoritesRepo
     }
     
     func loadData() async {
         isLoading = true
         
         do {
-            let fetchedArticle = try articlesRepo.fetchAll().first
+            var allArticles = try articlesRepo.fetchAll()
+            
+            if allArticles.isEmpty {
+                try await importer.importAll()
+                allArticles = try articlesRepo.fetchAll()
+            }
+            
+            let fetchedArticle = allArticles.first
             let fetchedCare = try careRepo.fetchAll().last
             let fetchedQuiz = try quizRepo.fetchAll().last
             
@@ -43,7 +56,8 @@ final class HomeViewModel: ObservableObject {
                     title: article.title,
                     category: "Article",
                     tag: article.categoryId,
-                    type: .article
+                    type: .article,
+                    isFavorite: favoritesRepo.isFavorite(id: article.id, type: .article)
                 ))
             }
             
@@ -53,7 +67,8 @@ final class HomeViewModel: ObservableObject {
                     title: care.title,
                     category: "Guides",
                     tag: care.category,
-                    type: .care
+                    type: .care,
+                    isFavorite: favoritesRepo.isFavorite(id: care.id, type: .care)
                 ))
             }
             
@@ -63,7 +78,8 @@ final class HomeViewModel: ObservableObject {
                     title: quiz.title,
                     category: "Quizzes",
                     tag: quiz.categoryId,
-                    type: .quiz
+                    type: .quiz,
+                    isFavorite: favoritesRepo.isFavorite(id: quiz.id, type: .quiz)
                 ))
             }
             
@@ -83,6 +99,7 @@ struct HomeRecommendation: Identifiable {
     let category: String
     let tag: String
     let type: ContentType
+    var isFavorite: Bool
 }
 
 enum ContentType {

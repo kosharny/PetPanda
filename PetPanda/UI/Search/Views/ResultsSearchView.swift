@@ -36,6 +36,7 @@ struct ResultsSearchView: View {
                             title: "Panda Conservation Success Story",
                             tag: "Population",
                             type: "Habitat",
+                            isFavorite: false,
                             onTap: {
                                 onArticleTap("")
                             })
@@ -44,6 +45,7 @@ struct ResultsSearchView: View {
                             title: "What Do Giant Pandas Eat?",
                             tag: "Diet",
                             type: "Care guides",
+                            isFavorite: false,
                             onTap: {
                                 onArticleTap("")
                             })
@@ -52,6 +54,7 @@ struct ResultsSearchView: View {
                             title: "Panda Conservation Success Story",
                             tag: "Population",
                             type: "Habitat",
+                            isFavorite: false,
                             onTap: {
                                 onArticleTap("")
                             })
@@ -60,6 +63,7 @@ struct ResultsSearchView: View {
                             title: "What Do Giant Pandas Eat?",
                             tag: "Diet",
                             type: "Care guides",
+                            isFavorite: false,
                             onTap: {
                                 onArticleTap("")
                             })
@@ -68,6 +72,7 @@ struct ResultsSearchView: View {
                             title: "Panda Conservation Success Story",
                             tag: "Population",
                             type: "Habitat",
+                            isFavorite: false,
                             onTap: {
                                 onArticleTap("")
                             })
@@ -76,6 +81,7 @@ struct ResultsSearchView: View {
                             title: "What Do Giant Pandas Eat?",
                             tag: "Diet",
                             type: "Care guides",
+                            isFavorite: false,
                             onTap: {
                                 onArticleTap("")
                             })
