@@ -35,13 +35,18 @@ struct MainTabView: View {
             TabView(selection: $selectedTab) {
                 NavigationStack(path: $router.homePath) {
                     HomeView(
+                        articlesRepo: articlesRepository, 
+                        careRepo: careRepository,
+                        quizRepo: quizRepository,
                         onSettingsTap: {
                             router.homePath.append(AppRouter.Route.settings)
                         },
-                        onArticleTap: { articleId in
-//                            router.homePath.append(AppRouter.Route.article(id: articleId))
-                            router.homePath.append(AppRouter.Route.care(id: articleId))
-//                            router.homePath.append(AppRouter.Route.quiz(id: articleId))
+                        onArticleTap: { id, type in
+                            switch type {
+                            case .article: router.homePath.append(AppRouter.Route.article(id: id))
+                            case .care:    router.homePath.append(AppRouter.Route.care(id: id))
+                            case .quiz:    router.homePath.append(AppRouter.Route.quiz(id: id))
+                            }
                         },
                         onCategoryTap: { category in
                             router.homePath.append(AppRouter.Route.results(articleIds: category))
