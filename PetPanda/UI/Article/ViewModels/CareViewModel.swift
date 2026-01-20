@@ -1,0 +1,106 @@
+//
+//  CareViewModel.swift
+//  PetPanda
+//
+//  Created by Maksim Kosharny on 20.01.2026.
+//
+
+import Foundation
+import Combine
+
+@MainActor
+final class CareViewModel: ObservableObject {
+    // MARK: - State
+    @Published var isGuideStarted: Bool = false
+    @Published private(set) var guide: CareGuide?
+    @Published var currentStepIndex: Int = 0
+    @Published var notesText: String = ""
+    @Published private(set) var isLoading = false
+    @Published private(set) var errorMessage: String?
+
+    private let careId: String
+    private let repository: CareGuideRepository
+    
+    var currentStep: CareGuideStep? {
+        guard let guide = guide, currentStepIndex < guide.steps.count else { return nil }
+        return guide.steps[currentStepIndex]
+    }
+    
+    var totalSteps: Int {
+        guide?.steps.count ?? 0
+    }
+    
+    var progressTitle: String {
+        "Step \(currentStepIndex + 1) of \(totalSteps)"
+    }
+    
+    var firstSentenceOfContent: String {
+        guard let firstStep = guide?.steps.first,
+              let firstParagraph = firstStep.content.first else {
+            return ""
+        }
+        
+        if let firstDotIndex = firstParagraph.firstIndex(of: ".") {
+            return String(firstParagraph[...firstDotIndex])
+        }
+        
+        return firstParagraph
+    }
+    
+    var firstSentence: String {
+        guide?.steps.first?.content.first?.components(separatedBy: ".").first ?? ""
+    }
+
+    init(careId: String, repository: CareGuideRepository) {
+        self.careId = careId
+        self.repository = repository
+    }
+    
+    func startGuide() {
+        isGuideStarted = true
+    }
+
+    func load() async {
+        isLoading = true
+        errorMessage = nil
+        
+        currentStepIndex = 0
+        
+        do {
+            let allGuides = try repository.fetchAll()
+            guard let foundGuide = allGuides.first(where: { $0.id == careId }) else {
+                throw NSError(domain: "CareViewModel", code: 404, userInfo: [NSLocalizedDescriptionKey: "Guide not found"])
+            }
+            self.guide = foundGuide
+        
+            
+        } catch {
+            self.errorMessage = error.localizedDescription
+        }
+        isLoading = false
+    }
+
+    func nextStep() {
+        guard let guide = guide, currentStepIndex < guide.steps.count - 1 else { return }
+        currentStepIndex += 1
+        saveProgress()
+    }
+
+    func prevStep() {
+        guard currentStepIndex > 0 else { return }
+        currentStepIndex -= 1
+        saveProgress()
+    }
+
+    func completeGuide() {
+        saveProgress(completed: true)
+    }
+
+    private func saveProgress(completed: Bool = false) {
+        try? repository.updateProgress(
+            guideId: careId,
+            stepIndex: currentStepIndex,
+            completed: completed
+        )
+    }
+}

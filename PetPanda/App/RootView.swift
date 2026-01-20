@@ -11,7 +11,33 @@ import CoreData
 struct RootView: View {
     
     @StateObject private var appState = AppState()
-    let conteiner: NSPersistentContainer
+    let container: NSPersistentContainer
+    
+    private var coreDataStack: CoreDataStack {
+        CoreDataStack()
+    }
+    
+    private var articlesRepository: ArticlesRepository {
+        ArticlesRepositoryImpl(
+            context: container.viewContext
+        )
+    }
+    
+    private var careRepository: CareGuideRepository {
+        CareGuideRepositoryImpl(context: container.viewContext)
+    }
+    
+    private var quizRepository: QuizRepository {
+        QuizRepositoryImpl(context: container.viewContext)
+    }
+    
+    private var contentImporter: ContentImporting {
+        ContentImporter(coreDataStack: coreDataStack)
+    }
+    
+    init(container: NSPersistentContainer) {
+        self.container = container
+    }
     
     var body: some View {
         ZStack {
@@ -27,8 +53,12 @@ struct RootView: View {
                 )
                 
             case .main:
-                MainTabView()
-//                MainTabView(container: conteiner)
+                MainTabView(
+                    articlesRepository: articlesRepository,
+                    contentImporter: contentImporter,
+                    careRepository: careRepository,
+                    quizRepository: quizRepository
+                )
             }
         }
         .animation(.easeInOut, value: appState.state)
