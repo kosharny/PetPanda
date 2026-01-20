@@ -8,12 +8,32 @@
 import SwiftUI
 
 struct HomeView: View {
-    let isLoading = true
+    @StateObject private var vm: HomeViewModel
     
     let onSettingsTap: () -> Void
-    let onArticleTap: (String) -> Void
+    let onArticleTap: (String, ContentType) -> Void
     let onCategoryTap: ([String]) -> Void
     let onQuickAccessTap: ([String]) -> Void
+    
+    init(
+        articlesRepo: ArticlesRepository,
+        careRepo: CareGuideRepository,
+        quizRepo: QuizRepository,
+        onSettingsTap: @escaping () -> Void,
+        onArticleTap: @escaping (String, ContentType) -> Void,
+        onCategoryTap: @escaping ([String]) -> Void,
+        onQuickAccessTap: @escaping ([String]) -> Void
+    ) {
+        self._vm = StateObject(wrappedValue: HomeViewModel(
+            articlesRepo: articlesRepo,
+            careRepo: careRepo,
+            quizRepo: quizRepo
+        ))
+        self.onSettingsTap = onSettingsTap
+        self.onArticleTap = onArticleTap
+        self.onCategoryTap = onCategoryTap
+        self.onQuickAccessTap = onQuickAccessTap
+    }
     
     var body: some View {
         ZStack {
@@ -30,7 +50,7 @@ struct HomeView: View {
                     },
                     onLeftTap: {})
                 
-                if !isLoading {
+                if vm.isLoading {
                     EmptyView(title: "Uh-oh, pandas couldn’t deliver this page :(", imageName: "emptyImage", isButtonNeeded: true)
                 } else {
                     ScrollView(showsIndicators: false) {
@@ -72,44 +92,38 @@ struct HomeView: View {
                         }
                         .padding(.vertical)
                         .padding(.leading)
-                        VStack(alignment: .leading) {
-                            Text("Recommended")
-                                .font(.customSen(.semiBold, size: 16))
-                                .foregroundStyle(.mainGreen)
+                        if !vm.recommendations.isEmpty {
+                            VStack(alignment: .leading) {
+                                Text("Recommended")
+                                    .font(.customSen(.semiBold, size: 16))
+                                    .foregroundStyle(.mainGreen)
+                                    .padding(.horizontal)
+                                
+                                VStack(spacing: 12) {
+                                    ForEach(vm.recommendations) { item in
+                                        ArticleCard(
+                                            category: item.category,
+                                            title: item.title,
+                                            tag: item.tag,
+                                            type: item.category,
+                                            onTap: {
+                                                onArticleTap(item.id, item.type)
+                                            }
+                                        )
+                                    }
+                                }
                                 .padding(.horizontal)
-                            
-                            VStack(spacing: 12) {
-                                ArticleCard(
-                                    category: "Article",
-                                    title: "Panda Conservation Success Story",
-                                    tag: "Population",
-                                    type: "Habitat",
-                                    onTap: {
-                                        onArticleTap("panda_diet_01")
-                                    }
-                                )
-                                ArticleCard(
-                                    category: "Guides",
-                                    title: "What Do Giant Pandas Eat?",
-                                    tag: "Diet",
-                                    type: "Care guides",
-                                    onTap: {
-                                        onArticleTap("panda_diet_01")
-                                    }
-                                )
                             }
-                            .padding(.horizontal)
                         }
-                        
                         Spacer(minLength: 100)
                     }
                     .padding(.top)
                 }
             }
         }
+        .task {
+            await vm.loadData()
+        }
     }
 }
 
-#Preview {
-    HomeView(onSettingsTap: {}, onArticleTap: {_ in }, onCategoryTap: {_ in }, onQuickAccessTap: {_ in })
-}
