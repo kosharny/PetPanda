@@ -57,29 +57,37 @@ final class HomeViewModel: ObservableObject {
                     category: "Article",
                     tag: article.categoryId,
                     type: .article,
-                    isFavorite: favoritesRepo.isFavorite(id: article.id, type: .article)
+                    isFavorite: favoritesRepo.isFavorite(id: article.id, type: .article),
+                    progress: article.readProgress
                 ))
             }
             
             if let care = fetchedCare {
+                let progressValue = careRepo.getCalculatedProgress(for: care.id)
+                    
                 newRecommendations.append(HomeRecommendation(
                     id: care.id,
                     title: care.title,
                     category: "Guides",
                     tag: care.category,
                     type: .care,
-                    isFavorite: favoritesRepo.isFavorite(id: care.id, type: .care)
+                    isFavorite: favoritesRepo.isFavorite(id: care.id, type: .care),
+                    progress: progressValue
                 ))
             }
             
             if let quiz = fetchedQuiz {
+                let results = (try? quizRepo.fetchResults(quizId: quiz.id)) ?? []
+                let isDone = !results.isEmpty
+                
                 newRecommendations.append(HomeRecommendation(
                     id: quiz.id,
                     title: quiz.title,
                     category: "Quizzes",
                     tag: quiz.categoryId,
                     type: .quiz,
-                    isFavorite: favoritesRepo.isFavorite(id: quiz.id, type: .quiz)
+                    isFavorite: favoritesRepo.isFavorite(id: quiz.id, type: .quiz),
+                    progress: isDone ? 1.0 : 0.0
                 ))
             }
             
@@ -93,6 +101,40 @@ final class HomeViewModel: ObservableObject {
     }
 }
 
+extension HomeViewModel {
+    func getIds(forCategory category: String) -> [String] {
+        var resultIDs: [String] = []
+        let query = category.lowercased()
+        
+        if let articles = try? articlesRepo.fetchAll() {
+            let matches = articles.filter { $0.categoryId.lowercased() == query }
+            resultIDs.append(contentsOf: matches.map { $0.id })
+        }
+        
+        if let guides = try? careRepo.fetchAll() {
+            let matches = guides.filter { $0.category.lowercased() == query }
+            resultIDs.append(contentsOf: matches.map { $0.id })
+        }
+        
+        if let quizzes = try? quizRepo.fetchAll() {
+            let matches = quizzes.filter { $0.categoryId.lowercased() == query }
+            resultIDs.append(contentsOf: matches.map { $0.id })
+        }
+        
+        return resultIDs
+    }
+    func getIds(for type: ContentType) -> [String] {
+        switch type {
+        case .article:
+            return (try? articlesRepo.fetchAll().map { $0.id }) ?? []
+        case .care:
+            return (try? careRepo.fetchAll().map { $0.id }) ?? []
+        case .quiz:
+            return (try? quizRepo.fetchAll().map { $0.id }) ?? []
+        }
+    }
+}
+
 struct HomeRecommendation: Identifiable {
     let id: String
     let title: String
@@ -100,6 +142,7 @@ struct HomeRecommendation: Identifiable {
     let tag: String
     let type: ContentType
     var isFavorite: Bool
+    let progress: Double
 }
 
 enum ContentType {

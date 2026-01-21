@@ -13,6 +13,7 @@ protocol CareGuideRepository {
     func fetch(by categoryId: String) throws -> [CareGuide]
     func updateProgress(guideId: String, stepIndex: Int, completed: Bool) throws
     func fetchProgress(guideId: String) throws -> CareGuideProgressEntity?
+    func getCalculatedProgress(for guideId: String) -> Double
 }
 
 final class CareGuideRepositoryImpl: CareGuideRepository {
@@ -56,5 +57,20 @@ final class CareGuideRepositoryImpl: CareGuideRepository {
         entity.isCompleted = false
         entity.currentStepIndex = 0
         return entity
+    }
+    
+    func getCalculatedProgress(for guideId: String) -> Double {
+        guard let progressEntity = try? fetchProgress(guideId: guideId) else { return 0.0 }
+        
+        if progressEntity.isCompleted { return 1.0 }
+        
+        if progressEntity.currentStepIndex == 0 { return 0.0 }
+        
+        guard let guide = try? fetchAll().first(where: { $0.id == guideId }) else { return 0.0 }
+        
+        let total = Double(guide.steps.count)
+        let current = Double(progressEntity.currentStepIndex)
+        
+        return (current / total) * 0.9
     }
 }

@@ -109,6 +109,9 @@ struct ArticleView: View {
                             
                             ForEach(vm.contentBlocks.indices, id: \.self) { index in
                                 ContentBlockView(block: vm.contentBlocks[index])
+                                    .onAppear {
+                                        vm.updateProgress(for: index)
+                                    }
                             }
                             
                             HStack {

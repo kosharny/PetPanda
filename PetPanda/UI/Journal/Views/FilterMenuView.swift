@@ -8,80 +8,107 @@
 import SwiftUI
 
 struct FilterMenuView: View {
-    let isSearchView: Bool
-    @State private var unreadOnly = false
+    @ObservedObject var vm: SearchViewModel
+    let onApply: () -> Void
+    
+    let categories = ["Habitat", "Diet", "Behavior", "Fun Facts", "Health"]
+    let progressOptions = ["< 20%", "20 - 70%", "70 - 100%"]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            if !isSearchView {
-                FilterGroup(title: "By title:") {
+        ZStack {
+            Color.endBg.edgesIgnoringSafeArea(.all) // Фон для поповера
+            
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    
+                    // Type Filter
+                    FilterGroup(title: "Type:") {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
+                            ForEach(SearchType.allCases) { type in
+                                CotegoryButton(
+                                    title: type.rawValue,
+                                    isSelected: vm.selectedType == type,
+                                    onTap: {
+                                        vm.selectedType = (vm.selectedType == type) ? nil : type
+                                    }
+                                )
+                            }
+                        }
+                    }
+                    
+                    // Category Filter
+                    FilterGroup(title: "Categories:") {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
+                            ForEach(categories, id: \.self) { cat in
+                                CotegoryButton(
+                                    title: cat,
+                                    isSelected: vm.selectedCategory == cat,
+                                    onTap: {
+                                        vm.selectedCategory = (vm.selectedCategory == cat) ? nil : cat
+                                    }
+                                )
+                            }
+                        }
+                    }
+                    
+                    // Reading Time Filter
+                    FilterGroup(title: "Reading Time:") {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
+                            ForEach(ReadingTimeType.allCases) { time in
+                                CotegoryButton(
+                                    title: time.rawValue,
+                                    isSelected: vm.selectedTime == time,
+                                    onTap: {
+                                        vm.selectedTime = (vm.selectedTime == time) ? nil : time
+                                    }
+                                )
+                            }
+                        }
+                    }
+                    
+                    // Progress Filter
+                    FilterGroup(title: "By progress:") {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
+                            ForEach(progressOptions, id: \.self) { option in
+                                CotegoryButton(
+                                    title: option,
+                                    isSelected: vm.selectedProgress == option,
+                                    onTap: {
+                                        vm.selectedProgress = (vm.selectedProgress == option) ? nil : option
+                                    }
+                                )
+                            }
+                        }
+                    }
+                    
+                    // Unread Only
                     HStack {
-                        CotegoryButton(title: "A - Z", isSelected: false, onTap: {})
-                        CotegoryButton(title: "Z - A", isSelected: false, onTap: {})
+                        Toggle("Unread only (0%)", isOn: $vm.unreadOnly)
+                            .toggleStyle(GlassToggleStyle())
+                            .padding(.horizontal, 4)
                     }
-                }
-            }
-            if isSearchView {
-                FilterGroup(title: "Type:") {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                        CotegoryButton(title: "Articles", isSelected: false, onTap: {})
-                        CotegoryButton(title: "Guides", isSelected: false, onTap: {})
-                        CotegoryButton(title: "Quizzes", isSelected: false, onTap: {})
+                    
+                    Divider().background(Color.text.opacity(0.2))
+                    
+                    // Action Buttons
+                    HStack(spacing: 16) {
+                        MainButtonTransparentView(title: "Reset") {
+                            withAnimation {
+                                vm.resetFilters()
+                            }
+                        }
+                        
+                        MainButtonsFillView(title: "Apply") {
+                            onApply()
+                        }
                     }
+                    .padding(.top, 10)
                 }
-            }
-            FilterGroup(title: "Categories:") {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                    CotegoryButton(title: "Habitat", isSelected: false, onTap: {})
-                    CotegoryButton(title: "Diet", isSelected: false, onTap: {})
-                    CotegoryButton(title: "Behavior", isSelected: false, onTap: {})
-                    CotegoryButton(title: "Fun Facts", isSelected: false, onTap: {})
-                    CotegoryButton(title: "Health", isSelected: false, onTap: {})
-                }
-            }
-            FilterGroup(title: "Reading Time:") {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                    CotegoryButton(title: "< 5 min", isSelected: false, onTap: {})
-                    CotegoryButton(title: "5 - 10 min", isSelected: false, onTap: {})
-                    CotegoryButton(title: "10+ min", isSelected: false, onTap: {})
-                }
-            }
-            if !isSearchView {
-                FilterGroup(title: "By progress:") {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                        CotegoryButton(title: "< 20%", isSelected: false, onTap: {})
-                        CotegoryButton(title: "20 - 70%", isSelected: false, onTap: {})
-                        CotegoryButton(title: "70 - 100%", isSelected: false, onTap: {})
-                    }
-                }
-            }
-            HStack {
-                Toggle("Unread only", isOn: $unreadOnly)
-                    .toggleStyle(GlassToggleStyle())
-                    .padding(.horizontal, 20)
-            }
-            HStack {
-                MainButtonTransparentView(title: "Reset", onTap: {})
-                MainButtonsFillView(title: "Apply", onReady: {})
+                .padding()
             }
         }
-        .padding()
-        .frame(width: 320)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Material.ultraThinMaterial)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.endBg.opacity(0.7))
-                )
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.text.opacity(0.3), lineWidth: 1)
-        )
     }
 }
-
 
 struct FilterGroup<Content: View>: View {
     let title: String
@@ -95,7 +122,7 @@ struct FilterGroup<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .font(.customSen(.semiBold, size: 16))
+                .font(.customSen(.semiBold, size: 16)) 
                 .foregroundStyle(.text)
             
             content

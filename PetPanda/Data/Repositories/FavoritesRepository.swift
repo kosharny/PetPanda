@@ -74,7 +74,8 @@ final class FavoritesRepositoryImpl: FavoritesRepository {
                         type: .article,
                         title: article.title,
                         subtitle: article.categoryId,
-                        tag: article.tags.first ?? ""
+                        tag: article.tags.first ?? "",
+                        progress: article.readProgress
                     )
                 )
                 
@@ -83,13 +84,15 @@ final class FavoritesRepositoryImpl: FavoritesRepository {
                     .first { $0.id == ref.id }
                 
                 if let guide {
+                    let calculatedProgress = careRepo.getCalculatedProgress(for: guide.id)
                     result.append(
                         FavoriteItem(
                             id: guide.id,
                             type: .care,
                             title: guide.title,
                             subtitle: guide.category,
-                            tag: guide.tags.first ?? ""
+                            tag: guide.tags.first ?? "",
+                            progress: calculatedProgress
                         )
                     )
                 }
@@ -99,13 +102,16 @@ final class FavoritesRepositoryImpl: FavoritesRepository {
                     .first { $0.id == ref.id }
                 
                 if let quiz {
+                    let results = (try? quizRepo.fetchResults(quizId: quiz.id)) ?? []
+                    let isCompleted = !results.isEmpty
                     result.append(
                         FavoriteItem(
                             id: quiz.id,
                             type: .quiz,
                             title: quiz.title,
                             subtitle: "\(quiz.questions.count) Questions",
-                            tag: quiz.tags.first ?? ""
+                            tag: quiz.tags.first ?? "",
+                            progress: isCompleted ? 1.0 : 0.0
                         )
                     )
                 }

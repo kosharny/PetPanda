@@ -19,6 +19,7 @@ struct FavoriteItem: Identifiable, Hashable {
     let title: String
     let subtitle: String
     let tag: String
+    let progress: Double
 }
 
 struct FavoriteRef: Hashable, Codable {

@@ -58,6 +58,8 @@ struct MainTabView: View {
                         },
                         onQuickAccessTap: { quickAccess in
                             router.homePath.append(AppRouter.Route.results(articleIds: quickAccess))
+                        }, onJournalTap: {
+                            selectedTab = 1
                         })
                     .navigationDestination(for: AppRouter.Route.self) { route in
                         destination(for: route)
@@ -85,6 +87,9 @@ struct MainTabView: View {
                 .tag(1)
                 NavigationStack(path: $router.searchPath) {
                     SearchView(
+                        articlesRepo: articlesRepository,
+                        careRepo: careRepository,
+                        quizRepo: quizRepository,
                         onSettingsTap: {
                             router.searchPath.append(AppRouter.Route.settings)
                         },
@@ -93,7 +98,8 @@ struct MainTabView: View {
                         },
                         onSerachTap: { results in
                             router.searchPath.append(AppRouter.Route.results(articleIds: results))
-                        })
+                        }
+                    )
                     .navigationDestination(for: AppRouter.Route.self) { route in
                         destination(for: route)
                     }
@@ -102,6 +108,9 @@ struct MainTabView: View {
                 NavigationStack(path: $router.favoritesPath) {
                     FavoritesView(
                         repository: favoritesRepository,
+                        articlesRepo: articlesRepository,
+                        careRepo: careRepository,
+                        quizRepo: quizRepository,
                         onBackTap: {
                             selectedTab = 0
                         },
@@ -178,14 +187,26 @@ struct MainTabView: View {
 
         case .results(let articleIds):
             ResultsSearchView(
-                articleIds: articleIds,
-                onArticleTap: { articleId in
-                    push(.article(id: articleId))
-                },
-                onBackTap: {
-                    popCurrentPath()
-                }, onFilterTap: {}
-            )
+                    articleIds: articleIds,
+                    articlesRepo: articlesRepository,
+                    careRepo: careRepository,
+                    quizRepo: quizRepository,
+                    onArticleTap: { id, type in
+                        switch type {
+                        case "Article":
+                            push(.article(id: id))
+                        case "Guide":
+                            push(.care(id: id))
+                        case "Quiz":
+                            push(.quiz(id: id))
+                        default:
+                            push(.article(id: id))
+                        }
+                    },
+                    onBackTap: {
+                        popCurrentPath()
+                    }
+                )
 
         case .article(let id):
             ArticleView(

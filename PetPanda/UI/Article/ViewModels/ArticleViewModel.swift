@@ -17,12 +17,14 @@ final class ArticleViewModel: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
     @Published var isFavorite = false
+    @Published var readProgress: Double = 0.0
 
     // MARK: - Dependencies
     private let articleId: String
     private let repository: ArticlesRepository
     private let importer: ContentImporting
     private let favorites: FavoritesRepository
+    private var viewedIndices: Set<Int> = []
     
     var lastUpdatedText: String {
         guard let date = article?.lastUpdated else { return "" }
@@ -69,6 +71,14 @@ final class ArticleViewModel: ObservableObject {
             
             let finalArticle = try repository.fetch(byId: articleId)
             self.article = finalArticle
+            
+            if let article = self.article {
+                self.readProgress = article.readProgress
+                
+                if article.readProgress >= 1.0 {
+                    self.readProgress = 1.0
+                }
+            }
 
             if let response = try? JSONLoader().load(ArticlesResponseDTO.self, from: "articles") {
                 if let dto = response.articles.first(where: { "\($0.id)" == "\(articleId)" }) {
@@ -84,16 +94,32 @@ final class ArticleViewModel: ObservableObject {
         isFavorite = favorites.isFavorite(id: articleId, type: .article)
         isLoading = false
     }
+    
+    func updateProgress(for index: Int) {
+            guard readProgress < 1.0, !contentBlocks.isEmpty else { return }
+            
+            viewedIndices.insert(index)
+            
+            let total = Double(contentBlocks.count)
+            let currentViewed = Double(viewedIndices.count)
+            
+            let newProgress = (currentViewed / total) * 0.9
+            
+            if newProgress > self.readProgress {
+                self.readProgress = newProgress
+                try? repository.updateProgress(articleId: articleId, progress: newProgress)
+            }
+        }
 
     func markAsRead() {
-        guard let article else { return }
-        try? repository.markAsRead(articleId: article.id)
+        guard let article = article else { return }
+        self.readProgress = 1.0
+        try? repository.updateProgress(articleId: article.id, progress: 1.0)
     }
     
     func toggleFavorite() {
         favorites.toggle(id: articleId, type: .article)
         isFavorite = favorites.isFavorite(id: articleId, type: .article)
     }
-
 }
 

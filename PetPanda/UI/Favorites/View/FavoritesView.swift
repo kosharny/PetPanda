@@ -16,11 +16,14 @@ struct FavoritesView: View {
     
     init(
         repository: FavoritesRepository,
+        articlesRepo: ArticlesRepository,
+        careRepo: CareGuideRepository,
+        quizRepo: QuizRepository,
         onBackTap: @escaping () -> Void,
         onSettingsTap: @escaping () -> Void,
         onItemTap: @escaping (FavoriteItem) -> Void
     ) {
-        _vm = StateObject(wrappedValue: FavoritesViewModel(repository: repository))
+        _vm = StateObject(wrappedValue: FavoritesViewModel(repository: repository, articlesRepo: articlesRepo, careRepo: careRepo, quizRepo: quizRepo))
         self.onBackTap = onBackTap
         self.onSettingsTap = onSettingsTap
         self.onItemTap = onItemTap
@@ -79,7 +82,8 @@ struct FavoritesView: View {
                                         title: item.title,
                                         tag: item.tag,
                                         type: item.subtitle,
-                                        isFavorite: true
+                                        isFavorite: true,
+                                        progress: item.progress,
                                     ) {
                                         onItemTap(item)
                                     }

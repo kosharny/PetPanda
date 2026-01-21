@@ -23,16 +23,50 @@ final class FavoritesViewModel: ObservableObject {
     @Published var isLoading = false
 
     private let repository: FavoritesRepository
+    
+    private let articlesRepo: ArticlesRepository
+    private let careRepo: CareGuideRepository
+    private let quizRepo: QuizRepository
 
-    init(repository: FavoritesRepository) {
+    init(
+        repository: FavoritesRepository,
+        articlesRepo: ArticlesRepository,
+        careRepo: CareGuideRepository,
+        quizRepo: QuizRepository
+    ) {
         self.repository = repository
+        self.articlesRepo = articlesRepo
+        self.careRepo = careRepo
+        self.quizRepo = quizRepo
         load()
     }
 
     func load() {
-        isLoading = true
-        items = (try? repository.fetchAll()) ?? []
-        isLoading = false
+        let favoriteRefs = (try? repository.fetchAll()) ?? []
+        
+        self.items = favoriteRefs.map { item in
+            let currentProgress: Double
+            
+            switch item.type {
+            case .article:
+                let article = (try? articlesRepo.fetchAll())?.first(where: { $0.id == item.id })
+                currentProgress = article?.readProgress ?? 0.0
+            case .care:
+                currentProgress = careRepo.getCalculatedProgress(for: item.id)
+            case .quiz:
+                let results = (try? quizRepo.fetchResults(quizId: item.id)) ?? []
+                currentProgress = results.isEmpty ? 0.0 : 1.0
+            }
+            
+            return FavoriteItem(
+                id: item.id,
+                type: item.type,
+                title: item.title,
+                subtitle: item.subtitle,
+                tag: item.tag,
+                progress: currentProgress
+            )
+        }
     }
 
     func selectFilter(_ filter: FavoritesFilter) {
