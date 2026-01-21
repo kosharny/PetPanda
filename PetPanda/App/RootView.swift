@@ -39,6 +39,10 @@ struct RootView: View {
         )
     }
     
+    private var journalRepository: JournalRepository {
+        JournalRepositoryImpl()
+    }
+    
     private var contentImporter: ContentImporting {
         ContentImporter(coreDataStack: coreDataStack)
     }
@@ -66,7 +70,8 @@ struct RootView: View {
                     contentImporter: contentImporter,
                     careRepository: careRepository,
                     quizRepository: quizRepository,
-                    favoritesRepository: favoritesRepository
+                    favoritesRepository: favoritesRepository,
+                    journalRepository: journalRepository
                 )
             }
         }

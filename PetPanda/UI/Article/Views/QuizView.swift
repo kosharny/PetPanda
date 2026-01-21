@@ -16,10 +16,18 @@ struct QuizView: View {
         quizId: String,
         repository: QuizRepository,
         favorites: FavoritesRepository,
+        journalRepo: JournalRepository,
         onBackTap: @escaping () -> Void,
         onReady: @escaping () -> Void
     ) {
-        _vm = StateObject(wrappedValue: QuizViewModel(quizId: quizId, repository: repository, favorites: favorites))
+        _vm = StateObject(
+            wrappedValue: QuizViewModel(
+                quizId: quizId,
+                repository: repository,
+                favorites: favorites,
+                journalRepo: journalRepo
+            )
+        )
         self.onBackTap = onBackTap
         self.onReady = onReady
     }

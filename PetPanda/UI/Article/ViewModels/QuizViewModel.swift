@@ -28,6 +28,7 @@ final class QuizViewModel: ObservableObject {
     private let quizId: String
     private let repository: QuizRepository
     private let favorites: FavoritesRepository
+    private let journalRepo: JournalRepository
     
     
     var currentQuestion: QuizQuestion? {
@@ -55,11 +56,13 @@ final class QuizViewModel: ObservableObject {
     init(
         quizId: String,
         repository: QuizRepository,
-        favorites: FavoritesRepository
+        favorites: FavoritesRepository,
+        journalRepo: JournalRepository
     ) {
         self.quizId = quizId
         self.repository = repository
         self.favorites = favorites
+        self.journalRepo = journalRepo
     }
     
     
@@ -77,6 +80,17 @@ final class QuizViewModel: ObservableObject {
                 throw NSError(domain: "QuizViewModel", code: 404, userInfo: [NSLocalizedDescriptionKey: "Quiz not found"])
             }
             self.quiz = foundQuiz
+            
+            let journalItem = JournalItem(
+                id: foundQuiz.id,
+                type: .quiz,
+                date: Date(),
+                title: foundQuiz.title,
+                category: "Quizzes",
+                tag: foundQuiz.categoryId 
+            )
+            journalRepo.saveVisit(item: journalItem)
+            
         } catch {
             self.errorMessage = error.localizedDescription
         }

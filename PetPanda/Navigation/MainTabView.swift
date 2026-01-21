@@ -14,6 +14,7 @@ struct MainTabView: View {
     let careRepository: CareGuideRepository
     let quizRepository: QuizRepository
     let favoritesRepository: FavoritesRepository
+    let journalRepository: JournalRepository
     
     @State private var selectedTab = 0
     @StateObject private var router = AppRouter()
@@ -23,13 +24,15 @@ struct MainTabView: View {
         contentImporter: ContentImporting,
         careRepository: CareGuideRepository,
         quizRepository: QuizRepository,
-        favoritesRepository: FavoritesRepository
+        favoritesRepository: FavoritesRepository,
+        journalRepository: JournalRepository
     ) {
         self.articlesRepository = articlesRepository
         self.contentImporter = contentImporter
         self.careRepository = careRepository
         self.quizRepository = quizRepository
         self.favoritesRepository = favoritesRepository
+        self.journalRepository = journalRepository
         UITabBar.appearance().isHidden = true
     }
     
@@ -68,17 +71,18 @@ struct MainTabView: View {
                 .tag(0)
                 NavigationStack(path: $router.journalPath) {
                     JournalView(
-                        onSettingsTap: {
-                            router.journalPath.append(AppRouter.Route.settings)
-                        },
+                        repository: journalRepository,
                         onBackTap: {
                             selectedTab = 0
+                        }, onSettingsTap: {
+                            router.journalPath.append(AppRouter.Route.settings)
                         },
-                        onFilterTap: {
-                            
-                        },
-                        onArticleTap: { articleId in
-                            router.journalPath.append(AppRouter.Route.article(id: articleId))
+                        onArticleTap: {articleId, contentType in
+                            switch contentType {
+                            case .article: push(.article(id: articleId))
+                            case .care:    push(.care(id: articleId))
+                            case .quiz:    push(.quiz(id: articleId))
+                            }
                         })
                     .navigationDestination(for: AppRouter.Route.self) { route in
                         destination(for: route)
@@ -214,6 +218,7 @@ struct MainTabView: View {
                 repository: articlesRepository,
                 importer: contentImporter,
                 favorites: favoritesRepository,
+                journalRepo: journalRepository,
                 onBackTap: {
                     popCurrentPath()
                 },
@@ -234,6 +239,7 @@ struct MainTabView: View {
                 careId: id,
                 repository: careRepository,
                 favorites: favoritesRepository,
+                journalRepo: journalRepository,
                 onBackTap: {
                     popCurrentPath()
                 },
@@ -247,6 +253,7 @@ struct MainTabView: View {
                 quizId: id,
                 repository: quizRepository,
                 favorites: favoritesRepository,
+                journalRepo: journalRepository,
                 onBackTap: {
                     popCurrentPath()
                 },
