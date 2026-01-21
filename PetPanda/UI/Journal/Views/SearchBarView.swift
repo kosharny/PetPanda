@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SearchBarView: View {
-    let isSearchView: Bool
     @Binding var searchText: String
     @Binding var showFilters: Bool
+    var onCommit: () -> Void = {}
     
     var body: some View {
         HStack(spacing: 0) {
@@ -20,14 +20,25 @@ struct SearchBarView: View {
                 .padding(.leading, 16)
             
             TextField("", text: $searchText, prompt:
-                Text("Search by title, tags, brief description")
-                    .font(.customSen(.regular, size: 12))
-                    .foregroundStyle(.text.opacity(0.5))
+                        Text("Search by title, tags...")
+                .font(.customSen(.regular, size: 12))
+                .foregroundStyle(.text.opacity(0.5))
             )
             .font(.customSen(.regular, size: 12))
             .foregroundStyle(.text)
             .padding(.leading, 12)
             .padding(.vertical, 14)
+            .onSubmit {
+                onCommit()
+            }
+            
+            if !searchText.isEmpty {
+                Button(action: { searchText = "" }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.text.opacity(0.4))
+                }
+                .padding(.trailing, 8)
+            }
             
             Rectangle()
                 .fill(Color.text.opacity(0.1))
@@ -37,24 +48,16 @@ struct SearchBarView: View {
             Button(action: {
                 showFilters.toggle()
             }) {
-                Image("filterButton")
+                Image("filterButton") 
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: 20)
                     .padding(.horizontal, 16)
             }
-            .popover(isPresented: $showFilters) {
-                FilterMenuView(isSearchView: isSearchView)
-                    .presentationCompactAdaptation(.popover)
-            }
         }
         .background(
             Capsule()
                 .fill(Material.ultraThinMaterial.opacity(0.2))
-                .overlay(
-                    Capsule()
-                        .fill(Color.mainGreen.opacity(0))
-                )
         )
         .overlay(
             Capsule()
@@ -63,5 +66,3 @@ struct SearchBarView: View {
         .padding(.horizontal, 16)
     }
 }
-
-

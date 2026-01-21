@@ -13,6 +13,7 @@ struct ArticleCard: View {
     let tag: String
     let type: String
     let isFavorite: Bool
+    let progress: Double
     let onTap: () -> Void
     
     var body: some View {
@@ -36,24 +37,7 @@ struct ArticleCard: View {
                         .frame(maxWidth: 20)
                 }
                 HStack {
-                    Text("20%")
-                        .font(.customSen(.regular, size: 10))
-                        .foregroundStyle(.mainGreen)
-                        .padding(4)
-                        .padding(.horizontal)
-                        .background(
-                            RoundedRectangle(cornerRadius: 28)
-                                .fill(Material.ultraThinMaterial)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 28)
-                                        .fill(Color.mainGreen)
-                                    )
-                                .opacity(0.5)
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 28)
-                                .stroke(Color.mainGreen.opacity(0.3), lineWidth: 1)
-                        )
+                    ProgressTagView(progress: progress)
                     TagView(title: "10 min")
                     TagView(title: tag)
                     TagView(title: type)
@@ -65,5 +49,35 @@ struct ArticleCard: View {
             .background(.ultraThinMaterial.opacity(0.1))
             .cornerRadius(25)
         }
+    }
+}
+
+struct ProgressTagView: View {
+    let progress: Double
+    
+    var body: some View {
+        Text("\(Int(progress * 100))%")
+            .font(.customSen(.regular, size: 10))
+            .foregroundStyle(progress > 0.5 ? .text : .mainGreen)
+            .padding(4)
+            .padding(.horizontal, 8)
+            .background {
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 28)
+                        .fill(Material.ultraThinMaterial)
+                    
+                    GeometryReader { geo in
+                        RoundedRectangle(cornerRadius: 28)
+                            .fill(Color.mainGreen)
+                            .frame(width: geo.size.width * progress)
+                            .animation(.spring(response: 0.4, dampingFraction: 0.7), value: progress)
+                    }
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 28))
+            .overlay(
+                RoundedRectangle(cornerRadius: 28)
+                    .stroke(Color.mainGreen.opacity(0.3), lineWidth: 1)
+            )
     }
 }

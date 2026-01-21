@@ -9,14 +9,31 @@ import SwiftUI
 
 struct SearchView: View {
     
-    let isLoading = true
-    @State private var searchText = ""
+    @StateObject private var vm: SearchViewModel
     @State private var showFilters = false
+    @FocusState private var isSearchFocused: Bool
+    
     let onSettingsTap: () -> Void
     let onBackTap: () -> Void
     let onSerachTap: ([String]) -> Void
     
-    @FocusState private var isSearchFocused: Bool
+    init(
+        articlesRepo: ArticlesRepository,
+        careRepo: CareGuideRepository,
+        quizRepo: QuizRepository,
+        onSettingsTap: @escaping () -> Void,
+        onBackTap: @escaping () -> Void,
+        onSerachTap: @escaping ([String]) -> Void
+    ) {
+        _vm = StateObject(wrappedValue: SearchViewModel(
+            articlesRepo: articlesRepo,
+            careRepo: careRepo,
+            quizRepo: quizRepo
+        ))
+        self.onSettingsTap = onSettingsTap
+        self.onBackTap = onBackTap
+        self.onSerachTap = onSerachTap
+    }
     
     var body: some View {
         ZStack {
@@ -24,7 +41,6 @@ struct SearchView: View {
                 .onTapGesture {
                     if isSearchFocused {
                         isSearchFocused = false
-                        onSerachTap([""])
                     }
                 }
             
@@ -38,44 +54,66 @@ struct SearchView: View {
                         onSettingsTap()
                     },
                     onLeftTap: {
+                        vm.searchText = ""
+                        vm.resetFilters()
                         onBackTap()
                     })
                 
                 
-                    ScrollView(showsIndicators: false) {
-                        SearchBarView(isSearchView: true, searchText: $searchText, showFilters: $showFilters)
-                            .focused($isSearchFocused)
-                            .searchKeyboardToolbar(
-                                isFocused: $isSearchFocused,
-                                onSearch: {
-                                    let results = [" "]//vm.search(text: searchText)
-                                    onSerachTap(results)
-                                }
-                            )
-                        Spacer(minLength: 150)
-                        if !isLoading {
-                            EmptyView(title: "Uh-oh, no pandas know this one :( Try another search.", imageName: "emptyImage", isButtonNeeded: false)
-                        } else {
-                            VStack {
-                                
-                                Text("Recent searches")
-                                    .font(.customSen(.semiBold, size: 16))
-                                    .foregroundStyle(.mainGreen)
-                                    .padding(.bottom)
-                                
-                                
-                                RecentSearchButtonView(title: "Bamboo nutrition facts")
-                                RecentSearchButtonView(title: "Giant panda population 2025")
-                                RecentSearchButtonView(title: "Panda habitat conservation tips")
-                                RecentSearchButtonView(title: "Baby panda weight at birth")
-                                RecentSearchButtonView(title: "Bamboo forest ecosystem species")
+                ScrollView(showsIndicators: false) {
+                    SearchBarView(searchText: $vm.searchText, showFilters: $showFilters)
+                        .focused($isSearchFocused)
+                        .searchKeyboardToolbar(
+                            isFocused: $isSearchFocused,
+                            onSearch: {
+                                let results = vm.performSearch()
+                                onSerachTap(results)
+                            }
+                        )
+                    Spacer(minLength: 150)
+                    if vm.recentSearches.isEmpty && vm.searchText.isEmpty {
+                        Spacer(minLength: 50)
+                        EmptyView(title: "Uh-oh, no pandas know this one :( Try another search.", imageName: "emptyImage", isButtonNeeded: false)
+                    } else {
+                        VStack {
+                            
+                            Text("Recent searches")
+                                .font(.customSen(.semiBold, size: 16))
+                                .foregroundStyle(.mainGreen)
+                                .padding(.bottom)
+                            
+                            Spacer()
+                            
+                            Button("Clear") {
+                                vm.clearHistory()
+                            }
+                            .font(.customSen(.regular, size: 12))
+                            .foregroundStyle(.text.opacity(0.6))
+                            
+                            ForEach(vm.recentSearches, id: \.self) { historyItem in
+                                RecentSearchButtonView(title: historyItem)
+                                    .onTapGesture {
+                                        vm.searchText = historyItem
+                                        let results = vm.performSearch()
+                                        onSerachTap(results)
+                                    }
                             }
                         }
-                        Spacer(minLength: 100)
+                    }
+                    Spacer(minLength: 100)
                 }
             }
+            .sheet(isPresented: $showFilters) {
+                FilterMenuView(vm: vm, onApply: {
+                    showFilters = false
+                    let results = vm.performSearch()
+                    onSerachTap(results)
+                })
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+            }
+            .contentShape(Rectangle())
         }
-        .contentShape(Rectangle())
     }
 }
 
@@ -90,9 +128,7 @@ struct RecentSearchButtonView: View {
             .background(.ultraThinMaterial.opacity(0.1))
             .cornerRadius(25)
             .padding(.horizontal)
+            .contentShape(Rectangle())
     }
 }
 
-#Preview {
-    SearchView(onSettingsTap: { }, onBackTap: { }, onSerachTap: { _ in })
-}

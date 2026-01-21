@@ -18,6 +18,7 @@ final class CareViewModel: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
     @Published var isFavorite = false
+    @Published private(set) var readProgress: Double = 0.0
 
 
     private let careId: String
@@ -81,6 +82,14 @@ final class CareViewModel: ObservableObject {
             }
             self.guide = foundGuide
         
+            if let savedProgress = try? repository.fetchProgress(guideId: careId) {
+                self.currentStepIndex = Int(savedProgress.currentStepIndex)
+                if savedProgress.isCompleted {
+                    self.readProgress = 1.0
+                } else {
+                    calculateProgress()
+                }
+            }
             
         } catch {
             self.errorMessage = error.localizedDescription
@@ -92,16 +101,19 @@ final class CareViewModel: ObservableObject {
     func nextStep() {
         guard let guide = guide, currentStepIndex < guide.steps.count - 1 else { return }
         currentStepIndex += 1
+        calculateProgress()
         saveProgress()
     }
 
     func prevStep() {
         guard currentStepIndex > 0 else { return }
         currentStepIndex -= 1
+        calculateProgress()
         saveProgress()
     }
 
     func completeGuide() {
+        self.readProgress = 1.0
         saveProgress(completed: true)
     }
     
@@ -110,6 +122,20 @@ final class CareViewModel: ObservableObject {
         isFavorite = favorites.isFavorite(id: careId, type: .care)
     }
 
+    private func calculateProgress() {
+        guard totalSteps > 0 else { return }
+        
+        if currentStepIndex == 0 {
+            self.readProgress = 0.0
+            return
+        }
+        
+        let calculated = (Double(currentStepIndex) / Double(totalSteps)) * 0.9
+        
+        if calculated > self.readProgress {
+            self.readProgress = calculated
+        }
+    }
 
     private func saveProgress(completed: Bool = false) {
         try? repository.updateProgress(

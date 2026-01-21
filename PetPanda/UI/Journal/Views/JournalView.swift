@@ -37,7 +37,7 @@ struct JournalView: View {
                 
                 
                 ScrollView(showsIndicators: false) {
-                    SearchBarView(isSearchView: false, searchText: $searchText, showFilters: $showFilters)
+//                    SearchBarView(isSearchView: false, searchText: $searchText, showFilters: $showFilters)
                     VStack(spacing: 20) {
                         HStack {
                             CotegoryButton(title: "All", isSelected: false, onTap: { onFilterTap()})
@@ -67,6 +67,7 @@ struct JournalView: View {
                                     tag: "Population",
                                     type: "Habitat",
                                     isFavorite: false,
+                                    progress: 0.0,
                                     onTap: {
                                         onArticleTap("")
                                     })
@@ -76,6 +77,7 @@ struct JournalView: View {
                                     tag: "Diet",
                                     type: "Care guides",
                                     isFavorite: false,
+                                    progress: 0.0,
                                     onTap: {
                                         onArticleTap("")
                                     }
@@ -86,6 +88,7 @@ struct JournalView: View {
                                     tag: "Population",
                                     type: "Habitat",
                                     isFavorite: false,
+                                    progress: 0.0,
                                     onTap: {
                                         onArticleTap("")
                                     }
@@ -96,6 +99,7 @@ struct JournalView: View {
                                     tag: "Diet",
                                     type: "Care guides",
                                     isFavorite: false,
+                                    progress: 0.0,
                                     onTap: {
                                         onArticleTap("")
                                     }

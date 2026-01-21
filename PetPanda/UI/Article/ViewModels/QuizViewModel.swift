@@ -17,11 +17,13 @@ final class QuizViewModel: ObservableObject {
     
     @Published var selectedAnswerIndex: Int? = nil
     @Published var isAnswered: Bool = false
-    @Published var score: Int = 0                 
+    @Published var score: Int = 0
     
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
     @Published var isFavorite = false
+    
+    @Published private(set) var readProgress: Double = 0.0
     
     private let quizId: String
     private let repository: QuizRepository
@@ -65,6 +67,10 @@ final class QuizViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
         
+        if let results = try? repository.fetchResults(quizId: quizId), !results.isEmpty {
+            self.readProgress = 1.0
+        }
+        
         do {
             let allQuizzes = try repository.fetchAll()
             guard let foundQuiz = allQuizzes.first(where: { $0.id == quizId }) else {
@@ -83,6 +89,7 @@ final class QuizViewModel: ObservableObject {
         score = 0
         resetStepState()
         isQuizStarted = true
+        calculateProgress()
     }
     
     func selectAnswer(at index: Int) {
@@ -101,9 +108,11 @@ final class QuizViewModel: ObservableObject {
         
         currentStepIndex += 1
         resetStepState()
+        calculateProgress()
     }
     
     func completeQuiz() {
+        self.readProgress = 1.0
         try? repository.saveResult(quizId: quizId, score: score, totalQuestions: totalSteps)
     }
     
@@ -115,5 +124,14 @@ final class QuizViewModel: ObservableObject {
     private func resetStepState() {
         selectedAnswerIndex = nil
         isAnswered = false
+    }
+    
+    private func calculateProgress() {
+        guard totalSteps > 0 else { return }
+        // (Текущий вопрос / Всего) * 0.9
+        let calculated = (Double(currentStepIndex + 1) / Double(totalSteps)) * 0.9
+        if calculated > self.readProgress {
+            self.readProgress = calculated
+        }
     }
 }

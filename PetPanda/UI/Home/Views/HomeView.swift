@@ -14,6 +14,7 @@ struct HomeView: View {
     let onArticleTap: (String, ContentType) -> Void
     let onCategoryTap: ([String]) -> Void
     let onQuickAccessTap: ([String]) -> Void
+    let onJournalTap: () -> Void
     
     init(
         articlesRepo: ArticlesRepository,
@@ -24,7 +25,8 @@ struct HomeView: View {
         onSettingsTap: @escaping () -> Void,
         onArticleTap: @escaping (String, ContentType) -> Void,
         onCategoryTap: @escaping ([String]) -> Void,
-        onQuickAccessTap: @escaping ([String]) -> Void
+        onQuickAccessTap: @escaping ([String]) -> Void,
+        onJournalTap: @escaping () -> Void
     ) {
         self._vm = StateObject(wrappedValue: HomeViewModel(
             articlesRepo: articlesRepo,
@@ -37,6 +39,7 @@ struct HomeView: View {
         self.onArticleTap = onArticleTap
         self.onCategoryTap = onCategoryTap
         self.onQuickAccessTap = onQuickAccessTap
+        self.onJournalTap = onJournalTap
     }
     
     var body: some View {
@@ -62,35 +65,35 @@ struct HomeView: View {
                             .padding(.vertical)
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                             QuickAccessButton(icon: "population", title: "Population", onTap: {
-                                onQuickAccessTap([""])
+                                onQuickAccessTap(vm.getIds(for: .article))
                             })
                             QuickAccessButton(icon: "guides", title: "Care guides", onTap: {
-                                onQuickAccessTap([""])
+                                onQuickAccessTap(vm.getIds(for: .care))
                             })
                             QuickAccessButton(icon: "quizzes", title: "Quizzes", onTap: {
-                                onQuickAccessTap([""])
+                                onQuickAccessTap(vm.getIds(for: .quiz))
                             })
                             QuickAccessButton(icon: "journal", title: "Journal", onTap: {
-                                onQuickAccessTap([""])
+                                onJournalTap()
                             })
                         }
                         .padding(.horizontal)
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack{
                                 CotegoryButton(title: "Habitat", isSelected: false, onTap: {
-                                    onCategoryTap([""])
+                                    onCategoryTap(vm.getIds(forCategory: "Habitat"))
                                 })
                                 CotegoryButton(title: "Diet", isSelected: false, onTap: {
-                                    onCategoryTap([""])
+                                    onCategoryTap(vm.getIds(forCategory: "Diet"))
                                 })
                                 CotegoryButton(title: "Behavior", isSelected: false, onTap: {
-                                    onCategoryTap([""])
+                                    onCategoryTap(vm.getIds(forCategory: "Behavior"))
                                 })
                                 CotegoryButton(title: "Fun Facts", isSelected: false, onTap: {
-                                    onCategoryTap([""])
+                                    onCategoryTap(vm.getIds(forCategory: "Fun Facts"))
                                 })
                                 CotegoryButton(title: "Health", isSelected: false, onTap: {
-                                    onCategoryTap([""])
+                                    onCategoryTap(vm.getIds(forCategory: "Health"))
                                 })
                             }
                         }
@@ -111,6 +114,7 @@ struct HomeView: View {
                                             tag: item.tag,
                                             type: item.category,
                                             isFavorite: item.isFavorite,
+                                            progress: item.progress,
                                             onTap: {
                                                 onArticleTap(item.id, item.type)
                                             }
