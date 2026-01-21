@@ -43,9 +43,19 @@ struct RootView: View {
         JournalRepositoryImpl()
     }
     
+    private var statsRepository: StatsRepository {
+        StatsRepositoryImpl(
+            journalRepo: journalRepository,
+            articlesRepo: articlesRepository,
+            guidesRepo: careRepository,
+            quizzesRepo: quizRepository
+        )
+    }
+    
     private var contentImporter: ContentImporting {
         ContentImporter(coreDataStack: coreDataStack)
     }
+    
     
     init(container: NSPersistentContainer) {
         self.container = container
@@ -71,7 +81,8 @@ struct RootView: View {
                     careRepository: careRepository,
                     quizRepository: quizRepository,
                     favoritesRepository: favoritesRepository,
-                    journalRepository: journalRepository
+                    journalRepository: journalRepository,
+                    statsRepository: statsRepository
                 )
             }
         }

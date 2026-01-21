@@ -15,18 +15,12 @@ struct PandaCategory: Identifiable {
     let color: Color
 }
 
-let pandaData: [PandaCategory] = [
-    PandaCategory(name: "Habitat", value: 25, color: Color.mainGreen),
-    PandaCategory(name: "Diet", value: 20, color: Color.darkBlueChart),
-    PandaCategory(name: "Behavior", value: 15, color: Color.darkGreenChart),
-    PandaCategory(name: "Fun Facts", value: 20, color: Color.greanCharts),
-    PandaCategory(name: "Health", value: 20, color: Color.blueCharts)
-]
-
 struct PandaPieChartView: View {
+    let data: [PandaCategory]
+    
     var body: some View {
         HStack(spacing: 30) {
-            Chart(pandaData) { item in
+            Chart(data) { item in
                 SectorMark(
                     angle: .value("Value", item.value),
                     innerRadius: .ratio(0),
@@ -37,7 +31,7 @@ struct PandaPieChartView: View {
             .frame(width: 200, height: 200)
             
             VStack(alignment: .leading, spacing: 12) {
-                ForEach(pandaData) { item in
+                ForEach(data) { item in
                     HStack(spacing: 12) {
                         Circle()
                             .fill(item.color)

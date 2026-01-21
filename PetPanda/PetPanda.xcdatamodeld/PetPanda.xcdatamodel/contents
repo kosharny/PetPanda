@@ -40,9 +40,12 @@
         <attribute name="totalQuestions" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="UserProgressEntity" representedClassName="UserProgressEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="articlesRead" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="averageReadingProgress" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="guidesCompleted" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="lastActiveDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="quizzesCompleted" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="readingStreak" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
 </model>
