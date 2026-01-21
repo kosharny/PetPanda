@@ -24,6 +24,7 @@ final class ArticleViewModel: ObservableObject {
     private let repository: ArticlesRepository
     private let importer: ContentImporting
     private let favorites: FavoritesRepository
+    private let journalRepo: JournalRepository
     private var viewedIndices: Set<Int> = []
     
     var lastUpdatedText: String {
@@ -50,12 +51,14 @@ final class ArticleViewModel: ObservableObject {
         articleId: String,
         repository: ArticlesRepository,
         importer: ContentImporting,
-        favorites: FavoritesRepository
+        favorites: FavoritesRepository,
+        journalRepo: JournalRepository
     ) {
         self.articleId = articleId
         self.repository = repository
         self.importer = importer
         self.favorites = favorites
+        self.journalRepo = journalRepo
     }
 
     func load() async {
@@ -78,6 +81,16 @@ final class ArticleViewModel: ObservableObject {
                 if article.readProgress >= 1.0 {
                     self.readProgress = 1.0
                 }
+                
+                let historyItem = JournalItem(
+                    id: article.id,
+                    type: .article,
+                    date: Date(),
+                    title: article.title,
+                    category: "Article", // Для отображения в карточке
+                    tag: article.categoryId
+                )
+                journalRepo.saveVisit(item: historyItem)
             }
 
             if let response = try? JSONLoader().load(ArticlesResponseDTO.self, from: "articles") {

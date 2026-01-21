@@ -24,6 +24,7 @@ final class CareViewModel: ObservableObject {
     private let careId: String
     private let repository: CareGuideRepository
     private let favorites: FavoritesRepository
+    private let journalRepo: JournalRepository
     
     var currentStep: CareGuideStep? {
         guard let guide = guide, currentStepIndex < guide.steps.count else { return nil }
@@ -58,11 +59,13 @@ final class CareViewModel: ObservableObject {
     init(
         careId: String,
         repository: CareGuideRepository,
-        favorites: FavoritesRepository
+        favorites: FavoritesRepository,
+        journalRepo: JournalRepository
     ) {
         self.careId = careId
         self.repository = repository
         self.favorites = favorites
+        self.journalRepo = journalRepo
     }
     
     func startGuide() {
@@ -81,6 +84,16 @@ final class CareViewModel: ObservableObject {
                 throw NSError(domain: "CareViewModel", code: 404, userInfo: [NSLocalizedDescriptionKey: "Guide not found"])
             }
             self.guide = foundGuide
+            
+            let journalItem = JournalItem(
+                id: foundGuide.id,
+                type: .care,
+                date: Date(),
+                title: foundGuide.title,
+                category: "Guides",
+                tag: foundGuide.category
+            )
+            journalRepo.saveVisit(item: journalItem)
         
             if let savedProgress = try? repository.fetchProgress(guideId: careId) {
                 self.currentStepIndex = Int(savedProgress.currentStepIndex)

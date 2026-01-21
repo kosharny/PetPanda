@@ -19,6 +19,7 @@ struct ArticleView: View {
         repository: ArticlesRepository,
         importer: ContentImporting,
         favorites: FavoritesRepository,
+        journalRepo: JournalRepository,
         onBackTap: @escaping () -> Void,
         onReady: @escaping () -> Void
     ) {
@@ -27,7 +28,8 @@ struct ArticleView: View {
                 articleId: articleId,
                 repository: repository,
                 importer: importer,
-                favorites: favorites
+                favorites: favorites,
+                journalRepo: journalRepo
             )
         )
         self.onBackTap = onBackTap

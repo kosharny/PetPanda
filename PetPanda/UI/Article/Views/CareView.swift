@@ -16,10 +16,18 @@ struct CareView: View {
         careId: String,
         repository: CareGuideRepository,
         favorites: FavoritesRepository,
+        journalRepo: JournalRepository,
         onBackTap: @escaping () -> Void,
         onReady: @escaping () -> Void
     ) {
-        _vm = StateObject(wrappedValue: CareViewModel(careId: careId, repository: repository, favorites: favorites))
+        _vm = StateObject(
+            wrappedValue: CareViewModel(
+                careId: careId,
+                repository: repository,
+                favorites: favorites,
+                journalRepo: journalRepo
+            )
+        )
         self.onBackTap = onBackTap
         self.onReady = onReady
     }

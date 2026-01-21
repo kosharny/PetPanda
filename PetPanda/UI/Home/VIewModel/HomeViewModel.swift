@@ -145,6 +145,6 @@ struct HomeRecommendation: Identifiable {
     let progress: Double
 }
 
-enum ContentType {
+enum ContentType: Codable {
     case article, care, quiz
 }

@@ -5,18 +5,27 @@
 //  Created by Maksim Kosharny on 18.01.2026.
 //
 
+
 import SwiftUI
 
 struct JournalView: View {
-    let isLoading = true
-    @State private var searchText = ""
-    @State private var showFilters = false
-    
+    @StateObject var vm: JournalViewModel
     
     let onSettingsTap: () -> Void
     let onBackTap: () -> Void
-    let onFilterTap: () -> Void
-    let onArticleTap: (String) -> Void
+    let onArticleTap: (String, ContentType) -> Void
+    
+    init(
+        repository: JournalRepository,
+        onBackTap: @escaping () -> Void,
+        onSettingsTap: @escaping () -> Void,
+        onArticleTap: @escaping (String, ContentType) -> Void
+    ) {
+        _vm = StateObject(wrappedValue: JournalViewModel(journalRepo: repository))
+        self.onBackTap = onBackTap
+        self.onSettingsTap = onSettingsTap
+        self.onArticleTap = onArticleTap
+    }
     
     var body: some View {
         ZStack {
@@ -37,75 +46,57 @@ struct JournalView: View {
                 
                 
                 ScrollView(showsIndicators: false) {
-//                    SearchBarView(isSearchView: false, searchText: $searchText, showFilters: $showFilters)
                     VStack(spacing: 20) {
                         HStack {
-                            CotegoryButton(title: "All", isSelected: false, onTap: { onFilterTap()})
-                            CotegoryButton(title: "Articles", isSelected: false, onTap: { onFilterTap()})
-                            CotegoryButton(title: "Guides", isSelected: false, onTap: { onFilterTap()})
-                            CotegoryButton(title: "Quizzes", isSelected: false, onTap: { onFilterTap()})
+                            filterBtn(title: "All", filter: .all)
+                            filterBtn(title: "Articles", filter: .article)
+                            filterBtn(title: "Guides", filter: .care)
+                            filterBtn(title: "Quizzes", filter: .quiz)
                         }
                         .padding(.vertical)
-                        if !isLoading {
+                        if vm.groupedItems.isEmpty {
                             EmptyView(title: "Here you will find articles read and quizzes completed.", imageName: "journalEmptyImage", isButtonNeeded: false)
                         } else {
                             
                             VStack(spacing: 20) {
-                                HStack {
-                                    Image("calendar")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(maxWidth: 20)
-                                    Text("01/01/26")
-                                        .font(.customSen(.semiBold, size: 16))
-                                        .foregroundStyle(.text)
+                                ForEach(vm.groupedItems, id: \.0) { date, items in
+                                    VStack(alignment: .leading, spacing: 15) {
+                                        HStack {
+                                            Spacer()
+                                            dateHeader(date)
+                                            Spacer()
+                                        }
+                                        
+                                        ForEach(items) { item in
+                                            ArticleCard(
+                                                category: item.category,
+                                                title: item.title,
+                                                tag: item.tag,
+                                                type: item.category,
+                                                isFavorite: false,
+                                                progress: 0.0,
+                                                onTap: {
+                                                    onArticleTap(item.id, item.type)
+                                                }
+                                            )
+                                        }
+                                    }
                                 }
                                 
-                                ArticleCard(
-                                    category: "Article",
-                                    title: "Panda Conservation Success Story",
-                                    tag: "Population",
-                                    type: "Habitat",
-                                    isFavorite: false,
-                                    progress: 0.0,
-                                    onTap: {
-                                        onArticleTap("")
-                                    })
-                                ArticleCard(
-                                    category: "Guides",
-                                    title: "What Do Giant Pandas Eat?",
-                                    tag: "Diet",
-                                    type: "Care guides",
-                                    isFavorite: false,
-                                    progress: 0.0,
-                                    onTap: {
-                                        onArticleTap("")
-                                    }
-                                )
-                                ArticleCard(
-                                    category: "Article",
-                                    title: "Panda Conservation Success Story",
-                                    tag: "Population",
-                                    type: "Habitat",
-                                    isFavorite: false,
-                                    progress: 0.0,
-                                    onTap: {
-                                        onArticleTap("")
-                                    }
-                                )
-                                ArticleCard(
-                                    category: "Guides",
-                                    title: "What Do Giant Pandas Eat?",
-                                    tag: "Diet",
-                                    type: "Care guides",
-                                    isFavorite: false,
-                                    progress: 0.0,
-                                    onTap: {
-                                        onArticleTap("")
-                                    }
-                                )
                                 ZStack {
-                                    MainButtonsFillView(title: "Export Data (PDF)", onReady: { })
+                                    MainButtonsFillView(title: "Export Data (PDF)", onReady: {
+                                        if let pdfURL = vm.exportJournalToPDF() {
+                                            let activityVC = UIActivityViewController(activityItems: [pdfURL], applicationActivities: nil)
+                                            
+                                            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                                               let rootVC = scene.windows.first(where: { $0.isKeyWindow })?.rootViewController {
+                                                rootVC.present(activityVC, animated: true)
+                                            } else {
+                                                print("Failed to find rootViewController to present share sheet")
+                                            }
+                                        }
+
+                                    })
                                     HStack {
                                         Spacer()
                                         Image("lock")
@@ -123,9 +114,33 @@ struct JournalView: View {
                 }
             }
         }
+        .onAppear {
+            vm.load()
+        }
+    }
+    
+    private func filterBtn(
+        title: String,
+        filter: FavoritesFilter
+    ) -> some View {
+        CotegoryButton(
+            title: title,
+            isSelected: vm.isSelected(filter),
+            onTap: { vm.select(filter) }
+        )
+    }
+    
+    private func dateHeader(_ date: Date) -> some View {
+        HStack(spacing: 8) {
+            Image("calendar")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
+
+            Text(vm.formattedDate(date))
+                .font(.customSen(.semiBold, size: 16))
+                .foregroundStyle(.text)
+        }
     }
 }
 
-#Preview {
-    JournalView(onSettingsTap: {}, onBackTap: {}, onFilterTap: {}, onArticleTap: {_ in })
-}
