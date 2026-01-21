@@ -27,6 +27,15 @@ struct QuizQuestion: Identifiable, Equatable {
     let explanation: String
 }
 
+struct QuizResultSummary {
+    let correct: Int
+    let total: Int
+
+    var formatted: String {
+        "\(correct)/\(total)"
+    }
+}
+
 extension QuizDTO {
     func toDomain() -> Quiz {
         let lastUpdatedDate: Date?

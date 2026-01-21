@@ -10,9 +10,11 @@ import Charts
 
 struct StatsView: View {
     
+    
+    @StateObject var vm: StatsViewModel
+    
     let onSettingsTap: () -> Void
     let onBackTap: () -> Void
-    let onFilterTap: () -> Void
     
     var body: some View {
         ZStack {
@@ -34,9 +36,13 @@ struct StatsView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
                         HStack {
-                            CotegoryButton(title: "All time", isSelected: false, onTap: { onFilterTap() })
-                            CotegoryButton(title: "Week", isSelected: false, onTap: { onFilterTap() })
-                            CotegoryButton(title: "Month", isSelected: false, onTap: { onFilterTap() })
+                            ForEach(StatsFilter.allCases, id: \.self) { filter in
+                                CotegoryButton(
+                                    title: filter.rawValue,
+                                    isSelected: vm.filter == filter,
+                                    onTap: { vm.setFilter(filter) }
+                                )
+                            }
                         }
                         .padding()
                     }
@@ -47,32 +53,32 @@ struct StatsView: View {
                         ],
                         spacing: 16
                     ) {
-                        StatsCardView(resultCount: "5", category: "Articles read", imageName: "articlesStat")
-                        StatsCardView(resultCount: "5", category: "Guides complete", imageName: "guidesStat")
-                        StatsCardView(resultCount: "8/10", category: "Test results", imageName: "quizzes")
-                        StatsCardView(resultCount: "5", category: "Streak", imageName: "streak")
+                        StatsCardView(resultCount: "\(vm.articlesRead)", category: "Articles read", imageName: "articlesStat")
+                        StatsCardView(resultCount: "\(vm.guidesCompleted)", category: "Guides complete", imageName: "guidesStat")
+                        StatsCardView(resultCount: "\(vm.quizResultText)", category: "Test results", imageName: "quizzes")
+                        StatsCardView(resultCount: "\(vm.streak)", category: "Streak", imageName: "streak")
                     }
                     .padding(.horizontal)
                     Text("Daily activity")
                         .font(.customSen(.semiBold, size: 17))
                         .foregroundStyle(.text)
                         .padding()
-                    CustomChartView()
+                    CustomChartView(data: vm.dailyActivityData)
                         .padding(.horizontal)
                     Text("Topics you've studied")
                         .font(.customSen(.semiBold, size: 17))
                         .foregroundStyle(.text)
                         .padding()
-                    PandaPieChartView()
+                    PandaPieChartView(data: vm.categoryDistribution)
                         .padding(.horizontal)
                     
                     Spacer(minLength: 100)
                 }
             }
         }
+        .onAppear {
+            vm.reload()
+        }
     }
 }
 
-#Preview {
-    StatsView(onSettingsTap: {}, onBackTap: {}, onFilterTap: {})
-}

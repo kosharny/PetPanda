@@ -15,6 +15,7 @@ struct MainTabView: View {
     let quizRepository: QuizRepository
     let favoritesRepository: FavoritesRepository
     let journalRepository: JournalRepository
+    let statsRepository: StatsRepository
     
     @State private var selectedTab = 0
     @StateObject private var router = AppRouter()
@@ -25,7 +26,8 @@ struct MainTabView: View {
         careRepository: CareGuideRepository,
         quizRepository: QuizRepository,
         favoritesRepository: FavoritesRepository,
-        journalRepository: JournalRepository
+        journalRepository: JournalRepository,
+        statsRepository: StatsRepository
     ) {
         self.articlesRepository = articlesRepository
         self.contentImporter = contentImporter
@@ -33,6 +35,7 @@ struct MainTabView: View {
         self.quizRepository = quizRepository
         self.favoritesRepository = favoritesRepository
         self.journalRepository = journalRepository
+        self.statsRepository = statsRepository
         UITabBar.appearance().isHidden = true
     }
     
@@ -139,15 +142,14 @@ struct MainTabView: View {
                 .tag(3)
                 NavigationStack(path: $router.statsPath) {
                     StatsView(
-                        onSettingsTap: {
-                            router.statsPath.append(AppRouter.Route.settings)
+                        vm: StatsViewModel(
+                            statsRepo: statsRepository,
+                            journalRepo: journalRepository,
+                            quizRepo: quizRepository
+                        ),
+                        onSettingsTap: { router.statsPath.append(.settings)
                         },
-                        onBackTap: {
-                            selectedTab = 0
-                        },
-                        onFilterTap: {
-                            
-                        })
+                              onBackTap: { selectedTab = 0 })
                     .navigationDestination(for: AppRouter.Route.self) { route in
                         destination(for: route)
                     }
