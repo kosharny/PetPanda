@@ -16,6 +16,7 @@ struct ArticleCard: View {
     let type: String
     let isFavorite: Bool
     let progress: Double
+    let duration: Int
     let onTap: () -> Void
     
     var body: some View {
@@ -40,7 +41,7 @@ struct ArticleCard: View {
                 }
                 HStack {
                     ProgressTagView(progress: progress)
-                    TagView(title: "10 min")
+                    TagView(title: "\(duration) min")
                     TagView(title: tag.capitalized)
                     TagView(title: type.capitalized)
                 }

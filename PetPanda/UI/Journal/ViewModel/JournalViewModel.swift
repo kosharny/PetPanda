@@ -16,15 +16,33 @@ final class JournalViewModel: ObservableObject {
     @Published var selectedFilter: FavoritesFilter = .all
     
     private let journalRepo: JournalRepository
+    private let favoritesRepo: FavoritesRepository
+    private let articlesRepo: ArticlesRepository
+    private let careRepo: CareGuideRepository
+    private let quizRepo: QuizRepository
     
     
-    init(journalRepo: JournalRepository) {
+    init(
+        journalRepo: JournalRepository,
+        favoritesRepo: FavoritesRepository,
+        articlesRepo: ArticlesRepository,
+        careRepo: CareGuideRepository,
+        quizRepo: QuizRepository
+    ) {
         self.journalRepo = journalRepo
+        self.favoritesRepo = favoritesRepo
+        self.articlesRepo = articlesRepo
+        self.careRepo = careRepo
+        self.quizRepo = quizRepo
         load()
     }
     
     func load() {
         items = (try? journalRepo.fetchAll()) ?? []
+    }
+    
+    func isFavorite(id: String, type: ContentType) -> Bool {
+        favoritesRepo.isFavorite(id: id, type: FavoriteType(contentType: type))
     }
     
     func saveVisit(_ item: JournalItem) {
@@ -45,6 +63,26 @@ final class JournalViewModel: ObservableObject {
             .sorted { $0.key > $1.key }
             .map { ($0.key, $0.value) }
     }
+    
+    func duration(for item: JournalItem) -> Int {
+        switch item.type {
+        case .article:
+            return (try? articlesRepo.fetchAll()
+                .first { $0.id == item.id }?
+                .readTime) ?? 0
+
+        case .care:
+            return (try? careRepo.fetchAll()
+                .first { $0.id == item.id }?
+                .duration) ?? 0
+
+        case .quiz:
+            return (try? quizRepo.fetchAll()
+                .first { $0.id == item.id }?
+                .duration) ?? 0
+        }
+    }
+
     
     func select(_ filter: FavoritesFilter) {
         selectedFilter = filter

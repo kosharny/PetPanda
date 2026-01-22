@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 @MainActor
 final class QuizViewModel: ObservableObject {
@@ -19,11 +20,17 @@ final class QuizViewModel: ObservableObject {
     @Published var isAnswered: Bool = false
     @Published var score: Int = 0
     
+    @Published var showResultAlert: Bool = false
+    
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
     @Published var isFavorite = false
     
     @Published private(set) var readProgress: Double = 0.0
+    
+    @Published private(set) var quizLastResultText: String = "–"
+    @Published private(set) var quizBestResultText: String = "–"
+    @Published private(set) var quizAccuracyPercent: String = "–"
     
     private let quizId: String
     private let repository: QuizRepository
@@ -106,6 +113,10 @@ final class QuizViewModel: ObservableObject {
         calculateProgress()
     }
     
+    func restartQuiz() {
+        startQuiz()
+    }
+    
     func selectAnswer(at index: Int) {
         guard !isAnswered, let question = currentQuestion else { return }
         
@@ -128,6 +139,10 @@ final class QuizViewModel: ObservableObject {
     func completeQuiz() {
         self.readProgress = 1.0
         try? repository.saveResult(quizId: quizId, score: score, totalQuestions: totalSteps)
+        
+        withAnimation {
+            showResultAlert = true
+        }
     }
     
     func toggleFavorite() {
@@ -142,10 +157,10 @@ final class QuizViewModel: ObservableObject {
     
     private func calculateProgress() {
         guard totalSteps > 0 else { return }
-        // (Текущий вопрос / Всего) * 0.9
         let calculated = (Double(currentStepIndex + 1) / Double(totalSteps)) * 0.9
         if calculated > self.readProgress {
             self.readProgress = calculated
         }
     }
+    
 }

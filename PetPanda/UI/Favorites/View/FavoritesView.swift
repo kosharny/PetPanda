@@ -84,6 +84,7 @@ struct FavoritesView: View {
                                         type: item.subtitle,
                                         isFavorite: true,
                                         progress: item.progress,
+                                        duration: 10,
                                     ) {
                                         onItemTap(item)
                                     }

@@ -11,10 +11,28 @@ import Charts
 struct StatsView: View {
     
     @EnvironmentObject var settingsVM: SettingsViewModel
-    @StateObject var vm: StatsViewModel
-    
-    let onSettingsTap: () -> Void
-    let onBackTap: () -> Void
+    @StateObject private var vm: StatsViewModel
+
+        let onSettingsTap: () -> Void
+        let onBackTap: () -> Void
+
+        init(
+            statsRepo: StatsRepository,
+            journalRepo: JournalRepository,
+            quizRepo: QuizRepository,
+            onSettingsTap: @escaping () -> Void,
+            onBackTap: @escaping () -> Void
+        ) {
+            _vm = StateObject(
+                wrappedValue: StatsViewModel(
+                    statsRepo: statsRepo,
+                    journalRepo: journalRepo,
+                    quizRepo: quizRepo
+                )
+            )
+            self.onSettingsTap = onSettingsTap
+            self.onBackTap = onBackTap
+        }
     
     var body: some View {
         ZStack {

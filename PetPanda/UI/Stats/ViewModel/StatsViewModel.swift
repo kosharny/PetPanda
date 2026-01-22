@@ -14,6 +14,20 @@ enum StatsFilter: String, CaseIterable {
     case allTime = "All time"
     case week = "Week"
     case month = "Month"
+
+    var startDate: Date? {
+        let calendar = Calendar.current
+        let now = Date()
+
+        switch self {
+        case .allTime:
+            return nil
+        case .week:
+            return calendar.date(byAdding: .day, value: -7, to: now)
+        case .month:
+            return calendar.date(byAdding: .month, value: -1, to: now)
+        }
+    }
 }
 
 @MainActor
@@ -26,10 +40,10 @@ final class StatsViewModel: ObservableObject {
     @Published private(set) var quizzesCompleted = 0
     @Published private(set) var streak = 0
     
+    @Published private(set) var quizResultText: String = "–"
+    
     @Published private(set) var dailyActivityData: [ChartData] = []
     @Published private(set) var categoryDistribution: [PandaCategory] = []
-    
-    @Published private(set) var quizResultText: String = "–"
     
     private let statsRepo: StatsRepository
     private let journalRepo: JournalRepository
@@ -51,82 +65,99 @@ final class StatsViewModel: ObservableObject {
         filter = newFilter
         reload()
     }
-
+    
     func reload() {
+        loadProgressStats()
+        loadQuizStats()
+        buildCategoryDistribution()
+    }
+}
+
+private extension StatsViewModel {
+
+    func loadProgressStats() {
         let allProgress = statsRepo.fetchUserProgress(filter: .allTime)
         let filteredProgress = statsRepo.fetchUserProgress(filter: filter)
 
-        articlesRead = filteredProgress.reduce(into: 0) { $0 += $1.articlesRead }
-        guidesCompleted = filteredProgress.reduce(into: 0) { $0 += $1.guidesCompleted }
-        quizzesCompleted = filteredProgress.reduce(into: 0) { $0 += $1.quizzesCompleted }
+        calculateTotals(from: filteredProgress)
+        streak = allProgress.map(\.readingStreak).max() ?? 0
 
-        self.streak = allProgress.map(\.readingStreak).max() ?? 0
-        
         buildDailyActivity(from: filteredProgress)
-        buildCategoryDistribution()
-        loadQuizResults()
     }
 
-
-    private func calculateTotals(from progress: [UserProgress]) {
-        articlesRead = progress.reduce(into: 0) { $0 += $1.articlesRead }
-        guidesCompleted = progress.reduce(into: 0) { $0 += $1.guidesCompleted }
-        quizzesCompleted = progress.reduce(into: 0) { $0 += $1.quizzesCompleted }
-
-        streak = progress.map(\.readingStreak).max() ?? 0
+    func calculateTotals(from progress: [UserProgress]) {
+        articlesRead = progress.reduce(0) { $0 + $1.articlesRead }
+        guidesCompleted = progress.reduce(0) { $0 + $1.guidesCompleted }
+        quizzesCompleted = progress.reduce(0) { $0 + $1.quizzesCompleted }
     }
-    
-    private func loadQuizResults() {
-        do {
-            let results = try quizRepo.fetchResults(quizId: "all")
-            let correct = results.reduce(0) { $0 + Int($1.score) }
-            let total = results.reduce(0) { $0 + Int($1.totalQuestions) }
-            
-            if total > 0 {
-                quizResultText = "\(correct)/\(total)"
-            } else {
-                quizResultText = "0/0"
+
+    func buildDailyActivity(from progress: [UserProgress]) {
+        let grouped = Dictionary(grouping: progress) {
+            dateFormatter.string(from: $0.lastActiveDate)
+        }
+
+        dailyActivityData = grouped
+            .map { date, items in
+                let total = items.reduce(0) {
+                    $0 + $1.articlesRead + $1.guidesCompleted + $1.quizzesCompleted
+                }
+
+                return ChartData(
+                    category: date,
+                    value: Double(total),
+                    color: .mainGreen
+                )
             }
+            .sorted { $0.category < $1.category }
+    }
+}
+
+private extension StatsViewModel {
+
+    func loadQuizStats() {
+        do {
+            let results = try quizRepo.fetchAllResults()
+            let filtered = filterResultsByDate(results)
+            calculateQuizStats(from: filtered)
         } catch {
             quizResultText = "–"
         }
     }
 
+    func calculateQuizStats(from results: [QuizResultEntity]) {
+        let correct = results.reduce(0) { $0 + Int($1.score) }
+        let total = results.reduce(0) { $0 + Int($1.totalQuestions) }
 
-
-
-    private func buildDailyActivity(from progress: [UserProgress]) {
-        let grouped = Dictionary(grouping: progress) {
-            formatDate($0.lastActiveDate)
-        }
-
-        dailyActivityData = grouped.map { date, items in
-            let total = items.reduce(0) {
-                $0 + $1.articlesRead + $1.guidesCompleted + $1.quizzesCompleted
-            }
-
-            return ChartData(
-                category: date,
-                value: Double(total),
-                color: .mainGreen
-            )
-        }
-        .sorted { $0.category < $1.category }
+        quizResultText = total > 0 ? "\(correct)/\(total)" : "0/0"
     }
 
+    func filterResultsByDate(
+        _ results: [QuizResultEntity]
+    ) -> [QuizResultEntity] {
 
-    private func buildCategoryDistribution() {
+        guard let fromDate = filter.startDate else { return results }
+
+        return results.filter {
+            guard let date = $0.date else { return false }
+            return date >= fromDate
+        }
+    }
+}
+
+private extension StatsViewModel {
+
+    func buildCategoryDistribution() {
         guard let allItems = try? journalRepo.fetchAll() else {
             categoryDistribution = []
             return
         }
 
-        let filtered = allItems.filter { item in
+        let filtered = allItems.filter {
             guard let fromDate = filter.startDate else { return true }
-            return item.date >= fromDate
+            return $0.date >= fromDate
         }
 
-        let grouped = Dictionary(grouping: filtered, by: { $0.tag })
+        let grouped = Dictionary(grouping: filtered, by: \.tag)
         let total = Double(filtered.count)
 
         guard total > 0 else {
@@ -134,38 +165,27 @@ final class StatsViewModel: ObservableObject {
             return
         }
 
-        categoryDistribution = grouped.map { tagName, items in
+        categoryDistribution = grouped.map { tag, items in
             PandaCategory(
-                name: tagName.capitalized, 
+                name: tag.capitalized,
                 value: Double(items.count) / total * 100,
-                color: PandaCategoryColorResolver.color(for: tagName)
+                color: PandaCategoryColorResolver.color(for: tag)
             )
         }
     }
+}
 
+private extension StatsViewModel {
 
-
-    private func formatDate(_ date: Date?) -> String {
-        guard let date else { return "-" }
+    var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yy"
-        return formatter.string(from: date)
+        return formatter
     }
 }
 
-extension StatsFilter {
-    var startDate: Date? {
-        let calendar = Calendar.current
-        switch self {
-        case .allTime:
-            return nil
-        case .week:
-            return calendar.date(byAdding: .day, value: -7, to: Date())
-        case .month:
-            return calendar.date(byAdding: .month, value: -1, to: Date())
-        }
-    }
-}
+
+
 
 enum PandaCategoryColorResolver {
     static func color(for tag: String) -> Color {

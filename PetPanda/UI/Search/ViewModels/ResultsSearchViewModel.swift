@@ -38,17 +38,20 @@ final class ResultsSearchViewModel: ObservableObject {
     private let articlesRepo: ArticlesRepository
     private let careRepo: CareGuideRepository
     private let quizRepo: QuizRepository
+    private let favoritesRepo: FavoritesRepository
     
     init(
         ids: [String],
         articlesRepo: ArticlesRepository,
         careRepo: CareGuideRepository,
-        quizRepo: QuizRepository
+        quizRepo: QuizRepository,
+        favoritesRepo: FavoritesRepository
     ) {
         self.resultIds = ids
         self.articlesRepo = articlesRepo
         self.careRepo = careRepo
         self.quizRepo = quizRepo
+        self.favoritesRepo = favoritesRepo
         loadData()
     }
     
@@ -65,9 +68,9 @@ final class ResultsSearchViewModel: ObservableObject {
                     title: item.title,
                     tag: item.tags.first ?? "Info",
                     subTitle: "Habitat",
-                    duration: 5,
+                    duration: item.readTime,
                     progress: item.readProgress,
-                    isFavorite: false
+                    isFavorite: favoritesRepo.isFavorite(id: item.id, type: .article)
                 )
             }
             tempItems.append(contentsOf: mapped)
@@ -85,7 +88,7 @@ final class ResultsSearchViewModel: ObservableObject {
                     subTitle: item.category,
                     duration: item.duration,
                     progress: prog,
-                    isFavorite: false
+                    isFavorite: favoritesRepo.isFavorite(id: item.id, type: .care)
                 )
             }
             tempItems.append(contentsOf: mapped)
@@ -103,9 +106,9 @@ final class ResultsSearchViewModel: ObservableObject {
                     title: item.title,
                     tag: "Test",
                     subTitle: "Knowledge",
-                    duration: 3,
+                    duration: item.duration,
                     progress: prog,
-                    isFavorite: false
+                    isFavorite: favoritesRepo.isFavorite(id: item.id, type: .care)
                 )
             }
             tempItems.append(contentsOf: mapped)
