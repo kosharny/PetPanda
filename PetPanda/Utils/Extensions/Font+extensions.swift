@@ -9,8 +9,14 @@ import SwiftUI
 
 extension Font {
     
+    private static var isSmallDevice: Bool {
+        return UIScreen.main.bounds.width <= 375
+    }
+    
     static func customSen(_ weight: SenWeight, size: CGFloat, offset: CGFloat = 0) -> Font {
-        return Font.custom("Sen-\(weight.rawValue)", size: size + offset)
+        let adaptiveSize = isSmallDevice ? (size - 2) : size
+        
+        return Font.custom("Sen-\(weight.rawValue)", size: adaptiveSize + offset)
     }
     
     enum SenWeight: String {

@@ -131,6 +131,241 @@
           "explanation": "When local people benefit from eco-tourism, they become the best guardians of the forests."
         }
       ]
+    },
+    {
+      "id": "panda_diet_expert_01",
+      "title": "Bamboo & Beyond: The Diet Quiz",
+      "description": "How well do you know what keeps a giant panda energized? Test your knowledge on their unique eating habits.",
+      "categoryId": "diet",
+      "tags": ["Nutrition", "Bamboo", "Digestive System"],
+      "duration": 8,
+      "lastUpdated": "2026-01-20",
+      "coverImage": "panda_diet_quiz_cover",
+      "questions": [
+        {
+          "id": "dq1",
+          "text": "What percentage of a panda's diet is bamboo?",
+          "answers": ["50%", "75%", "99%", "100%"],
+          "correctIndex": 2,
+          "explanation": "While they occasionally eat other things, 99% of their diet is bamboo."
+        },
+        {
+          "id": "dq2",
+          "text": "How many hours a day does a panda spend eating?",
+          "answers": ["2-4 hours", "6-8 hours", "10-16 hours", "20-22 hours"],
+          "correctIndex": 2,
+          "explanation": "Due to bamboo's low calorie count, pandas must eat for the majority of their waking hours."
+        },
+        {
+          "id": "dq3",
+          "text": "Why do pandas have to eat so much bamboo?",
+          "answers": ["They love the taste", "It is high in protein", "It is very low in nutrients and energy", "To keep their teeth sharp"],
+          "correctIndex": 2,
+          "explanation": "Bamboo is mostly water and fiber. To get enough energy, a panda needs to consume massive amounts."
+        },
+        {
+          "id": "dq4",
+          "text": "Which part of the bamboo do pandas prefer in the spring?",
+          "answers": ["Dry stalks", "Hard roots", "Fresh shoots", "Yellow leaves"],
+          "correctIndex": 2,
+          "explanation": "Bamboo shoots are the most nutrient-rich part and are a panda's favorite spring treat."
+        },
+        {
+          "id": "dq5",
+          "text": "How much bamboo can an adult panda eat in a single day?",
+          "answers": ["Up to 5 kg", "Up to 12 kg", "Up to 38 kg", "Exactly 100 kg"],
+          "correctIndex": 2,
+          "explanation": "Depending on the part of the bamboo, they can eat between 12 and 38 kg daily."
+        }
+      ]
+    },
+    {
+      "id": "panda_habitat_master_01",
+      "title": "Mountain Homes: Habitat Quiz",
+      "description": "Explore the misty forests of China and see if you know where pandas feel most at home.",
+      "categoryId": "habitat",
+      "tags": ["Mountains", "China", "Climate"],
+      "duration": 8,
+      "lastUpdated": "2026-01-18",
+      "coverImage": "panda_habitat_quiz_cover",
+      "questions": [
+        {
+          "id": "hq1",
+          "text": "In which country are giant pandas found in the wild?",
+          "answers": ["Vietnam", "China", "Thailand", "Japan"],
+          "correctIndex": 1,
+          "explanation": "Giant pandas are endemic to South Central China, primarily in Sichuan, Shaanxi, and Gansu provinces."
+        },
+        {
+          "id": "hq2",
+          "text": "What is the preferred climate for a giant panda?",
+          "answers": ["Hot and dry", "Cool and misty", "Tropical and rainy", "Freezing Arctic"],
+          "correctIndex": 1,
+          "explanation": "They love high-altitude temperate forests with lots of moisture and heavy mist."
+        },
+        {
+          "id": "hq3",
+          "text": "At what altitude do wild pandas typically live?",
+          "answers": ["Sea level", "500 - 1,000 meters", "1,200 - 3,100 meters", "Above 5,000 meters"],
+          "correctIndex": 2,
+          "explanation": "They stay in high-altitude forests where bamboo grows best and the air is cool."
+        },
+        {
+          "id": "hq4",
+          "text": "What is the main reason pandas move to lower altitudes in winter?",
+          "answers": ["To find mates", "To escape the cold", "To find different bamboo species", "To avoid snow"],
+          "correctIndex": 1,
+          "explanation": "While they don't hibernate, they move down the mountains to stay slightly warmer during peak winter."
+        },
+        {
+          "id": "hq5",
+          "text": "Why are 'ecological corridors' important for panda habitats?",
+          "answers": ["To let tourists in", "To connect isolated forest patches", "To plant flowers", "To stop forest fires"],
+          "correctIndex": 1,
+          "explanation": "Corridors allow pandas from different groups to meet and breed, preventing inbreeding."
+        }
+      ]
+    },
+    {
+      "id": "panda_behavior_fun_01",
+      "title": "Panda Social Life & Secrets",
+      "description": "Are pandas social butterflies or lone rangers? Find out in this behavior quiz!",
+      "categoryId": "behavior",
+      "tags": ["Social", "Scent Marking", "Climbing"],
+      "duration": 8,
+      "lastUpdated": "2026-01-15",
+      "coverImage": "panda_behavior_quiz_cover",
+      "questions": [
+        {
+          "id": "bq1",
+          "text": "How do solitary pandas communicate with each other?",
+          "answers": ["Singing", "Scent marking", "Dancing", "Using tools"],
+          "correctIndex": 1,
+          "explanation": "They leave scent marks on trees to tell others about their age, gender, and social status."
+        },
+        {
+          "id": "bq2",
+          "text": "Why do pandas somersault and roll down hills?",
+          "answers": ["To scare predators", "For play and coordination", "To travel faster", "To clean their fur"],
+          "correctIndex": 1,
+          "explanation": "Rolling is a form of play that helps cubs develop muscle strength and motor skills."
+        },
+        {
+          "id": "bq3",
+          "text": "At what age do panda cubs usually start to climb trees?",
+          "answers": ["1 month", "6 months", "2 years", "5 years"],
+          "correctIndex": 1,
+          "explanation": "At around 6 months, cubs are strong enough to start practicing their climbing skills."
+        },
+        {
+          "id": "bq4",
+          "text": "What sound does a panda make to show they are annoyed?",
+          "answers": ["Bleating", "Barking", "Honking", "Purring"],
+          "correctIndex": 2,
+          "explanation": "A 'honk' or a 'growl' is a sign that a panda is feeling stressed or aggressive."
+        },
+        {
+          "id": "bq5",
+          "text": "How much of a panda's life is spent sleeping or resting?",
+          "answers": ["2 hours", "About 5-10 hours", "Over 15 hours", "They never sleep"],
+          "correctIndex": 1,
+          "explanation": "When not eating, pandas rest to conserve energy, usually sleeping 8-12 hours a day."
+        }
+      ]
+    },
+    {
+      "id": "panda_anatomy_facts_01",
+      "title": "Anatomy & Fun Facts",
+      "description": "Test your knowledge on the physical quirks that make pandas so special.",
+      "categoryId": "fun facts",
+      "tags": ["Anatomy", "Pseudo-thumb", "Fur"],
+      "duration": 8,
+      "lastUpdated": "2026-01-10",
+      "coverImage": "panda_anatomy_quiz_cover",
+      "questions": [
+        {
+          "id": "afq1",
+          "text": "What is the 'sixth finger' on a panda's paw actually?",
+          "answers": ["A true thumb", "An enlarged wrist bone", "A skin growth", "A sharp claw"],
+          "correctIndex": 1,
+          "explanation": "It's a modified sesamoid bone that acts like a thumb to help them grip bamboo."
+        },
+        {
+          "id": "afq2",
+          "text": "What color is a newborn panda?",
+          "answers": ["Black and white", "Grey", "Pink", "Bright white"],
+          "correctIndex": 2,
+          "explanation": "Panda cubs are born pink, blind, and nearly hairless."
+        },
+        {
+          "id": "afq3",
+          "text": "What is the purpose of the panda's black and white fur?",
+          "answers": ["To look cute", "Camouflage in snow and shadows", "To attract mates", "To absorb more sun"],
+          "correctIndex": 1,
+          "explanation": "The white helps them hide in snow, and the black helps them blend into deep shadows in the forest."
+        },
+        {
+          "id": "afq4",
+          "text": "Are pandas related more to bears or raccoons?",
+          "answers": ["Raccoons", "Bears", "Red pandas", "They are cats"],
+          "correctIndex": 1,
+          "explanation": "DNA tests have proven that giant pandas are true members of the bear family (Ursidae)."
+        },
+        {
+          "id": "afq5",
+          "text": "How strong is a panda's bite?",
+          "answers": ["Weak", "Like a house cat", "Stronger than a polar bear", "One of the strongest of any carnivore"],
+          "correctIndex": 3,
+          "explanation": "Because they must crush tough bamboo, their jaw muscles are incredibly powerful."
+        }
+      ]
+    },
+    {
+      "id": "panda_health_safety_01",
+      "title": "Health & Life Cycle Quiz",
+      "description": "How long do they live? How big do they get? Test your health stats knowledge.",
+      "categoryId": "health",
+      "tags": ["Lifespan", "Growth", "Cubs"],
+      "duration": 8,
+      "lastUpdated": "2026-01-12",
+      "coverImage": "panda_health_quiz_cover",
+      "questions": [
+        {
+          "id": "hsq1",
+          "text": "What is the average lifespan of a giant panda in the wild?",
+          "answers": ["5-10 years", "15-20 years", "30-40 years", "50+ years"],
+          "correctIndex": 1,
+          "explanation": "Wild pandas usually live around 15-20 years, though they can live up to 30 in captivity."
+        },
+        {
+          "id": "hsq2",
+          "text": "How much does a newborn panda weigh compared to its mother?",
+          "answers": ["1/10th", "1/100th", "1/900th", "1/50th"],
+          "correctIndex": 2,
+          "explanation": "Panda cubs are tiny—about the size of a stick of butter—making them 1/900th of the mother's weight."
+        },
+        {
+          "id": "hsq3",
+          "text": "Why is dental health so critical for a giant panda?",
+          "answers": ["For a nice smile", "Because they can't eat without strong teeth", "To prevent infections", "Both 1 and 2"],
+          "correctIndex": 1,
+          "explanation": "If a panda's teeth are damaged, they cannot crush bamboo, which leads to starvation."
+        },
+        {
+          "id": "hsq4",
+          "text": "How often do female pandas give birth?",
+          "answers": ["Every month", "Once a year", "Once every 2-3 years", "Once in their lifetime"],
+          "correctIndex": 2,
+          "explanation": "Pandas have a very slow reproductive rate, usually raising one cub every two or three years."
+        },
+        {
+          "id": "hsq5",
+          "text": "What is the biggest health risk for wild panda cubs?",
+          "answers": ["Lack of food", "Predators (like leopards)", "Accidental crushing by mother", "All of the above"],
+          "correctIndex": 3,
+          "explanation": "Cubs are extremely fragile and face threats from predators and the environment early on."
+        }
+      ]
     }
   ]
 }

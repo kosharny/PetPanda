@@ -198,7 +198,7 @@ enum PandaCategoryColorResolver {
         case "health": return .greanCharts
         case "quiz": return .text
         default:
-            return Color(hue: Double(abs(tag.hashValue % 100)) / 100.0, saturation: 0.7, brightness: 0.8)
+            return Color.gray
         }
     }
 }
