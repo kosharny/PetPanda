@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var vm: HomeViewModel
+    @EnvironmentObject var settingsVM: SettingsViewModel
     
     let onSettingsTap: () -> Void
     let onArticleTap: (String, ContentType) -> Void
@@ -61,8 +62,11 @@ struct HomeView: View {
                     EmptyView(title: "Uh-oh, pandas couldn’t deliver this page :(", imageName: "emptyImage", isButtonNeeded: true)
                 } else {
                     ScrollView(showsIndicators: false) {
-                        FactCardView()
-                            .padding(.vertical)
+                        if settingsVM.notificationsEnabled {
+                            FactCardView()
+                                .padding(.vertical)
+                                .transition(.move(edge: .top).combined(with: .opacity))
+                        }
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                             QuickAccessButton(icon: "population", title: "Population", onTap: {
                                 onQuickAccessTap(vm.getIds(for: .article))
@@ -102,7 +106,7 @@ struct HomeView: View {
                         if !vm.recommendations.isEmpty {
                             VStack(alignment: .leading) {
                                 Text("Recommended")
-                                    .font(.customSen(.semiBold, size: 16))
+                                    .font(.customSen(.semiBold, size: 16, offset: settingsVM.fontSizeOffset))
                                     .foregroundStyle(.mainGreen)
                                     .padding(.horizontal)
                                 

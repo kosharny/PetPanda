@@ -10,7 +10,7 @@ import Charts
 
 struct StatsView: View {
     
-    
+    @EnvironmentObject var settingsVM: SettingsViewModel
     @StateObject var vm: StatsViewModel
     
     let onSettingsTap: () -> Void
@@ -60,13 +60,13 @@ struct StatsView: View {
                     }
                     .padding(.horizontal)
                     Text("Daily activity")
-                        .font(.customSen(.semiBold, size: 17))
+                        .font(.customSen(.semiBold, size: 17, offset: settingsVM.fontSizeOffset))
                         .foregroundStyle(.text)
                         .padding()
                     CustomChartView(data: vm.dailyActivityData)
                         .padding(.horizontal)
                     Text("Topics you've studied")
-                        .font(.customSen(.semiBold, size: 17))
+                        .font(.customSen(.semiBold, size: 17, offset: settingsVM.fontSizeOffset))
                         .foregroundStyle(.text)
                         .padding()
                     PandaPieChartView(data: vm.categoryDistribution)

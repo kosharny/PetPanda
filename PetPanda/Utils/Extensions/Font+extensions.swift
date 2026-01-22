@@ -9,8 +9,8 @@ import SwiftUI
 
 extension Font {
     
-    static func customSen(_ weight: SenWeight, size: CGFloat) -> Font {
-        return Font.custom("Sen-\(weight.rawValue)", size: size)
+    static func customSen(_ weight: SenWeight, size: CGFloat, offset: CGFloat = 0) -> Font {
+        return Font.custom("Sen-\(weight.rawValue)", size: size + offset)
     }
     
     enum SenWeight: String {

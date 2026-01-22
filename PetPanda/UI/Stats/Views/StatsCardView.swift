@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StatsCardView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let resultCount: String
     let category: String
     let imageName: String
@@ -15,7 +16,7 @@ struct StatsCardView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(resultCount)
-                .font(.customSen(.semiBold, size: 25))
+                .font(.customSen(.semiBold, size: 25, offset: settingsVM.fontSizeOffset))
                 .foregroundStyle(.text)
             HStack(spacing: 8) {
                 Image(imageName)
@@ -23,7 +24,7 @@ struct StatsCardView: View {
                     .scaledToFit()
                     .frame(width: 20, height: 20)
                 Text(category)
-                    .font(.customSen(.regular, size: 13))
+                    .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
                     .lineLimit(1)
             }

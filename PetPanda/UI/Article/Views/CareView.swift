@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CareView: View {
     @StateObject private var vm: CareViewModel
+    @EnvironmentObject var settingsVM: SettingsViewModel
+    
     let onBackTap: () -> Void
     let onReady: () -> Void
     
@@ -86,7 +88,7 @@ struct CareView: View {
                         )
                         
                         Text(guide.title)
-                            .font(.customSen(.semiBold, size: 15))
+                            .font(.customSen(.semiBold, size: 15, offset: settingsVM.fontSizeOffset))
                             .foregroundStyle(.text)
                             .padding()
                     }
@@ -97,7 +99,7 @@ struct CareView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         if !vm.firstSentenceOfContent.isEmpty {
                             Text(vm.firstSentenceOfContent)
-                                .font(.customSen(.regular, size: 13))
+                                .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
                                 .foregroundStyle(.text)
                                 .multilineTextAlignment(.leading)
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -147,7 +149,7 @@ struct CareView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 Text(vm.progressTitle)
-                    .font(.customSen(.semiBold, size: 18))
+                    .font(.customSen(.semiBold, size: 18, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
                     .multilineTextAlignment(.center)
                 
@@ -165,13 +167,13 @@ struct CareView: View {
                             VStack(alignment: .leading, spacing: 12) {
                                 if let img = step.image { Image(img).resizable().scaledToFit() }
                                 Text(step.title)
-                                    .font(.customSen(.semiBold, size: 14))
+                                    .font(.customSen(.semiBold, size: 14, offset: settingsVM.fontSizeOffset))
                                     .foregroundStyle(.text)
                                     .padding(.top)
                                     .multilineTextAlignment(.center)
                                     .frame(maxWidth: .infinity, alignment: .center)
                                 Text(step.content.joined(separator: "\n"))
-                                    .font(.customSen(.regular, size: 13))
+                                    .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
                                     .foregroundStyle(.text)
                                     .multilineTextAlignment(.leading)
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -215,6 +217,7 @@ struct CareView: View {
 
 
 struct NotesFieldView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     @Binding var notesText: String
     let characterLimit = 1000
     
@@ -225,7 +228,7 @@ struct NotesFieldView: View {
                     .font(.system(size: 20, weight: .semibold))
                 
                 Text("Notes")
-                    .font(.customSen(.semiBold, size: 14))
+                    .font(.customSen(.semiBold, size: 14, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
             }
             .padding(.top, 20)
@@ -233,7 +236,7 @@ struct NotesFieldView: View {
             
             TextEditor(text: $notesText)
                 .scrollContentBackground(.hidden)
-                .font(.customSen(.regular, size: 12))
+                .font(.customSen(.regular, size: 12, offset: settingsVM.fontSizeOffset))
                 .foregroundStyle(.text)
                 .onChange(of: notesText) { _, newValue in
                     if newValue.count > characterLimit {
@@ -244,7 +247,7 @@ struct NotesFieldView: View {
             HStack {
                 Spacer()
                 Text("\(notesText.count)/\(characterLimit)")
-                    .font(.customSen(.regular, size: 13))
+                    .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
             }
             .padding(.bottom, 16)

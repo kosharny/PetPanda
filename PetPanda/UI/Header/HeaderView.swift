@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let tilte: String
     let leftBarButton: String?
     let rightBarButton: String?
@@ -18,7 +19,7 @@ struct HeaderView: View {
         VStack(alignment: .leading, spacing: 20) {
             ZStack {
                 Text(tilte)
-                    .font(.customSen(.semiBold, size: 20))
+                    .font(.customSen(.semiBold, size: 20, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
                 
                 HStack {

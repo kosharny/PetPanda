@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchBarView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     @Binding var searchText: String
     @Binding var showFilters: Bool
     var onCommit: () -> Void = {}
@@ -21,10 +22,10 @@ struct SearchBarView: View {
             
             TextField("", text: $searchText, prompt:
                         Text("Search by title, tags...")
-                .font(.customSen(.regular, size: 12))
+                .font(.customSen(.regular, size: 12, offset: settingsVM.fontSizeOffset))
                 .foregroundStyle(.text.opacity(0.5))
             )
-            .font(.customSen(.regular, size: 12))
+            .font(.customSen(.regular, size: 12, offset: settingsVM.fontSizeOffset))
             .foregroundStyle(.text)
             .padding(.leading, 12)
             .padding(.vertical, 14)

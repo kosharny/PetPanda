@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CotegoryButton: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let title: String
     let isSelected: Bool
     let onTap: () -> Void
@@ -17,7 +18,7 @@ struct CotegoryButton: View {
             onTap()
         } label: {
             Text(title)
-                .font(.customSen(.semiBold, size: 14))
+                .font(.customSen(.semiBold, size: 14, offset: settingsVM.fontSizeOffset))
                 .foregroundStyle(isSelected ? .text : .mainGreen)
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: 60, alignment: .center)

@@ -10,6 +10,15 @@ import SwiftUI
 
 struct JournalView: View {
     @StateObject var vm: JournalViewModel
+    @EnvironmentObject var settingsVM: SettingsViewModel
+    @StateObject var iapManager = PurchaseManager.shared
+    
+    @State private var showAlert = false
+    @State private var alertType: PurchaseAlertType = .confirmExport
+    
+    enum PurchaseAlertType {
+        case confirmExport, success, failure
+    }
     
     let onSettingsTap: () -> Void
     let onBackTap: () -> Void
@@ -85,26 +94,27 @@ struct JournalView: View {
                                 
                                 ZStack {
                                     MainButtonsFillView(title: "Export Data (PDF)", onReady: {
-                                        if let pdfURL = vm.exportJournalToPDF() {
-                                            let activityVC = UIActivityViewController(activityItems: [pdfURL], applicationActivities: nil)
-                                            
-                                            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                                               let rootVC = scene.windows.first(where: { $0.isKeyWindow })?.rootViewController {
-                                                rootVC.present(activityVC, animated: true)
-                                            } else {
-                                                print("Failed to find rootViewController to present share sheet")
-                                            }
+                                        if iapManager.isExportUnlocked {
+                                            exportAction()
+                                        } else {
+                                            alertType = .confirmExport
+                                            showAlert = true
                                         }
-
                                     })
-                                    HStack {
-                                        Spacer()
-                                        Image("lock")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(maxWidth: 20)
+                                    .opacity(iapManager.isExportUnlocked ? 1.0 : 0.9)
+                                    if !iapManager.isExportUnlocked {
+                                        HStack {
+                                            Spacer()
+                                            Image("payLock")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(maxWidth: 24)
+                                        }
+                                        .padding(.horizontal, 40)
+                                        .allowsHitTesting(false)
+                                        
+                                        .padding(.horizontal, 40)
                                     }
-                                    .padding(.horizontal, 40)
                                 }
                             }
                         }
@@ -113,9 +123,22 @@ struct JournalView: View {
                     Spacer(minLength: 100)
                 }
             }
+            if showAlert {
+                alertOverlay
+            }
         }
         .onAppear {
             vm.load()
+        }
+    }
+    
+    private func exportAction() {
+        if let pdfURL = vm.exportJournalToPDF() {
+            let activityVC = UIActivityViewController(activityItems: [pdfURL], applicationActivities: nil)
+            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let rootVC = scene.windows.first(where: { $0.isKeyWindow })?.rootViewController {
+                rootVC.present(activityVC, animated: true)
+            }
         }
     }
     
@@ -138,9 +161,54 @@ struct JournalView: View {
                 .frame(width: 20, height: 20)
 
             Text(vm.formattedDate(date))
-                .font(.customSen(.semiBold, size: 16))
+                .font(.customSen(.semiBold, size: 16, offset: settingsVM.fontSizeOffset))
                 .foregroundStyle(.text)
         }
     }
 }
 
+extension JournalView {
+    var alertOverlay: some View {
+        Group {
+            switch alertType {
+            case .confirmExport:
+                CustomPurchaseAlert(
+                    title: "Unlock data export",
+                    message: "Want to save, share or work with your notes outside the app? Activate data export.",
+                    primaryButtonTitle: "Buy $1.99",
+                    secondaryButtonTitle: "Cancel",
+                    action: {
+                        Task {
+                            let success = await iapManager.purchase(iapManager.exportID)
+                            alertType = success ? .success : .failure
+                        }
+                    },
+                    cancelAction: { showAlert = false }
+                )
+                
+            case .success:
+                CustomPurchaseAlert(
+                    title: "Success",
+                    message: "Data export is now unlocked!",
+                    primaryButtonTitle: "Cool",
+                    secondaryButtonTitle: "Close",
+                    action: { showAlert = false },
+                    cancelAction: { showAlert = false }
+                )
+                
+            case .failure:
+                CustomPurchaseAlert(
+                    title: "Purchase Failed",
+                    message: "Something went wrong. Please try again.",
+                    primaryButtonTitle: "Try Again",
+                    secondaryButtonTitle: "Cancel",
+                    action: {
+                        // Повторная попытка покупки
+                        alertType = .confirmExport
+                    },
+                    cancelAction: { showAlert = false }
+                )
+            }
+        }
+    }
+}

@@ -19,6 +19,7 @@ struct MainTabView: View {
     
     @State private var selectedTab = 0
     @StateObject private var router = AppRouter()
+    @StateObject private var settingsVM = SettingsViewModel()
     
     init(
         articlesRepository: ArticlesRepository,
@@ -175,6 +176,7 @@ struct MainTabView: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 10)
         }
+        .environmentObject(settingsVM)
     }
     
     @ViewBuilder
@@ -183,6 +185,7 @@ struct MainTabView: View {
 
         case .settings:
             SettingsView(
+                vm: settingsVM,
                 onBackTap: {
                     popCurrentPath()
                 },
@@ -303,6 +306,8 @@ struct MainTabView: View {
 }
 
 struct TabItem: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
+    
     let icon: String
     let label: String
     let isSelected: Bool
@@ -316,7 +321,7 @@ struct TabItem: View {
                     .scaledToFit()
                     .frame(maxWidth: 40)
                 Text(label)
-                    .font(.customSen(.regular, size: 12))
+                    .font(.customSen(.regular, size: 12, offset: settingsVM.fontSizeOffset))
             }
             .foregroundStyle(isSelected ? Color.mainGreen : Color.tabBarText)
             .frame(maxWidth: .infinity)

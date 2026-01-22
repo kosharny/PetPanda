@@ -9,6 +9,8 @@ import SwiftUI
 
 struct QuizView: View {
     @StateObject private var vm: QuizViewModel
+    @EnvironmentObject var settingsVM: SettingsViewModel
+    
     let onBackTap: () -> Void
     let onReady: () -> Void
     
@@ -86,7 +88,7 @@ struct QuizView: View {
                     )
                     
                     Text(quiz.title)
-                        .font(.customSen(.semiBold, size: 15))
+                        .font(.customSen(.semiBold, size: 15, offset: settingsVM.fontSizeOffset))
                         .foregroundStyle(.white)
                         .padding()
                 }
@@ -97,7 +99,7 @@ struct QuizView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     if !vm.firstSentenceOfDescription.isEmpty {
                         Text(vm.firstSentenceOfDescription)
-                            .font(.customSen(.regular, size: 13))
+                            .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
                             .foregroundStyle(.text)
                             .multilineTextAlignment(.leading)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -159,7 +161,7 @@ struct QuizView: View {
         VStack(spacing: 20) {
             
             Text(vm.progressTitle)
-                .font(.customSen(.semiBold, size: 18))
+                .font(.customSen(.semiBold, size: 18, offset: settingsVM.fontSizeOffset))
                 .foregroundStyle(.text)
             
             HStack(spacing: 8) {
@@ -178,7 +180,7 @@ struct QuizView: View {
                     VStack(spacing: 20) {
                         
                         Text(question.text)
-                            .font(.customSen(.semiBold, size: 20))
+                            .font(.customSen(.semiBold, size: 20, offset: settingsVM.fontSizeOffset))
                             .foregroundStyle(.text)
                             .multilineTextAlignment(.center)
                             .padding()
@@ -207,7 +209,7 @@ struct QuizView: View {
                                     .font(.title3)
                                 
                                 Text(question.explanation)
-                                    .font(.customSen(.regular, size: 13))
+                                    .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
                                     .foregroundStyle(.text)
                                     .multilineTextAlignment(.leading)
                             }
@@ -274,6 +276,8 @@ enum QuizOptionState {
 }
 
 struct QuizOptionButton: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
+    
     let text: String
     let state: QuizOptionState
     let action: () -> Void
@@ -290,7 +294,7 @@ struct QuizOptionButton: View {
         Button(action: action) {
             HStack {
                 Text(text)
-                    .font(.customSen(.medium, size: 14))
+                    .font(.customSen(.medium, size: 14, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.leading)
                 Spacer()

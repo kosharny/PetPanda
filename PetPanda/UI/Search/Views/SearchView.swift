@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchView: View {
     
     @StateObject private var vm: SearchViewModel
+    @EnvironmentObject var settingsVM: SettingsViewModel
     @State private var showFilters = false
     @FocusState private var isSearchFocused: Bool
     
@@ -78,7 +79,7 @@ struct SearchView: View {
                         VStack {
                             
                             Text("Recent searches")
-                                .font(.customSen(.semiBold, size: 16))
+                                .font(.customSen(.semiBold, size: 16, offset: settingsVM.fontSizeOffset))
                                 .foregroundStyle(.mainGreen)
                                 .padding(.bottom)
                             
@@ -87,7 +88,7 @@ struct SearchView: View {
                             Button("Clear") {
                                 vm.clearHistory()
                             }
-                            .font(.customSen(.regular, size: 12))
+                            .font(.customSen(.regular, size: 12, offset: settingsVM.fontSizeOffset))
                             .foregroundStyle(.text.opacity(0.6))
                             
                             ForEach(vm.recentSearches, id: \.self) { historyItem in
@@ -118,10 +119,11 @@ struct SearchView: View {
 }
 
 struct RecentSearchButtonView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let title: String
     var body: some View {
         Text(title)
-            .font(.customSen(.regular, size: 14))
+            .font(.customSen(.regular, size: 14, offset: settingsVM.fontSizeOffset))
             .foregroundStyle(.text)
             .padding()
             .frame(maxWidth: .infinity)

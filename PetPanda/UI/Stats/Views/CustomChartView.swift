@@ -18,30 +18,40 @@ struct ChartData: Identifiable {
 struct CustomChartView: View {
     let data: [ChartData]
     
+    private var maxY: Double {
+        let maxVal = data.map { $0.value }.max() ?? 0
+        return maxVal < 5 ? 5 : maxVal + 1.2
+    }
+    
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Chart {
                 ForEach(data) { item in
                     BarMark(
                         x: .value("Date", item.category),
                         y: .value("Value", item.value),
-                        width: .fixed(12)
+                        width: .fixed(16)
                     )
                     .foregroundStyle(item.color)
                     .cornerRadius(4)
                 }
             }
+            .chartXScale(domain: data.map { $0.category })
+            .chartYScale(domain: 0...maxY)
             .chartXAxis(.hidden)
             .chartYAxis {
-                AxisMarks(values: [0, 25, 50, 75, 100]) { value in
+                AxisMarks(position: .leading, values: .automatic(desiredCount: 3)) { value in
                     AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
-                        .foregroundStyle(Color.white.opacity(0.4))
+                        .foregroundStyle(Color.white.opacity(0.2))
+                    AxisValueLabel()
+                        .foregroundStyle(Color.white.opacity(0.6))
                 }
             }
             .frame(height: 200)
-            .padding()
-            .background(Color.endBg)
-            .cornerRadius(12)
+            .padding(.top, 10)
         }
+        .padding()
+        .background(Color.endBg)
+        .cornerRadius(12)
     }
 }

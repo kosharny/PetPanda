@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ArticleCard: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
+    
     let category: String
     let title: String
     let tag: String
@@ -24,10 +26,10 @@ struct ArticleCard: View {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 10) {
                         Text(category)
-                            .font(.customSen(.regular, size: 12))
+                            .font(.customSen(.regular, size: 12, offset: settingsVM.fontSizeOffset))
                             .foregroundStyle(.text)
                         Text(title)
-                            .font(.customSen(.semiBold, size: 14))
+                            .font(.customSen(.semiBold, size: 14, offset: settingsVM.fontSizeOffset))
                             .foregroundStyle(.text)
                     }
                     Spacer()
@@ -39,8 +41,8 @@ struct ArticleCard: View {
                 HStack {
                     ProgressTagView(progress: progress)
                     TagView(title: "10 min")
-                    TagView(title: tag)
-                    TagView(title: type)
+                    TagView(title: tag.capitalized)
+                    TagView(title: type.capitalized)
                 }
                 .foregroundColor(.gray)
             }
@@ -53,11 +55,12 @@ struct ArticleCard: View {
 }
 
 struct ProgressTagView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let progress: Double
     
     var body: some View {
         Text("\(Int(progress * 100))%")
-            .font(.customSen(.regular, size: 10))
+            .font(.customSen(.regular, size: 10, offset: settingsVM.fontSizeOffset))
             .foregroundStyle(progress > 0.5 ? .text : .mainGreen)
             .padding(4)
             .padding(.horizontal, 8)

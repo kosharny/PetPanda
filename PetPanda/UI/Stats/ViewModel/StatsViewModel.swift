@@ -53,11 +53,18 @@ final class StatsViewModel: ObservableObject {
     }
 
     func reload() {
-        let progress = statsRepo.fetchUserProgress(filter: filter)
+        let allProgress = statsRepo.fetchUserProgress(filter: .allTime)
+        let filteredProgress = statsRepo.fetchUserProgress(filter: filter)
 
-        calculateTotals(from: progress)
-        buildDailyActivity(from: progress)
+        articlesRead = filteredProgress.reduce(into: 0) { $0 += $1.articlesRead }
+        guidesCompleted = filteredProgress.reduce(into: 0) { $0 += $1.guidesCompleted }
+        quizzesCompleted = filteredProgress.reduce(into: 0) { $0 += $1.quizzesCompleted }
+
+        self.streak = allProgress.map(\.readingStreak).max() ?? 0
+        
+        buildDailyActivity(from: filteredProgress)
         buildCategoryDistribution()
+        loadQuizResults()
     }
 
 
@@ -74,7 +81,12 @@ final class StatsViewModel: ObservableObject {
             let results = try quizRepo.fetchResults(quizId: "all")
             let correct = results.reduce(0) { $0 + Int($1.score) }
             let total = results.reduce(0) { $0 + Int($1.totalQuestions) }
-            quizResultText = total > 0 ? "\(correct)/\(total)" : "–"
+            
+            if total > 0 {
+                quizResultText = "\(correct)/\(total)"
+            } else {
+                quizResultText = "0/0"
+            }
         } catch {
             quizResultText = "–"
         }
@@ -114,7 +126,7 @@ final class StatsViewModel: ObservableObject {
             return item.date >= fromDate
         }
 
-        let grouped = Dictionary(grouping: filtered, by: { $0.category })
+        let grouped = Dictionary(grouping: filtered, by: { $0.tag })
         let total = Double(filtered.count)
 
         guard total > 0 else {
@@ -122,11 +134,11 @@ final class StatsViewModel: ObservableObject {
             return
         }
 
-        categoryDistribution = grouped.map { category, items in
+        categoryDistribution = grouped.map { tagName, items in
             PandaCategory(
-                name: category,
+                name: tagName.capitalized, 
                 value: Double(items.count) / total * 100,
-                color: PandaCategoryColorResolver.color(for: category)
+                color: PandaCategoryColorResolver.color(for: tagName)
             )
         }
     }
@@ -156,12 +168,17 @@ extension StatsFilter {
 }
 
 enum PandaCategoryColorResolver {
-    static func color(for category: String) -> Color {
-        switch category {
-        case "Health": return .mainGreen
-        case "Training": return .blueCharts
-        case "Nutrition": return .greanCharts
-        default: return .gray
+    static func color(for tag: String) -> Color {
+        switch tag.lowercased() {
+        case "habitat": return .darkBlueChart
+        case "population": return .mainGreen
+        case "diet": return .darkGreenChart
+        case "nutrition": return .blueCharts
+        case "care": return .textButton
+        case "health": return .greanCharts
+        case "quiz": return .text
+        default:
+            return Color(hue: Double(abs(tag.hashValue % 100)) / 100.0, saturation: 0.7, brightness: 0.8)
         }
     }
 }
