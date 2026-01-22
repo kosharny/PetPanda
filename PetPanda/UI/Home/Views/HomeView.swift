@@ -63,9 +63,15 @@ struct HomeView: View {
                 } else {
                     ScrollView(showsIndicators: false) {
                         if settingsVM.notificationsEnabled {
-                            FactCardView()
+                            if let fact = vm.randomFact {
+                                FactCardView(
+                                    factTitle: fact.title,
+                                    onOpenTap: {
+                                        onArticleTap(fact.id, .article)
+                                    })
                                 .padding(.vertical)
                                 .transition(.move(edge: .top).combined(with: .opacity))
+                            }
                         }
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                             QuickAccessButton(icon: "population", title: "Population", onTap: {

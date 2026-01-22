@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FactCardView: View {
     @EnvironmentObject var settingsVM: SettingsViewModel
+    let factTitle: String
+    let onOpenTap: () -> Void
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 15) {
@@ -34,10 +37,12 @@ struct FactCardView: View {
                         .stroke(Color.textButton.opacity(0.3), lineWidth: 1)
                 )
                 
-                Text("Only 1,864 giant pandas remain in the wild today.")
+                Text(factTitle)
                     .font(.customSen(.medium, size: 18, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
-                MainButtonsFillView(title: "Open", onReady: {})
+                MainButtonsFillView(title: "Open", onReady: {
+                    onOpenTap()
+                })
             }
             Spacer()
             Image("factImage")

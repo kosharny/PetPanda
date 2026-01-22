@@ -169,11 +169,15 @@ struct MainTabView: View {
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 20)
-            .background(.ultraThinMaterial.opacity(0.5))
             .cornerRadius(30)
+            .background(
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(Material.ultraThinMaterial)
+                    .opacity(0.1)
+            )
             .overlay(
                 RoundedRectangle(cornerRadius: 30)
-                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                    .stroke(Color.textButton.opacity(0.3), lineWidth: 1)
             )
             .padding(.horizontal, 16)
             .padding(.bottom, 10)

@@ -10,7 +10,6 @@ import CoreData
 
 protocol ArticlesRepository {
     func fetchAll() throws -> [Article]
-    func fetch(by categoryId: String) throws -> [Article]
     func fetch(byId id: String) throws -> Article
     func markAsRead(articleId: String) throws
     func updateProgress(articleId: String, progress: Double) throws
@@ -31,26 +30,6 @@ extension ArticlesRepositoryImpl {
 
         let request: NSFetchRequest<ArticleEntity> =
             ArticleEntity.fetchRequest()
-
-        request.sortDescriptors = [
-            NSSortDescriptor(key: "lastUpdated", ascending: false)
-        ]
-
-        let entities = try context.fetch(request)
-        return entities.map { $0.toDomain() }
-    }
-}
-
-extension ArticlesRepositoryImpl {
-
-    func fetch(by categoryId: String) throws -> [Article] {
-
-        let request: NSFetchRequest<ArticleEntity> =
-            ArticleEntity.fetchRequest()
-
-        request.predicate = NSPredicate(
-            format: "categoryId == %@", categoryId
-        )
 
         request.sortDescriptors = [
             NSSortDescriptor(key: "lastUpdated", ascending: false)

@@ -12,6 +12,7 @@ import Combine
 final class HomeViewModel: ObservableObject {
     @Published private(set) var recommendations: [HomeRecommendation] = []
     @Published private(set) var isLoading = false
+    @Published private(set) var randomFact: Article?
     
     private let articlesRepo: ArticlesRepository
     private let careRepo: CareGuideRepository
@@ -43,6 +44,10 @@ final class HomeViewModel: ObservableObject {
                 try await importer.importAll()
                 allArticles = try articlesRepo.fetchAll()
             }
+            
+            self.randomFact = allArticles
+                .filter { $0.categoryId.lowercased() == "fun facts" }
+                .randomElement()
             
             let fetchedArticle = allArticles.first
             let fetchedCare = try careRepo.fetchAll().last
