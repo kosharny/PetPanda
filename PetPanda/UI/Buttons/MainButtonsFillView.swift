@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct MainButtonsFillView: View {
+    
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let title: String
     let onReady: () -> Void
     
     var body: some View {
         Button(title) { onReady() }
-            .font(.customSen(.medium, size: 18))
+            .font(.customSen(.medium, size: 18, offset: settingsVM.fontSizeOffset))
             .foregroundStyle(.text)
             .frame(maxWidth: .infinity)
             .frame(height: 56)

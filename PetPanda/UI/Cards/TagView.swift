@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct TagView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let title: String
     
     var body: some View {
         Text(title)
-            .font(.customSen(.regular, size: 10))
+            .font(.customSen(.regular, size: 10, offset: settingsVM.fontSizeOffset))
             .foregroundStyle(.mainGreen)
             .padding(4)
             .padding(.horizontal)

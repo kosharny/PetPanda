@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct QuestionButtonView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let question: String
     var body: some View {
         Text(question)
-            .font(.customSen(.semiBold, size: 15))
+            .font(.customSen(.semiBold, size: 15, offset: settingsVM.fontSizeOffset))
             .foregroundStyle(.text)
             .padding(.horizontal)
             .frame(maxWidth: .infinity, minHeight: 60, alignment: .leading)

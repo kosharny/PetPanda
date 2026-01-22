@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct EmptyView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let title: String
     let imageName: String
     let isButtonNeeded: Bool
     var body: some View {
         VStack {
             Text(title)
-                .font(.customSen(.medium, size: 18))
+                .font(.customSen(.medium, size: 18, offset: settingsVM.fontSizeOffset))
                 .foregroundStyle(.text)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)

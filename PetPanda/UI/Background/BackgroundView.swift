@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct BackgroundView: View {
+    @AppStorage("app_theme") var theme: AppTheme = .classic
+    @EnvironmentObject var settings: SettingsViewModel
+    
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.startBg, .endBg], startPoint: .bottom, endPoint: .top)
+            LinearGradient(
+                colors: theme.colors,
+                startPoint: .bottom,
+                endPoint: .top
+            )
         }
         .ignoresSafeArea()
+        .animation(.easeInOut(duration: 0.5), value: theme)
     }
 }
 

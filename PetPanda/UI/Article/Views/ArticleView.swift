@@ -10,6 +10,7 @@ import SwiftUI
 struct ArticleView: View {
     
     @StateObject private var vm: ArticleViewModel
+    @EnvironmentObject var settingsVM: SettingsViewModel
     
     let onBackTap: () -> Void
     let onReady: () -> Void
@@ -75,7 +76,7 @@ struct ArticleView: View {
                                 )
                                 
                                 Text(article.title)
-                                    .font(.customSen(.semiBold, size: 15))
+                                    .font(.customSen(.semiBold, size: 15, offset: settingsVM.fontSizeOffset))
                                     .foregroundStyle(.text)
                                     .padding()
                                 
@@ -87,7 +88,7 @@ struct ArticleView: View {
                             VStack(alignment: .leading, spacing: 16) {
                                 if !vm.firstSentenceOfContent.isEmpty {
                                     Text(vm.firstSentenceOfContent)
-                                        .font(.customSen(.regular, size: 13))
+                                        .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
                                         .foregroundStyle(.text)
                                 }
                                 HStack(spacing: 16) {
@@ -184,19 +185,20 @@ struct ContentBlockView: View {
 
 
 struct ArticleTextView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let title: String
     let description: String
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             if !title.isEmpty {
                 Text(title)
-                    .font(.customSen(.semiBold, size: 14))
+                    .font(.customSen(.semiBold, size: 14, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
             }
             Text(description)
-                .font(.customSen(.regular, size: 13))
+                .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
                 .foregroundStyle(.text)
                 .multilineTextAlignment(.leading)
         }

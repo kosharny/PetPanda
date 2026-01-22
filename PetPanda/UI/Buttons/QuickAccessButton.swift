@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct QuickAccessButton: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let icon: String
     let title: String
     let onTap: () -> Void
@@ -23,7 +24,7 @@ struct QuickAccessButton: View {
                     .frame(maxWidth: 40)
                     .offset(x: 2, y: 2)
                 Text(title)
-                    .font(.customSen(.semiBold, size: 15))
+                    .font(.customSen(.semiBold, size: 15, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.mainGreen)
                 Spacer()
                 Image(systemName: "chevron.right")

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FactCardView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 15) {
@@ -34,7 +35,7 @@ struct FactCardView: View {
                 )
                 
                 Text("Only 1,864 giant pandas remain in the wild today.")
-                    .font(.customSen(.medium, size: 18))
+                    .font(.customSen(.medium, size: 18, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
                 MainButtonsFillView(title: "Open", onReady: {})
             }

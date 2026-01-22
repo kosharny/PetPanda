@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AboutView: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let onBackTap: () -> Void
     
     var body: some View {
@@ -32,55 +33,27 @@ struct AboutView: View {
                     .frame(maxHeight: 200)
                 
                 Text("PetPanda is an offline educational companion app about pandas, offering daily facts, care guides, quizzes, favorites, reading history, and PDF export.")
-                    .font(.customSen(.regular, size: 15))
+                    .font(.customSen(.regular, size: 15, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
                     .padding()
                 
                 
                 VStack(spacing: 16) {
-                    HStack {
-                        Text("Privacy Policy")
-                            .font(.customSen(.regular, size: 13))
-                            .foregroundStyle(.text)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.title3.bold())
-                            .foregroundStyle(.mainGreen)
-                            .padding(.trailing, 4)
+                    NavigationLink(destination: AboutDetailView(title: "Privacy Policy", content: LegalTexts.privacyPolicy)) {
+                        menuRow(title: "Privacy Policy")
                     }
-                    .padding(.horizontal)
-                    Divider()
-                        .padding()
-                        .frame(height: 1)
-                        .background(.text.opacity(0.5))
                     
-                    HStack {
-                        Text("Terms of Use")
-                            .font(.customSen(.regular, size: 13))
-                            .foregroundStyle(.text)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.title3.bold())
-                            .foregroundStyle(.mainGreen)
-                            .padding(.trailing, 4)
-                    }
-                    .padding(.horizontal)
-                    Divider()
-                        .padding()
-                        .frame(height: 1)
-                        .background(.text.opacity(0.5))
+                    divider
                     
-                    HStack {
-                        Text("Sources")
-                            .font(.customSen(.regular, size: 13))
-                            .foregroundStyle(.text)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.title3.bold())
-                            .foregroundStyle(.mainGreen)
-                            .padding(.trailing, 4)
+                    NavigationLink(destination: AboutDetailView(title: "Terms of Use", content: LegalTexts.termsOfUse)) {
+                        menuRow(title: "Terms of Use")
                     }
-                    .padding(.horizontal)
+                    
+                    divider
+                    
+                    NavigationLink(destination: AboutDetailView(title: "Sources", content: LegalTexts.sources)) {
+                        menuRow(title: "Sources")
+                    }
                 }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -100,13 +73,35 @@ struct AboutView: View {
                 .padding(.top, 30)
                 Spacer()
                 Text("App Version 1.0")
-                    .font(.customSen(.regular, size: 13))
+                    .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
                     .foregroundStyle(.text)
                 
                 Spacer(minLength: 100)
             }
             .navigationBarHidden(true)
         }
+    }
+    
+    private func menuRow(title: String) -> some View {
+        HStack {
+            Text(title)
+                .font(.customSen(.regular, size: 14, offset: settingsVM.fontSizeOffset))
+                .foregroundStyle(.text)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .font(.system(size: 14, weight: .bold))
+                .foregroundStyle(.mainGreen)
+        }
+        .padding(.vertical, 18)
+        .padding(.horizontal, 20)
+        .contentShape(Rectangle())
+    }
+    
+    private var divider: some View {
+        Divider()
+            .padding(.horizontal, 20)
+            .frame(height: 1)
+            .background(Color.text.opacity(0.1))
     }
 }
 

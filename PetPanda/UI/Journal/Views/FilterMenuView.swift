@@ -111,6 +111,7 @@ struct FilterMenuView: View {
 }
 
 struct FilterGroup<Content: View>: View {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     let title: String
     let content: Content
 
@@ -122,7 +123,7 @@ struct FilterGroup<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .font(.customSen(.semiBold, size: 16)) 
+                .font(.customSen(.semiBold, size: 16, offset: settingsVM.fontSizeOffset))
                 .foregroundStyle(.text)
             
             content
@@ -132,10 +133,11 @@ struct FilterGroup<Content: View>: View {
 }
 
 struct GlassToggleStyle: ToggleStyle {
+    @EnvironmentObject var settingsVM: SettingsViewModel
     func makeBody(configuration: Configuration) -> some View {
         HStack {
             configuration.label
-                .font(.customSen(.semiBold, size: 16))
+                .font(.customSen(.semiBold, size: 16, offset: settingsVM.fontSizeOffset))
                 .foregroundColor(.text)
             
             Spacer()
