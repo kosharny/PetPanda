@@ -26,57 +26,58 @@ struct AboutView: View {
                     onLeftTap: {
                         onBackTap()
                     })
-                
-                Image("mainLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxHeight: 200)
-                
-                Text("PetPanda is an offline educational companion app about pandas, offering daily facts, care guides, quizzes, favorites, reading history, and PDF export.")
-                    .font(.customSen(.regular, size: 15, offset: settingsVM.fontSizeOffset))
-                    .foregroundStyle(.text)
+                ScrollView(showsIndicators: false) {
+                    Image("mainLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 200)
+                    
+                    Text("PetPanda is an offline educational companion app about pandas, offering daily facts, care guides, quizzes, favorites, reading history, and PDF export.")
+                        .font(.customSen(.regular, size: 15, offset: settingsVM.fontSizeOffset))
+                        .foregroundStyle(.text)
+                        .padding()
+                    
+                    
+                    VStack(spacing: 16) {
+                        NavigationLink(destination: AboutDetailView(title: "Privacy Policy", content: LegalTexts.privacyPolicy)) {
+                            menuRow(title: "Privacy Policy")
+                        }
+                        
+                        divider
+                        
+                        NavigationLink(destination: AboutDetailView(title: "Terms of Use", content: LegalTexts.termsOfUse)) {
+                            menuRow(title: "Terms of Use")
+                        }
+                        
+                        divider
+                        
+                        NavigationLink(destination: AboutDetailView(title: "Sources", content: LegalTexts.sources)) {
+                            menuRow(title: "Sources")
+                        }
+                    }
                     .padding()
-                
-                
-                VStack(spacing: 16) {
-                    NavigationLink(destination: AboutDetailView(title: "Privacy Policy", content: LegalTexts.privacyPolicy)) {
-                        menuRow(title: "Privacy Policy")
-                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: 28)
+                            .fill(Material.ultraThinMaterial.opacity(0.2))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 28)
+                                    .fill(Color.mainGreen.opacity(0))
+                            )
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 28)
+                            .stroke(Color.text.opacity(0.1), lineWidth: 1)
+                    )
+                    .padding(.horizontal)
+                    .padding(.top, 30)
+                    Spacer()
+                    Text("App Version 1.0")
+                        .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
+                        .foregroundStyle(.text)
                     
-                    divider
-                    
-                    NavigationLink(destination: AboutDetailView(title: "Terms of Use", content: LegalTexts.termsOfUse)) {
-                        menuRow(title: "Terms of Use")
-                    }
-                    
-                    divider
-                    
-                    NavigationLink(destination: AboutDetailView(title: "Sources", content: LegalTexts.sources)) {
-                        menuRow(title: "Sources")
-                    }
+                    Spacer(minLength: 100)
                 }
-                .padding()
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(
-                    RoundedRectangle(cornerRadius: 28)
-                        .fill(Material.ultraThinMaterial.opacity(0.2))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 28)
-                                .fill(Color.mainGreen.opacity(0))
-                        )
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 28)
-                        .stroke(Color.text.opacity(0.1), lineWidth: 1)
-                )
-                .padding(.horizontal)
-                .padding(.top, 30)
-                Spacer()
-                Text("App Version 1.0")
-                    .font(.customSen(.regular, size: 13, offset: settingsVM.fontSizeOffset))
-                    .foregroundStyle(.text)
-                
-                Spacer(minLength: 100)
             }
             .navigationBarHidden(true)
         }
