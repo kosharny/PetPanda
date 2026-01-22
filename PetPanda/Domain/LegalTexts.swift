@@ -11,7 +11,7 @@ struct LegalTexts {
     static let privacyPolicy = """
     Last updated: January 2026
     
-    PetPanda (“the App”) respects your privacy. This Privacy Policy explains what information is collected, how it is used, and your choices regarding your data.
+    PetPanda respects your privacy. This Privacy Policy explains what information is collected, how it is used, and your choices regarding your data.
 
     Information We Collect
     PetPanda is designed to work offline and does not require user registration.
@@ -29,7 +29,7 @@ struct LegalTexts {
     All payments are processed securely by Apple App Store. The App does not receive or store payment information.
 
     Contact
-    If you have questions, contact us at: support@petpanda.com
+    If you have questions about this Privacy Policy, please contact the developer via the App Store page.
     """
     
     static let termsOfUse = """

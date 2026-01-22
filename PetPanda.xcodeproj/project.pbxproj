@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DD81378D2F2262E00093F33D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DD81378C2F2262E00093F33D /* FirebaseMessaging */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DD344F5C2F1A0C2B0000767D /* PetPanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetPanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD81378D2F2262E00093F33D /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = PetPanda;
 			packageProductDependencies = (
+				DD81378C2F2262E00093F33D /* FirebaseMessaging */,
 			);
 			productName = PetPanda;
 			productReference = DD344F5C2F1A0C2B0000767D /* PetPanda.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = DD344F532F1A0C2B0000767D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DD81378B2F2262E00093F33D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DD344F5D2F1A0C2B0000767D /* Products */;
 			projectDirPath = "";
@@ -355,6 +364,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DD81378B2F2262E00093F33D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD81378C2F2262E00093F33D /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD81378B2F2262E00093F33D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DD344F542F1A0C2B0000767D /* Project object */;
 }
