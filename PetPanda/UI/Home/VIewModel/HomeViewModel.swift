@@ -58,7 +58,8 @@ final class HomeViewModel: ObservableObject {
                     tag: article.categoryId,
                     type: .article,
                     isFavorite: favoritesRepo.isFavorite(id: article.id, type: .article),
-                    progress: article.readProgress
+                    progress: article.readProgress,
+                    duration: article.readTime
                 ))
             }
             
@@ -72,7 +73,8 @@ final class HomeViewModel: ObservableObject {
                     tag: care.category,
                     type: .care,
                     isFavorite: favoritesRepo.isFavorite(id: care.id, type: .care),
-                    progress: progressValue
+                    progress: progressValue,
+                    duration: care.duration
                 ))
             }
             
@@ -87,7 +89,8 @@ final class HomeViewModel: ObservableObject {
                     tag: quiz.categoryId,
                     type: .quiz,
                     isFavorite: favoritesRepo.isFavorite(id: quiz.id, type: .quiz),
-                    progress: isDone ? 1.0 : 0.0
+                    progress: isDone ? 1.0 : 0.0,
+                    duration: quiz.duration
                 ))
             }
             
@@ -143,6 +146,7 @@ struct HomeRecommendation: Identifiable {
     let type: ContentType
     var isFavorite: Bool
     let progress: Double
+    let duration: Int
 }
 
 enum ContentType: Codable {

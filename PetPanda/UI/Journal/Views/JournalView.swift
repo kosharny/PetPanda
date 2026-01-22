@@ -26,11 +26,23 @@ struct JournalView: View {
     
     init(
         repository: JournalRepository,
+        favoritesRepo: FavoritesRepository,
+        articlesRepo: ArticlesRepository,
+        careRepo: CareGuideRepository,
+        quizRepo: QuizRepository,
         onBackTap: @escaping () -> Void,
         onSettingsTap: @escaping () -> Void,
         onArticleTap: @escaping (String, ContentType) -> Void
     ) {
-        _vm = StateObject(wrappedValue: JournalViewModel(journalRepo: repository))
+        _vm = StateObject(
+            wrappedValue: JournalViewModel(
+                journalRepo: repository,
+                favoritesRepo: favoritesRepo,
+                articlesRepo: articlesRepo,
+                careRepo: careRepo,
+                quizRepo: quizRepo
+            )
+        )
         self.onBackTap = onBackTap
         self.onSettingsTap = onSettingsTap
         self.onArticleTap = onArticleTap
@@ -82,8 +94,9 @@ struct JournalView: View {
                                                 title: item.title,
                                                 tag: item.tag,
                                                 type: item.category,
-                                                isFavorite: false,
+                                                isFavorite: vm.isFavorite(id: item.id, type: item.type),
                                                 progress: 0.0,
+                                                duration: vm.duration(for: item),
                                                 onTap: {
                                                     onArticleTap(item.id, item.type)
                                                 }

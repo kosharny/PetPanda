@@ -76,6 +76,10 @@ struct MainTabView: View {
                 NavigationStack(path: $router.journalPath) {
                     JournalView(
                         repository: journalRepository,
+                        favoritesRepo: favoritesRepository,
+                        articlesRepo: articlesRepository,
+                        careRepo: careRepository,
+                        quizRepo: quizRepository,
                         onBackTap: {
                             selectedTab = 0
                         }, onSettingsTap: {
@@ -143,14 +147,12 @@ struct MainTabView: View {
                 .tag(3)
                 NavigationStack(path: $router.statsPath) {
                     StatsView(
-                        vm: StatsViewModel(
-                            statsRepo: statsRepository,
-                            journalRepo: journalRepository,
-                            quizRepo: quizRepository
-                        ),
+                        statsRepo: statsRepository,
+                        journalRepo: journalRepository,
+                        quizRepo: quizRepository,
                         onSettingsTap: { router.statsPath.append(.settings)
                         },
-                              onBackTap: { selectedTab = 0 })
+                        onBackTap: { selectedTab = 0 })
                     .navigationDestination(for: AppRouter.Route.self) { route in
                         destination(for: route)
                     }
@@ -200,6 +202,7 @@ struct MainTabView: View {
                     articlesRepo: articlesRepository,
                     careRepo: careRepository,
                     quizRepo: quizRepository,
+                    favoritesRepo: favoritesRepository,
                     onArticleTap: { id, type in
                         switch type {
                         case "Article":

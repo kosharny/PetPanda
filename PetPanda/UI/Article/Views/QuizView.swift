@@ -39,17 +39,18 @@ struct QuizView: View {
             BackgroundView()
             
             VStack(spacing: 20) {
-                
-                HeaderView(
-                    tilte: "Quiz",
-                    leftBarButton: "chevron.left",
-                    rightBarButton: vm.isFavorite ? "star.fill" : "star",
-                    onRightTap: {
-                        vm.toggleFavorite()
-                    },
-                    onLeftTap: {
-                        onBackTap()
-                    })
+                if !vm.showResultAlert {
+                    HeaderView(
+                        tilte: "Quiz",
+                        leftBarButton: "chevron.left",
+                        rightBarButton: vm.isFavorite ? "star.fill" : "star",
+                        onRightTap: {
+                            vm.toggleFavorite()
+                        },
+                        onLeftTap: {
+                            onBackTap()
+                        })
+                }
                 
                 if vm.isLoading {
                     ProgressView()
@@ -66,6 +67,26 @@ struct QuizView: View {
                 }
             }
             .navigationBarHidden(true)
+            
+            if vm.showResultAlert {
+                QuizResultAlertView(
+                    score: vm.score,
+                    total: vm.totalSteps,
+                    onSeeArticles: {
+                        onReady()
+                    },
+                    onRepeat: {
+                        withAnimation {
+                            vm.restartQuiz()
+                        }
+                    },
+                    onOk: {
+                        onReady()
+                    }
+                )
+                .transition(.opacity)
+                .zIndex(100)
+            }
         }
         .onAppear {
             Task { await vm.load() }
@@ -235,7 +256,6 @@ struct QuizView: View {
                                     onReady: {
                                         if vm.currentStepIndex == vm.totalSteps - 1 {
                                             vm.completeQuiz()
-                                            onReady() 
                                         } else {
                                             withAnimation {
                                                 vm.nextStep()

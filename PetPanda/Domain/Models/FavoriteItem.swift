@@ -26,3 +26,13 @@ struct FavoriteRef: Hashable, Codable {
     let id: String
     let type: FavoriteType
 }
+
+extension FavoriteType {
+    init(contentType: ContentType) {
+        switch contentType {
+        case .article: self = .article
+        case .care: self = .care
+        case .quiz: self = .quiz
+        }
+    }
+}

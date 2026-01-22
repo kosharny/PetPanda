@@ -20,6 +20,7 @@ struct ResultsSearchView: View {
         articlesRepo: ArticlesRepository,
         careRepo: CareGuideRepository,
         quizRepo: QuizRepository,
+        favoritesRepo: FavoritesRepository,
         onArticleTap: @escaping (String, String) -> Void,
         onBackTap: @escaping () -> Void
     ) {
@@ -27,7 +28,8 @@ struct ResultsSearchView: View {
             ids: articleIds,
             articlesRepo: articlesRepo,
             careRepo: careRepo,
-            quizRepo: quizRepo
+            quizRepo: quizRepo,
+            favoritesRepo: favoritesRepo
         ))
         self.onArticleTap = onArticleTap
         self.onBackTap = onBackTap
@@ -72,6 +74,7 @@ struct ResultsSearchView: View {
                                     type: item.subTitle,
                                     isFavorite: item.isFavorite,
                                     progress: item.progress,
+                                    duration: item.duration,
                                     onTap: {
                                         onArticleTap(item.id, item.categoryType)
                                     }

@@ -13,6 +13,7 @@ protocol QuizRepository {
     func fetch(by categoryId: String) throws -> [Quiz]
     func saveResult(quizId: String, score: Int, totalQuestions: Int) throws
     func fetchResults(quizId: String) throws -> [QuizResultEntity]
+    func fetchAllResults() throws -> [QuizResultEntity]
 }
 
 final class QuizRepositoryImpl: QuizRepository {
@@ -46,6 +47,14 @@ final class QuizRepositoryImpl: QuizRepository {
     func fetchResults(quizId: String) throws -> [QuizResultEntity] {
         let request: NSFetchRequest<QuizResultEntity> = QuizResultEntity.fetchRequest()
         request.predicate = NSPredicate(format: "quizId == %@", quizId)
+        return try context.fetch(request)
+    }
+    
+    func fetchAllResults() throws -> [QuizResultEntity] {
+        let request: NSFetchRequest<QuizResultEntity> = QuizResultEntity.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "date", ascending: false)
+        ]
         return try context.fetch(request)
     }
 }

@@ -119,6 +119,7 @@ struct HomeView: View {
                                             type: item.category,
                                             isFavorite: item.isFavorite,
                                             progress: item.progress,
+                                            duration: item.duration,
                                             onTap: {
                                                 onArticleTap(item.id, item.type)
                                             }
