@@ -4,48 +4,38 @@
       "id": "panda_conservation_success_2026",
       "title": "Panda Conservation Success Story",
       "categoryId": "habitat",
-      "tags": [
-        "Population",
-        "Conservation",
-        "Habitat"
-      ],
+      "tags": ["Population", "Conservation", "Habitat"],
       "readTime": 10,
       "coverImage": "panda_population_cover",
       "lastUpdated": "2026-01-01",
       "contentBlocks": [
         {
           "type": "text",
-          "value": "A global conservation success story showing how habitat protection and science helped giant pandas recover. Giant pandas were once on the brink of extinction. Today, their recovery is considered one of the most successful conservation efforts in history — a result of habitat protection, scientific programs, and global awareness."
+          "value": "A global conservation success story showing how habitat protection and science helped giant pandas recover. Giant pandas were once on the brink of extinction. Today, their recovery is considered one of the most successful conservation efforts in history."
         },
         {
           "type": "text",
-          "value": "Native only to China’s mountain forests, pandas depend almost entirely on bamboo, making their survival directly tied to the health of this ecosystem."
+          "value": "Native only to China’s mountain forests, pandas depend almost entirely on bamboo, making their survival directly tied to the health of this ecosystem. Their recovery reflects a massive investment in nature."
         },
         {
           "type": "list",
           "title": "How the comeback happened",
           "value": [
             "Habitat loss was the main threat due to deforestation and land expansion.",
-            "China created a national protection strategy focused on rebuilding forests and isolating safe zones.",
+            "China created a national protection strategy focused on rebuilding forests.",
             "Protected reserves grew to more than 60, later unified into the Giant Panda National Park.",
-            "Scientific breeding and health monitoring programs improved survival rates of newborn cubs.",
-            "International cooperation and symbolic adoption programs helped fund protection initiatives."
+            "Scientific breeding and health monitoring programs improved cub survival rates.",
+            "International cooperation helped fund long-term protection initiatives."
           ]
-        },
-        {
-          "type": "text",
-          "value": "The panda story proves that conservation can work when governments, scientists, and communities act together."
         },
         {
           "type": "fact",
           "title": "Key facts you should know",
           "value": [
             "Giant pandas are still classified as vulnerable, not fully safe.",
-            "Bamboo forests are essential — protecting pandas means protecting entire ecosystems.",
-            "Panda reproduction is slow, so population growth takes decades, not years.",
-            "Climate change remains a long-term risk to bamboo availability.",
-            "Poaching has decreased dramatically but requires constant monitoring.",
-            "Conservation success is ongoing, and public support still matters."
+            "Bamboo forests are essential — protecting pandas protects entire ecosystems.",
+            "Panda reproduction is slow, so population growth takes decades.",
+            "Climate change remains a long-term risk to bamboo availability."
           ]
         },
         {
@@ -53,23 +43,11 @@
           "value": [
             {
               "question": "Why were pandas endangered?",
-              "answer": "The biggest reason was habitat destruction from deforestation, which reduced bamboo forests — their primary food source."
+              "answer": "The biggest reason was habitat destruction from deforestation, which reduced their primary food source."
             },
             {
               "question": "How many pandas are in the wild now?",
-              "answer": "Around 1,800+ giant pandas live in the wild today thanks to conservation and habitat protection."
-            },
-            {
-              "question": "Do breeding programs release pandas into nature?",
-              "answer": "Yes, but only a small percentage. Pandas must learn survival skills first — bamboo foraging, climbing, and self-defense."
-            },
-            {
-              "question": "Why does population grow so slowly?",
-              "answer": "Pandas reproduce rarely. Females are fertile only 2–3 days a year, and usually raise one cub at a time."
-            },
-            {
-              "question": "How does bamboo protection help other species?",
-              "answer": "Bamboo forests support red pandas, golden monkeys, birds, insects, and many rare plant species. Protecting pandas protects them too."
+              "answer": "Around 1,800+ giant pandas live in the wild today thanks to conservation."
             }
           ]
         }
@@ -79,37 +57,50 @@
       "id": "panda_diet_bamboo_obsession",
       "title": "The Bamboo Obsession: A Giant's Diet",
       "categoryId": "diet",
-      "tags": [
-        "Nutrition",
-        "Bamboo",
-        "Survival"
-      ],
-      "readTime": 8,
+      "tags": ["Nutrition", "Bamboo", "Survival"],
+      "readTime": 12,
       "coverImage": "panda_diet_cover",
       "lastUpdated": "2026-01-15",
       "contentBlocks": [
         {
           "type": "text",
-          "value": "Giant pandas are evolutionary marvels. Despite having the digestive system of a carnivore, they spend 12 to 16 hours a day eating bamboo. This unique shift in diet requires them to consume massive quantities to stay energized."
+          "value": "Giant pandas are evolutionary marvels. Despite having the digestive system of a carnivore, they spend 12 to 16 hours a day eating bamboo. This unique shift requires them to consume massive quantities to stay energized."
+        },
+        {
+          "type": "text",
+          "value": "Their bodies have adapted over millions of years, developing specialized gut bacteria and thick stomach linings to protect against sharp bamboo splinters."
         },
         {
           "type": "list",
           "title": "Favorite Bamboo Varieties",
           "value": [
-            "Arrow bamboo is a primary staple in high-altitude regions.",
-            "Umbrella bamboo provides essential nutrients during the winter months.",
-            "Young shoots are preferred for their high water and sugar content.",
-            "Pandas occasionally eat small rodents or birds for extra protein."
+            "Arrow bamboo: A primary staple in high-altitude regions.",
+            "Umbrella bamboo: Essential for nutrients during winter months.",
+            "Young shoots: Preferred for high sugar and water content.",
+            "Bamboo leaves: Eaten when shoots are unavailable for necessary fiber."
           ]
         },
         {
           "type": "fact",
           "title": "Digestive Challenges",
           "value": [
-            "Pandas only digest about 17% of the bamboo they eat.",
-            "They can consume up to 38 kilograms (84 pounds) of bamboo in a single day.",
-            "Their throat has a special lining to protect against bamboo splinters.",
-            "The low energy density of bamboo means pandas must avoid unnecessary movement."
+            "Pandas only digest about 17-20% of the bamboo they eat.",
+            "They can consume up to 38 kilograms of bamboo in a single day.",
+            "The low energy of bamboo means pandas must avoid unnecessary movement.",
+            "Their 'sixth finger' helps them grip stalks with precision."
+          ]
+        },
+        {
+          "type": "qa",
+          "value": [
+            {
+              "question": "Do they eat meat?",
+              "answer": "Occasionally. While 99% of their diet is bamboo, they may eat small rodents or birds for extra protein."
+            },
+            {
+              "question": "Why don't they hibernate?",
+              "answer": "Bamboo doesn't allow them to build enough body fat to survive a winter-long sleep."
+            }
           ]
         }
       ]
@@ -118,12 +109,8 @@
       "id": "panda_behavior_solitary_life",
       "title": "The Solitary Life of a Panda",
       "categoryId": "behavior",
-      "tags": [
-        "Social",
-        "Communication",
-        "Nature"
-      ],
-      "readTime": 7,
+      "tags": ["Social", "Communication", "Nature"],
+      "readTime": 11,
       "coverImage": "panda_behavior_solitary",
       "lastUpdated": "2026-01-10",
       "contentBlocks": [
@@ -132,15 +119,39 @@
           "value": "Unlike many other bears, pandas are highly solitary animals. They maintain strict territories and use complex scent-marking systems to avoid direct conflict with others."
         },
         {
+          "type": "text",
+          "value": "A panda's life is defined by a desire for peace and quiet. They avoid busy areas and prefer the deep, misty silence of the mountains where they can eat and rest undisturbed."
+        },
+        {
+          "type": "list",
+          "title": "Communication Methods",
+          "value": [
+            "Scent Glands: Leaving oily messages on trees and rocks.",
+            "Vocalizations: Using bleats, honks, and barks to express mood.",
+            "Claw Marks: Scratching tree bark to signal physical presence.",
+            "Body Language: Posture and movement to signal strength."
+          ]
+        },
+        {
+          "type": "fact",
+          "title": "Territory Facts",
+          "value": [
+            "A home range is typically 4 to 6 square kilometers.",
+            "Male territories often overlap with several female ranges.",
+            "Pandas are most active during dawn and dusk (crepuscular).",
+            "Conflict is rare, as scent markings help them 'time-share' the forest."
+          ]
+        },
+        {
           "type": "qa",
           "value": [
             {
-              "question": "How do pandas communicate if they live alone?",
-              "answer": "They use scent glands located under their tails to leave messages on trees and rocks."
+              "question": "How do they find each other to mate?",
+              "answer": "During the brief mating season, their scent markers become more intense, acting as a chemical beacon."
             },
             {
-              "question": "Do they hibernate?",
-              "answer": "No. Because bamboo doesn't allow them to build enough fat, they migrate to lower elevations instead of sleeping through winter."
+              "question": "Are they friendly to humans?",
+              "answer": "In the wild, they are shy and will run away. If cornered, they can be as dangerous as any other bear."
             }
           ]
         }
@@ -150,12 +161,8 @@
       "id": "panda_fun_facts_thumb",
       "title": "The Mystery of the Pseudo-Thumb",
       "categoryId": "fun facts",
-      "tags": [
-        "Anatomy",
-        "Evolution",
-        "Facts"
-      ],
-      "readTime": 5,
+      "tags": ["Anatomy", "Evolution", "Facts"],
+      "readTime": 9,
       "coverImage": "panda_thumb_cover",
       "lastUpdated": "2026-01-05",
       "contentBlocks": [
@@ -164,13 +171,40 @@
           "value": "One of the most fascinating features of a panda's paw is its 'sixth finger'. This isn't actually a finger, but an enlarged wrist bone that functions like an opposable thumb."
         },
         {
+          "type": "text",
+          "value": "This anatomical quirk allows them to do something most other bears cannot: hold things with one hand with extreme precision."
+        },
+        {
           "type": "fact",
           "title": "Why the thumb matters",
           "value": [
-            "It allows pandas to grip bamboo stalks with incredible precision.",
-            "It helps them peel away the tough outer layers of bamboo.",
-            "This anatomical quirk is a perfect example of convergent evolution.",
-            "Without it, they couldn't eat enough to survive."
+            "It allows pandas to grip bamboo stalks firmly while peeling them.",
+            "It helps them manipulate small objects like shoots or leaves.",
+            "This is a perfect example of convergent evolution.",
+            "Without it, they couldn't eat fast enough to survive."
+          ]
+        },
+        {
+          "type": "list",
+          "title": "Other Paw Features",
+          "value": [
+            "Thick padding for walking on cold, damp ground.",
+            "Sharp, curved claws perfect for climbing trees.",
+            "Non-slip soles to help navigate rocky mountain terrain.",
+            "Scent glands located nearby to mark paths as they walk."
+          ]
+        },
+        {
+          "type": "qa",
+          "value": [
+            {
+              "question": "Do red pandas have this too?",
+              "answer": "Yes! Red pandas also have a pseudo-thumb, even though they aren't closely related to giant pandas."
+            },
+            {
+              "question": "Can they hold tools?",
+              "answer": "Not like primates, but they are very skilled at holding and twisting bamboo stalks."
+            }
           ]
         }
       ]
@@ -179,12 +213,8 @@
       "id": "panda_health_cub_fragility",
       "title": "From Pink to Fluffy: Cub Health",
       "categoryId": "health",
-      "tags": [
-        "Infants",
-        "Growth",
-        "Care"
-      ],
-      "readTime": 12,
+      "tags": ["Infants", "Growth", "Care"],
+      "readTime": 13,
       "coverImage": "panda_cub_cover",
       "lastUpdated": "2026-01-12",
       "contentBlocks": [
@@ -193,13 +223,41 @@
           "value": "A newborn panda is one of the smallest mammal infants relative to its mother's size. Weighing only about 100 grams, they are pink, blind, and completely helpless at birth."
         },
         {
+          "type": "text",
+          "value": "The first 30 days are the most dangerous. During this time, the mother never leaves her cub, often refusing to even eat or drink to ensure its warmth and safety."
+        },
+        {
           "type": "list",
           "title": "Critical Growth Milestones",
           "value": [
             "Week 1: Develop pink skin and fine white hair.",
-            "Month 1: Black patches around eyes and ears appear.",
-            "Month 2: Eyes fully open, though vision is still blurry.",
-            "Month 6: Start eating soft bamboo while still nursing."
+            "Month 1: Iconic black patches around eyes and ears appear.",
+            "Month 2: Eyes fully open, though vision is blurry.",
+            "Month 4: Start to crawl and walk short distances.",
+            "Month 6: Start eating bamboo while still nursing."
+          ]
+        },
+        {
+          "type": "fact",
+          "title": "Care Facts",
+          "value": [
+            "A cub is 1/900th the size of its mother at birth.",
+            "Cubs cannot regulate their body temperature for the first few weeks.",
+            "Mothers often vocalize to soothe their cubs while nursing.",
+            "Survival rates in captivity are now over 90% thanks to science."
+          ]
+        },
+        {
+          "type": "qa",
+          "value": [
+            {
+              "question": "Why are they born so small?",
+              "answer": "It's likely due to the mother's low-energy diet, which doesn't support a long or heavy pregnancy."
+            },
+            {
+              "question": "When do they become independent?",
+              "answer": "Usually between 1.5 to 2 years, once they can forage and protect themselves."
+            }
           ]
         }
       ]
@@ -208,12 +266,8 @@
       "id": "panda_habitat_mountain_forests",
       "title": "Cloud Forests: The Panda's Home",
       "categoryId": "habitat",
-      "tags": [
-        "Mountains",
-        "China",
-        "Ecosystem"
-      ],
-      "readTime": 9,
+      "tags": ["Mountains", "China", "Ecosystem"],
+      "readTime": 11,
       "coverImage": "panda_forest_cover",
       "lastUpdated": "2026-01-18",
       "contentBlocks": [
@@ -222,13 +276,40 @@
           "value": "Giant pandas live in high-altitude temperate forests in Southwest China. These areas are often shrouded in heavy mist and clouds, providing the cool, damp environment pandas love."
         },
         {
+          "type": "text",
+          "value": "These 'cloud forests' are rich in biodiversity, acting as a home not just for pandas, but for thousands of other rare species."
+        },
+        {
           "type": "fact",
           "title": "Habitat Characteristics",
           "value": [
             "Elevation ranges from 1,200 to 3,100 meters.",
             "Dense bamboo understory is required for food and cover.",
             "Old-growth trees with hollows are essential for nesting.",
-            "Rivers and streams provide the large amount of water needed for digestion."
+            "Rivers and streams provide the large amount of water needed."
+          ]
+        },
+        {
+          "type": "list",
+          "title": "Why this habitat is unique",
+          "value": [
+            "High humidity helps bamboo grow year-round.",
+            "Steep terrain protects pandas from many natural predators.",
+            "Stable temperatures prevent heat stress in the bears.",
+            "Isolated locations reduce direct contact with humans."
+          ]
+        },
+        {
+          "type": "qa",
+          "value": [
+            {
+              "question": "Where exactly in China do they live?",
+              "answer": "Mostly in Sichuan province, but also in Shaanxi and Gansu provinces."
+            },
+            {
+              "question": "Do they live in snow?",
+              "answer": "Yes, their thick oily fur is waterproof and keeps them warm during snowy mountain winters."
+            }
           ]
         }
       ]
@@ -237,12 +318,8 @@
       "id": "panda_behavior_climbing_skills",
       "title": "Acrobats of the Forest",
       "categoryId": "behavior",
-      "tags": [
-        "Skills",
-        "Climbing",
-        "Survival"
-      ],
-      "readTime": 6,
+      "tags": ["Skills", "Climbing", "Survival"],
+      "readTime": 9,
       "coverImage": "panda_climbing_cover",
       "lastUpdated": "2026-01-20",
       "contentBlocks": [
@@ -251,15 +328,39 @@
           "value": "They might look clumsy on the ground, but giant pandas are expert climbers. This skill is vital for escaping predators and finding safe places to rest."
         },
         {
+          "type": "text",
+          "value": "A panda in a tree is a common sight in the wild. They often climb as high as possible to find a cool breeze or to stay out of reach of leopards."
+        },
+        {
+          "type": "list",
+          "title": "Climbing Techniques",
+          "value": [
+            "Using powerful front shoulders to pull themselves up.",
+            "Gripping bark with non-retractable sharp claws.",
+            "Using their hind legs as powerful pushers.",
+            "Selecting sturdy branches for napping at great heights."
+          ]
+        },
+        {
+          "type": "fact",
+          "title": "Climbing Facts",
+          "value": [
+            "Cubs start practicing climbing at just 6 months old.",
+            "Pandas can climb up to 4,000 meters in search of food.",
+            "They are excellent swimmers, often crossing rivers to reach new trees.",
+            "They often descend trees tail-first to stay balanced."
+          ]
+        },
+        {
           "type": "qa",
           "value": [
             {
-              "question": "How early do they start climbing?",
-              "answer": "Cubs as young as six months old begin practicing their climbing skills."
+              "question": "Do they ever fall?",
+              "answer": "Rarely. Their paws have great grip, and they are very careful about weight distribution."
             },
             {
-              "question": "Why do they climb so high?",
-              "answer": "Height offers safety from leopards and dholes, and a cool breeze on hot days."
+              "question": "Why do they sleep in trees?",
+              "answer": "It is much safer than sleeping on the ground where predators might be active at night."
             }
           ]
         }
@@ -269,12 +370,8 @@
       "id": "panda_diet_water_needs",
       "title": "Hydration in the Wild",
       "categoryId": "diet",
-      "tags": [
-        "Water",
-        "Metabolism",
-        "River"
-      ],
-      "readTime": 4,
+      "tags": ["Water", "Metabolism", "River"],
+      "readTime": 8,
       "coverImage": "panda_water_cover",
       "lastUpdated": "2026-01-08",
       "contentBlocks": [
@@ -283,13 +380,40 @@
           "value": "Bamboo is dry and fibrous, so pandas need a lot of water to keep their systems moving. They often settle near mountain streams for easy access to fresh water."
         },
         {
+          "type": "text",
+          "value": "Water also helps regulate their body temperature, especially during the summer when the thick fur can cause overheating."
+        },
+        {
           "type": "fact",
           "title": "Water Facts",
           "value": [
-            "Pandas drink at least once a day.",
+            "Pandas drink at least once a day, usually more.",
             "In winter, they may eat snow to stay hydrated.",
-            "Water helps move the massive amount of fiber through their intestines.",
-            "Clean water sources are a key indicator of a healthy panda habitat."
+            "Water helps move fiber through their long intestines.",
+            "Clean water is a key indicator of a healthy panda habitat."
+          ]
+        },
+        {
+          "type": "list",
+          "title": "Hydration Sources",
+          "value": [
+            "Mountain streams and rivers.",
+            "Morning dew on bamboo leaves.",
+            "Moisture trapped inside young bamboo shoots.",
+            "Rainwater collected in tree hollows."
+          ]
+        },
+        {
+          "type": "qa",
+          "value": [
+            {
+              "question": "Can they go long without water?",
+              "answer": "No. Due to their high-fiber diet, dehydration can quickly lead to digestive blockages."
+            },
+            {
+              "question": "Do they swim in the water they drink?",
+              "answer": "Yes, they are quite clean and enjoy bathing in streams during warm weather."
+            }
           ]
         }
       ]
@@ -298,27 +422,50 @@
       "id": "panda_fun_facts_naming",
       "title": "What's in a Name?",
       "categoryId": "fun facts",
-      "tags": [
-        "Language",
-        "History",
-        "Culture"
-      ],
-      "readTime": 5,
+      "tags": ["Language", "History", "Culture"],
+      "readTime": 9,
       "coverImage": "panda_name_cover",
       "lastUpdated": "2026-01-21",
       "contentBlocks": [
         {
           "type": "text",
-          "value": "In Chinese, the giant panda is called 'Daxiongmao'. This word has a literal translation that surprises many people who aren't familiar with the language."
+          "value": "In Chinese, the giant panda is called 'Daxiongmao'. This word has a literal translation that surprises many people: 'Big Bear-Cat'."
+        },
+        {
+          "type": "text",
+          "value": "Throughout history, different cultures have given the panda various names, reflecting its mysterious and unique appearance."
         },
         {
           "type": "fact",
           "title": "Linguistic Secrets",
           "value": [
             "Daxiongmao means 'Large Bear-Cat'.",
-            "Ancient Chinese texts sometimes referred to them as 'Zhi-Yi' or 'Mo'.",
-            "The word 'Panda' may have come from the Nepali word 'Ponya' (bamboo eater).",
-            "They are considered a national treasure in their home country."
+            "Ancient texts referred to them as 'Zhi-Yi' or 'Mo'.",
+            "The word 'Panda' may come from the Nepali 'Ponya' (bamboo eater).",
+            "They are considered a national treasure in China."
+          ]
+        },
+        {
+          "type": "list",
+          "title": "Symbolic Names",
+          "value": [
+            "'The Hermit of the Forest' due to their solitary nature.",
+            "'The Living Fossil' because they've existed for millions of years.",
+            "'The Ambassador of Peace' in modern diplomacy.",
+            "'The Black and White Bear' in early European records."
+          ]
+        },
+        {
+          "type": "qa",
+          "value": [
+            {
+              "question": "Is the Red Panda a real panda?",
+              "answer": "The Red Panda was named first! The Giant Panda was named later because of its similar diet."
+            },
+            {
+              "question": "What is their scientific name?",
+              "answer": "Ailuropoda melanoleuca, which means 'black and white cat-foot'."
+            }
           ]
         }
       ]
@@ -327,27 +474,50 @@
       "id": "panda_health_senior_care",
       "title": "Aging Gracefully: Senior Pandas",
       "categoryId": "health",
-      "tags": [
-        "Geriatrics",
-        "Lifespan",
-        "Care"
-      ],
-      "readTime": 11,
+      "tags": ["Geriatrics", "Lifespan", "Care"],
+      "readTime": 12,
       "coverImage": "panda_senior_cover",
       "lastUpdated": "2026-01-14",
       "contentBlocks": [
         {
           "type": "text",
-          "value": "In the wild, pandas live about 15–20 years. In captivity, with specialized medical care and nutrition, they can live into their 30s. Senior pandas require very specific health monitoring."
+          "value": "In the wild, pandas live about 15–20 years. In captivity, with specialized care, they can live into their 30s. Senior pandas require specific monitoring."
+        },
+        {
+          "type": "text",
+          "value": "As they age, their nutritional needs change. They often struggle with the toughest bamboo and require softer shoots or specially prepared supplements."
         },
         {
           "type": "list",
           "title": "Health Issues in Older Pandas",
           "value": [
             "Dental wear from decades of chewing tough bamboo.",
-            "Arthritis in the limbs, making climbing more difficult.",
+            "Arthritis in limbs, making climbing difficult.",
             "Higher risk of hypertension and heart issues.",
-            "Digestive slowdowns requiring softer bamboo shoots."
+            "Digestive slowdowns requiring softer food."
+          ]
+        },
+        {
+          "type": "fact",
+          "title": "Senior Milestones",
+          "value": [
+            "A 30-year-old panda is like a 90-year-old human.",
+            "Captive seniors often get 'panda cake' for easy nutrition.",
+            "Regular ultrasounds and blood tests help track their health.",
+            "Senior pandas often become much calmer and more social with keepers."
+          ]
+        },
+        {
+          "type": "qa",
+          "value": [
+            {
+              "question": "What is the record age for a panda?",
+              "answer": "The oldest recorded panda reached 38 years old in captivity."
+            },
+            {
+              "question": "Do they still eat bamboo in old age?",
+              "answer": "Yes, but they prefer the leaves and softest shoots that are easier on their teeth."
+            }
           ]
         }
       ]
@@ -356,29 +526,49 @@
       "id": "panda_habitat_fragmentation",
       "title": "The Threat of Isolated Islands",
       "categoryId": "habitat",
-      "tags": [
-        "Environment",
-        "Genetics",
-        "Geography"
-      ],
-      "readTime": 10,
+      "tags": ["Environment", "Genetics", "Geography"],
+      "readTime": 11,
       "coverImage": "panda_isolated_cover",
       "lastUpdated": "2026-01-19",
       "contentBlocks": [
         {
           "type": "text",
-          "value": "While forest cover is increasing, habitat fragmentation remains a danger. Roads and villages can cut forests into 'islands', preventing pandas from meeting and breeding with other groups."
+          "value": "While forest cover is increasing, habitat fragmentation remains a danger. Roads and villages can cut forests into 'islands', isolating panda groups."
+        },
+        {
+          "type": "text",
+          "value": "Isolation leads to inbreeding, which weakens the genetic health of the population and makes them more vulnerable to disease."
+        },
+        {
+          "type": "fact",
+          "title": "Fragmentation Risks",
+          "value": [
+            "Isolation prevents pandas from finding diverse mates.",
+            "Limited food area if bamboo in one patch dies off.",
+            "Increased chance of human-wildlife conflict at borders.",
+            "Difficulty migrating to cooler areas during climate shifts."
+          ]
+        },
+        {
+          "type": "list",
+          "title": "Conservation Solutions",
+          "value": [
+            "Building 'Ecological Corridors' to connect forests.",
+            "Moving roads and tunnels underground where possible.",
+            "Reforesting land between isolated patches.",
+            "Strict zoning laws to prevent new construction in corridors."
+          ]
         },
         {
           "type": "qa",
           "value": [
             {
-              "question": "Why is isolation bad for pandas?",
-              "answer": "It leads to inbreeding, which weakens the population's immune system and health."
+              "question": "What is an ecological corridor?",
+              "answer": "A strip of protected forest that connects two larger habitats, allowing animals to travel safely."
             },
             {
-              "question": "What is being done to help?",
-              "answer": "Ecological corridors are being built—bridges of forest that connect isolated patches of habitat."
+              "question": "How many isolated groups exist?",
+              "answer": "There are over 30 separate groups; some have fewer than 10 individuals."
             }
           ]
         }
@@ -386,4 +576,3 @@
     }
   ]
 }
-

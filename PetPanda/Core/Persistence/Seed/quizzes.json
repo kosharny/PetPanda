@@ -3,11 +3,11 @@
     {
       "id": "protect_pandas_quiz_01",
       "title": "How to Help Protect Pandas?",
-      "description": "A fun and insightful quiz that tests your knowledge of panda protection and everyday conservation actions.",
+      "description": "Become a true guardian of nature! This comprehensive quiz dives into the complex world of giant panda conservation. Explore the concept of 'umbrella species,' the vital role of ecological corridors, and how global climate change directly impacts China's misty mountain forests. See how your daily choices can contribute to the survival of this iconic species.",
       "categoryId": "population",
       "tags": ["Habitat", "Behavior", "Population"],
-      "duration": 10,
-      "lastUpdated": "2026-01-01",
+      "duration": 12,
+      "lastUpdated": "2026-01-23",
       "coverImage": "panda_help_quiz_cover",
       "questions": [
         {
@@ -129,16 +129,30 @@
           ],
           "correctIndex": 1,
           "explanation": "When local people benefit from eco-tourism, they become the best guardians of the forests."
+        },
+        {
+          "id": "q11",
+          "text": "What is the current status of the giant panda on the IUCN Red List?",
+          "answers": ["Extinct", "Critically Endangered", "Vulnerable", "Least Concern"],
+          "correctIndex": 2,
+          "explanation": "Thanks to conservation efforts, their status was upgraded from 'Endangered' to 'Vulnerable' in 2016."
+        },
+        {
+          "id": "q12",
+          "text": "How many giant pandas are estimated to remain in the wild?",
+          "answers": ["About 500", "Roughly 1,860", "Over 5,000", "Exactly 10,000"],
+          "correctIndex": 1,
+          "explanation": "The most recent census estimates about 1,864 individuals in the wild."
         }
       ]
     },
     {
       "id": "panda_diet_expert_01",
       "title": "Bamboo & Beyond: The Diet Quiz",
-      "description": "How well do you know what keeps a giant panda energized? Test your knowledge on their unique eating habits.",
+      "description": "Step into the role of a professional panda nutritionist! This quiz explores the fascinating culinary world of the giant bamboo bear. You'll learn about seasonal migrations for the best shoots, the biological mystery of their carnivore-like digestive system, and the incredible anatomical features that allow them to chew through tough stalks for up to 14 hours a day.",
       "categoryId": "diet",
       "tags": ["Nutrition", "Bamboo", "Digestive System"],
-      "duration": 8,
+      "duration": 10,
       "lastUpdated": "2026-01-20",
       "coverImage": "panda_diet_quiz_cover",
       "questions": [
@@ -176,16 +190,30 @@
           "answers": ["Up to 5 kg", "Up to 12 kg", "Up to 38 kg", "Exactly 100 kg"],
           "correctIndex": 2,
           "explanation": "Depending on the part of the bamboo, they can eat between 12 and 38 kg daily."
+        },
+        {
+          "id": "dq6",
+          "text": "Why do pandas have a thick layer of mucus in their digestive tract?",
+          "answers": ["To help swallow meat", "To protect against bamboo splinters", "To stay warm", "To store water"],
+          "correctIndex": 1,
+          "explanation": "Their esophagus and stomach have a thick mucus lining to prevent injury from sharp bamboo shards."
+        },
+        {
+          "id": "dq7",
+          "text": "What is a 'bamboo explosion' (flowering) and why is it dangerous for pandas?",
+          "answers": ["It creates more food", "It signals the end of winter", "Mass bamboo death after flowering leads to starvation", "It attracts predators"],
+          "correctIndex": 2,
+          "explanation": "Bamboo species flower and die simultaneously every 30-100 years, leaving pandas without food in that area."
         }
       ]
     },
     {
       "id": "panda_habitat_master_01",
       "title": "Mountain Homes: Habitat Quiz",
-      "description": "Explore the misty forests of China and see if you know where pandas feel most at home.",
+      "description": "Embark on a journey through the high-altitude cloud forests of Sichuan, Shaanxi, and Gansu. This quiz tests your knowledge of the precise environmental conditions—humidity, temperature, and elevation—that pandas need to thrive. Discover why habitat fragmentation is a major challenge and how specialized corridors are built to reconnect isolated panda groups.",
       "categoryId": "habitat",
       "tags": ["Mountains", "China", "Climate"],
-      "duration": 8,
+      "duration": 10,
       "lastUpdated": "2026-01-18",
       "coverImage": "panda_habitat_quiz_cover",
       "questions": [
@@ -223,16 +251,30 @@
           "answers": ["To let tourists in", "To connect isolated forest patches", "To plant flowers", "To stop forest fires"],
           "correctIndex": 1,
           "explanation": "Corridors allow pandas from different groups to meet and breed, preventing inbreeding."
+        },
+        {
+          "id": "hq6",
+          "text": "Which Chinese province is home to the largest number of wild pandas?",
+          "answers": ["Yunnan", "Sichuan", "Hebei", "Guangdong"],
+          "correctIndex": 1,
+          "explanation": "Sichuan province contains the majority of the wild panda population and their habitat."
+        },
+        {
+          "id": "hq7",
+          "text": "Why is mist important for the panda's ecosystem?",
+          "answers": ["It hides them from hunters", "It keeps bamboo succulent and moist", "It provides drinking water only", "It helps them sleep"],
+          "correctIndex": 1,
+          "explanation": "Constant mist and high humidity are essential for the growth of the high-quality bamboo pandas prefer."
         }
       ]
     },
     {
       "id": "panda_behavior_fun_01",
       "title": "Panda Social Life & Secrets",
-      "description": "Are pandas social butterflies or lone rangers? Find out in this behavior quiz!",
+      "description": "Unlock the secret language of the forest! While pandas are known as loners, they have a rich social life conducted through chemical signals and vocalizations. This quiz covers everything from the legendary 'handstand' scent marking to the unique sounds a mother uses to communicate with her cub. Test your skills in understanding panda body language and social hierarchy.",
       "categoryId": "behavior",
       "tags": ["Social", "Scent Marking", "Climbing"],
-      "duration": 8,
+      "duration": 10,
       "lastUpdated": "2026-01-15",
       "coverImage": "panda_behavior_quiz_cover",
       "questions": [
@@ -270,16 +312,30 @@
           "answers": ["2 hours", "About 5-10 hours", "Over 15 hours", "They never sleep"],
           "correctIndex": 1,
           "explanation": "When not eating, pandas rest to conserve energy, usually sleeping 8-12 hours a day."
+        },
+        {
+          "id": "bq6",
+          "text": "Are giant pandas good swimmers?",
+          "answers": ["No, they hate water", "Only in emergencies", "Yes, they are very capable swimmers", "They can only float"],
+          "correctIndex": 2,
+          "explanation": "Like most bears, pandas are surprisingly good swimmers and can cross mountain rivers."
+        },
+        {
+          "id": "bq7",
+          "text": "Why do male pandas try to leave scent marks as high as possible on a tree?",
+          "answers": ["To reach the leaves", "To show their size and strength to rivals", "To hide the smell from predators", "To clean their paws"],
+          "correctIndex": 1,
+          "explanation": "Height of the mark indicates the male's physical size; a higher mark can intimidate smaller rivals without a fight."
         }
       ]
     },
     {
       "id": "panda_anatomy_facts_01",
       "title": "Anatomy & Fun Facts",
-      "description": "Test your knowledge on the physical quirks that make pandas so special.",
+      "description": "Did you know a panda's bite force is comparable to that of a polar bear? This quiz is packed with striking facts about the panda's unique biology. From the evolutionary secret of their 'sixth finger' to the true purpose behind their high-contrast fur, you’ll discover why these bears are among the most specialized and fascinating creatures on Earth.",
       "categoryId": "fun facts",
       "tags": ["Anatomy", "Pseudo-thumb", "Fur"],
-      "duration": 8,
+      "duration": 10,
       "lastUpdated": "2026-01-10",
       "coverImage": "panda_anatomy_quiz_cover",
       "questions": [
@@ -317,16 +373,30 @@
           "answers": ["Weak", "Like a house cat", "Stronger than a polar bear", "One of the strongest of any carnivore"],
           "correctIndex": 3,
           "explanation": "Because they must crush tough bamboo, their jaw muscles are incredibly powerful."
+        },
+        {
+          "id": "afq6",
+          "text": "How many teeth does an adult giant panda have?",
+          "answers": ["20", "32", "42", "54"],
+          "correctIndex": 2,
+          "explanation": "Adult pandas have 42 teeth, including large, flat molars for grinding bamboo."
+        },
+        {
+          "id": "afq7",
+          "text": "What is unique about a panda's pupils compared to other bears?",
+          "answers": ["They are round", "They are vertical slits (like cats)", "They are horizontal", "They have no pupils"],
+          "correctIndex": 1,
+          "explanation": "Unlike other bears whose pupils are round, pandas have vertical slits, which helps their nocturnal vision."
         }
       ]
     },
     {
       "id": "panda_health_safety_01",
       "title": "Health & Life Cycle Quiz",
-      "description": "How long do they live? How big do they get? Test your health stats knowledge.",
+      "description": "Follow the journey of a panda from a pink, butter-stick-sized newborn to a mighty 125kg adult. This health-focused quiz examines the critical stages of a panda's life, the vital importance of dental health for survival, and the unique challenges of reproduction. Gain a deep understanding of the specialized care provided by veterinarians in breeding centers and reserves.",
       "categoryId": "health",
       "tags": ["Lifespan", "Growth", "Cubs"],
-      "duration": 8,
+      "duration": 10,
       "lastUpdated": "2026-01-12",
       "coverImage": "panda_health_quiz_cover",
       "questions": [
@@ -364,6 +434,20 @@
           "answers": ["Lack of food", "Predators (like leopards)", "Accidental crushing by mother", "All of the above"],
           "correctIndex": 3,
           "explanation": "Cubs are extremely fragile and face threats from predators and the environment early on."
+        },
+        {
+          "id": "hsq6",
+          "text": "At what age is a panda cub considered fully weaned from its mother's milk?",
+          "answers": ["3 months", "8-12 months", "18-24 months", "4 years"],
+          "correctIndex": 2,
+          "explanation": "Cubs start eating bamboo at 6 months but continue to nurse for up to 18-24 months."
+        },
+        {
+          "id": "hsq7",
+          "text": "What often happens when a giant panda gives birth to twins in the wild?",
+          "answers": ["She raises both easily", "The father helps with one", "She usually chooses the stronger one and abandons the other", "They both stay with the mother for 5 years"],
+          "correctIndex": 2,
+          "explanation": "In the wild, a mother often lacks the energy to raise two, so she focuses on one to ensure its survival. Reserves use 'swap' techniques to save both."
         }
       ]
     }

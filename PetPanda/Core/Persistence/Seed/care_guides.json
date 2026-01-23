@@ -1,359 +1,488 @@
 {
-    "guides": [
+  "guides": [
+    {
+      "id": "panda_diet_01",
+      "title": "What Do Giant Pandas Eat?",
+      "difficulty": "easy",
+      "category": "Diet",
+      "duration": 12,
+      "tags": [
+        "Diet",
+        "Nutrition",
+        "Bamboo"
+      ],
+      "steps": [
         {
-            "id": "panda_diet_01",
-            "title": "What Do Giant Pandas Eat?",
-            "difficulty": "easy",
-            "category": "Diet",
-            "duration": 10,
-            "tags": [
-                "Diet",
-                "Nutrition",
-                "Bamboo"
-            ],
-            "steps": [
-                {
-                    "id": "step_1",
-                    "title": "Main diet",
-                    "content": [
-                        "Bamboo — 99% of daily food",
-                        "Pandas eat: Bamboo stalks, leaves, and shoots (their favorite)"
-                    ],
-                    "image": "panda_eating_bamboo",
-                    "hint": "Shoots are the richest in nutrients."
-                },
-                {
-                    "id": "step_2",
-                    "title": "Occasional extras",
-                    "content": [
-                        "Sometimes pandas may eat: Small rodents, Birds, Eggs, Insects"
-                    ],
-                    "image": "panda_eating_bamboo",
-                    "hint": "This makes up only 1% of their diet."
-                },
-                {
-                    "id": "step_3",
-                    "title": "Daily intake",
-                    "content": [
-                        "Pandas eat 12–38 kg (26–84 lbs) of bamboo per day",
-                        "Feeding takes 10–14 hours a day",
-                        "They prefer young shoots in spring and leaves in winter"
-                    ],
-                    "image": "panda_eating_bamboo",
-                    "hint": "Feeding is their main activity during the day."
-                },
-                {
-                    "id": "step_4",
-                    "title": "Why bamboo?",
-                    "content": [
-                        "Fiber supports digestion",
-                        "Protein (especially in shoots)",
-                        "Calcium & phosphorus for strong bones",
-                        "Water — up to 50% of hydration"
-                    ],
-                    "image": "panda_eating_bamboo",
-                    "hint": "They have a 'pseudo-thumb' to hold bamboo like a hand!"
-                }
-            ],
-            "summary": [
-                "Pandas must eat huge amounts because bamboo is low-calorie.",
-                "Without bamboo forests, pandas cannot survive.",
-                "Conservation = protecting bamboo ecosystems."
-            ],
-            "faq": [
-                {
-                    "question": "Are pandas herbivores?",
-                    "answer": "Not biologically — they are classified as carnivores, but functionally they eat like herbivores."
-                },
-                {
-                    "question": "Do pandas eat meat regularly?",
-                    "answer": "No. Their bodies are not adapted to digest much animal protein."
-                },
-                {
-                    "question": "Why do they eat so much?",
-                    "answer": "Bamboo contains very few calories, so they need large quantities for energy."
-                }
-            ]
+          "id": "step_1",
+          "title": "The Bamboo Foundation",
+          "content": [
+            "Bamboo makes up over 99% of a giant panda's daily food intake.",
+            "They focus on the most succulent parts: bamboo stalks, fresh leaves, and nutrient-dense shoots.",
+            "Pandas are highly selective, choosing only about 20 species out of the hundreds available in China."
+          ],
+          "image": "panda_eating_bamboo",
+          "hint": "Shoots are the richest in nutrients and are easiest to digest."
         },
         {
-            "id": "panda_habitat_01",
-            "title": "Creating the Perfect Habitat",
-            "difficulty": "medium",
-            "category": "Habitat",
-            "duration": 15,
-            "tags": ["Environment", "Climate", "Altitude"],
-            "steps": [
-                {
-                    "id": "h_step_1",
-                    "title": "Temperature Control",
-                    "content": [
-                        "Pandas thrive in cool, damp environments",
-                        "Optimal temperature: 10°C to 20°C",
-                        "Avoid direct hot sun for long periods"
-                    ],
-                    "image": "habitat_cool_forest",
-                    "hint": "In the wild, they move higher up the mountains to stay cool."
-                },
-                {
-                    "id": "h_step_2",
-                    "title": "Altitude Matters",
-                    "content": [
-                        "Wild pandas live at 1,200 to 3,100 meters",
-                        "High altitude provides the necessary mist and humidity",
-                        "Air quality must be pristine"
-                    ],
-                    "image": "habitat_cool_forest",
-                    "hint": "Mist helps bamboo stay succulent and fresh."
-                },
-                {
-                    "id": "h_step_3",
-                    "title": "Humidity and Mist",
-                    "content": [
-                        "Humidity levels should stay above 60%",
-                        "Mist mimics the cloud forests of Sichuan",
-                        "Constant moisture prevents bamboo from drying out"
-                    ],
-                    "image": "habitat_cool_forest",
-                    "hint": "Cloud forests are the panda's natural air conditioner."
-                },
-                {
-                    "id": "h_step_4",
-                    "title": "Shelter and Cover",
-                    "content": [
-                        "Dense vegetation for feeling secure",
-                        "Hollow logs or caves for resting during rain",
-                        "Natural barriers to reduce wind chill"
-                    ],
-                    "image": "habitat_cool_forest",
-                    "hint": "Pandas spend a lot of time hiding while they digest."
-                }
-            ],
-            "summary": [
-                "Cool temperatures are vital for panda comfort.",
-                "High humidity supports bamboo growth.",
-                "A healthy habitat mimics the Sichuan mountains."
-            ],
-            "faq": [
-                {
-                    "question": "Can pandas live in tropical climates?",
-                    "answer": "No, they overheat easily due to their thick fur."
-                }
-            ]
+          "id": "step_2",
+          "title": "The 1% Carnivore Heritage",
+          "content": [
+            "Biologically, pandas are bears and still possess a digestive system designed for meat.",
+            "They occasionally eat small rodents, birds, eggs, and insects to supplement their diet.",
+            "This provides critical vitamins like B12 that are not found in bamboo."
+          ],
+          "image": "panda_eating_bamboo",
+          "hint": "This animal protein makes up only 1% of their total diet."
         },
         {
-            "id": "panda_behavior_01",
-            "title": "Understanding Panda Body Language",
-            "difficulty": "easy",
-            "category": "Behavior",
-            "duration": 12,
-            "tags": ["Communication", "Signs", "Social"],
-            "steps": [
-                {
-                    "id": "b_step_1",
-                    "title": "The Scent Mark",
-                    "content": [
-                        "Pandas rub scent glands against trees",
-                        "Used to mark territory and find mates",
-                        "Handstand marking: the higher the mark, the stronger the panda"
-                    ],
-                    "image": "panda_scent_marking",
-                    "hint": "They use scent because their eyesight isn't very sharp."
-                },
-                {
-                    "id": "b_step_2",
-                    "title": "Vocalizations",
-                    "content": [
-                        "Bleating: A friendly greeting or 'I'm here'",
-                        "Honking: Indicates stress or annoyance",
-                        "Chirp: Usually a mother calling her cub"
-                    ],
-                    "image": "panda_scent_marking",
-                    "hint": "They have 11 different distinct sounds."
-                },
-                {
-                    "id": "b_step_3",
-                    "title": "Postures and Stances",
-                    "content": [
-                        "Direct eye contact is often a threat",
-                        "Lowering the head shows submission or shyness",
-                        "Sitting upright while eating shows they feel safe"
-                    ],
-                    "image": "panda_scent_marking",
-                    "hint": "An upright panda is usually a relaxed panda."
-                }
-            ],
-            "summary": [
-                "Scent is the primary way pandas 'talk'.",
-                "Vocalizations help maintain social distance.",
-                "Body language helps avoid physical fights."
-            ],
-            "faq": [
-                {
-                    "question": "Are pandas aggressive?",
-                    "answer": "Generally no, they prefer to retreat, but can be dangerous if cornered."
-                }
-            ]
+          "id": "step_3",
+          "title": "Massive Daily Consumption",
+          "content": [
+            "Because bamboo is low in calories, an adult panda must eat 12–38 kg (26–84 lbs) every single day.",
+            "Feeding takes up a staggering 10–14 hours of their daily schedule.",
+            "The sheer volume of fiber requires a constant cycle of eating and short periods of rest."
+          ],
+          "image": "panda_eating_bamboo",
+          "hint": "Feeding is their primary waking activity to maintain energy levels."
         },
         {
-            "id": "panda_health_01",
-            "title": "Essential Health Check-up",
-            "difficulty": "hard",
-            "category": "Health",
-            "duration": 20,
-            "tags": ["Medical", "Wellness", "Teeth"],
-            "steps": [
-                {
-                    "id": "he_step_1",
-                    "title": "Dental Inspection",
-                    "content": [
-                        "Check for cracks from tough bamboo stalks",
-                        "Look for signs of gum irritation",
-                        "Pandas have 42 teeth—all must be functional"
-                    ],
-                    "image": "panda_teeth_check",
-                    "hint": "A panda's bite is stronger than a polar bear's!"
-                },
-                {
-                    "id": "he_step_2",
-                    "title": "Weight Monitoring",
-                    "content": [
-                        "Adult males: 85–125 kg",
-                        "Adult females: 70–100 kg",
-                        "Rapid weight loss usually indicates bamboo quality issues"
-                    ],
-                    "image": "panda_teeth_check",
-                    "hint": "They can lose weight quickly during the mating season."
-                },
-                {
-                    "id": "he_step_3",
-                    "title": "Coat and Skin Health",
-                    "content": [
-                        "Check for parasites in the thick fur",
-                        "Skin should be clear under the white patches",
-                        "Excessive scratching can indicate stress"
-                    ],
-                    "image": "panda_teeth_check",
-                    "hint": "Their fur is oily to protect them from the rain."
-                }
-            ],
-            "summary": [
-                "Teeth are a panda's most important tool.",
-                "Stable weight is a sign of a good diet.",
-                "Preventive care extends their life significantly."
-            ],
-            "faq": [
-                {
-                    "question": "How long do pandas live?",
-                    "answer": "15-20 years in the wild, up to 30 in captivity."
-                }
-            ]
+          "id": "step_4",
+          "title": "Anatomy for Eating",
+          "content": [
+            "Pandas have evolved a 'pseudo-thumb' (an enlarged wrist bone) to grip bamboo stems tightly.",
+            "Their powerful jaw muscles and large molars are designed to crush tough, woody stalks.",
+            "A thick layer of mucus protects their esophagus from sharp bamboo splinters."
+          ],
+          "image": "panda_eating_bamboo",
+          "hint": "Their bite force is one of the highest among all bear species."
         },
         {
-            "id": "panda_fun_01",
-            "title": "How to Identify a Giant Panda",
-            "difficulty": "easy",
-            "category": "Fun Facts",
-            "duration": 10,
-            "tags": ["Anatomy", "Colors", "Identification"],
-            "steps": [
-                {
-                    "id": "f_step_1",
-                    "title": "Spot the Patches",
-                    "content": [
-                        "Black circles around the eyes",
-                        "Black ears and black legs/shoulders",
-                        "The rest of the coat is creamy white"
-                    ],
-                    "image": "panda_markings",
-                    "hint": "Each panda's eye patches are as unique as a fingerprint."
-                },
-                {
-                    "id": "f_step_2",
-                    "title": "Check the Tail",
-                    "content": [
-                        "Pandas have short, stubby tails",
-                        "The tail is usually around 10–15 cm long",
-                        "It is white, unlike the red panda's long striped tail"
-                    ],
-                    "image": "panda_markings",
-                    "hint": "A panda's tail is the second longest in the bear family."
-                },
-                {
-                    "id": "f_step_3",
-                    "title": "Size and Stature",
-                    "content": [
-                        "Adults are 1.2 to 1.9 meters long",
-                        "They stand about 60–90 cm at the shoulder",
-                        "A heavy, round body shape helps with heat retention"
-                    ],
-                    "image": "panda_markings",
-                    "hint": "They look fluffy, but they are very muscular bears."
-                }
-            ],
-            "summary": [
-                "The black-and-white coat is perfect camouflage in snow and shadows.",
-                "No two pandas look exactly the same."
-            ],
-            "faq": [
-                {
-                    "question": "Are there brown pandas?",
-                    "answer": "Yes! The rare Qinling panda has brown and tan fur."
-                }
-            ]
-        },
-        {
-            "id": "panda_diet_02",
-            "title": "Seasonal Bamboo Guide",
-            "difficulty": "medium",
-            "category": "Diet",
-            "duration": 15,
-            "tags": ["Food", "Seasons", "Nutrition"],
-            "steps": [
-                {
-                    "id": "d2_step_1",
-                    "title": "Spring: The Shoot Season",
-                    "content": [
-                        "Focus on bamboo shoots (very high protein)",
-                        "Pandas eat the most during this time",
-                        "Shoots provide the energy for the breeding season"
-                    ],
-                    "image": "bamboo_shoots",
-                    "hint": "Shoots are like 'candy' for pandas."
-                },
-                {
-                    "id": "d2_step_2",
-                    "title": "Summer: Transition to Leaves",
-                    "content": [
-                        "As shoots harden, pandas move to leaves",
-                        "They seek higher ground for fresher growth",
-                        "Feeding speed slows down compared to spring"
-                    ],
-                    "image": "bamboo_shoots",
-                    "hint": "They follow the 'bamboo growth' up the mountain."
-                },
-                {
-                    "id": "d2_step_3",
-                    "title": "Winter: The Leaf Struggle",
-                    "content": [
-                        "Focus on older leaves and stalks",
-                        "Lower energy content means less movement",
-                        "Panda will move to lower altitudes to find green plants"
-                    ],
-                    "image": "bamboo_shoots",
-                    "hint": "They conserve energy by sleeping more in winter."
-                }
-            ],
-            "summary": [
-                "Nutrition needs change with the seasons.",
-                "Shoots are the most nutritious part.",
-                "Pandas are highly adaptable to what part of bamboo is available."
-            ],
-            "faq": [
-                {
-                    "question": "Do they drink a lot of water?",
-                    "answer": "Yes, especially when eating dry stalks."
-                }
-            ]
+          "id": "step_5",
+          "title": "Hydration Sources",
+          "content": [
+            "Fresh bamboo shoots are about 90% water, providing a major source of hydration.",
+            "Pandas still need to drink from mountain streams or melting snow at least once a day.",
+            "In winter, when they eat drier leaves, they must visit water sources more frequently."
+          ],
+          "image": "panda_eating_bamboo",
+          "hint": "Water access is just as vital as bamboo availability for their survival."
         }
-    ]
+      ],
+      "summary": [
+        "Pandas must eat huge amounts because bamboo is low-calorie.",
+        "They have unique anatomical adaptations like the pseudo-thumb for handling food.",
+        "Conservation requires protecting both the bamboo forests and the water sources within them."
+      ],
+      "faq": [
+        {
+          "question": "Are pandas herbivores?",
+          "answer": "Not biologically — they are classified as carnivores, but functionally they eat like herbivores."
+        },
+        {
+          "question": "Do pandas eat meat regularly?",
+          "answer": "No. Their bodies are not adapted to digest large amounts of animal protein, though they eat it occasionally."
+        }
+      ]
+    },
+    {
+      "id": "panda_habitat_01",
+      "title": "Creating the Perfect Habitat",
+      "difficulty": "medium",
+      "category": "Habitat",
+      "duration": 18,
+      "tags": [
+        "Environment",
+        "Climate",
+        "Altitude"
+      ],
+      "steps": [
+        {
+          "id": "h_step_1",
+          "title": "Temperature Control",
+          "content": [
+            "Pandas possess extremely thick fur that makes them highly susceptible to overheating.",
+            "They thrive in cool, damp environments with optimal temperatures between 10°C and 20°C.",
+            "In a managed habitat, direct hot sunlight must be avoided, and shaded retreats are mandatory."
+          ],
+          "image": "habitat_cool_forest",
+          "hint": "In the wild, they migrate to higher, cooler altitudes during the summer heat."
+        },
+        {
+          "id": "h_step_2",
+          "title": "High Altitude Requirements",
+          "content": [
+            "Wild pandas typically reside in mountain ranges at 1,200 to 3,100 meters above sea level.",
+            "These heights provide the constant mist and pristine air quality necessary for their health.",
+            "Lower altitudes often lack the specific bamboo species they need to survive."
+          ],
+          "image": "habitat_cool_forest",
+          "hint": "High altitudes naturally maintain the cool, moist climate pandas love."
+        },
+        {
+          "id": "h_step_3",
+          "title": "Humidity and Cloud Forests",
+          "content": [
+            "Humidity levels should consistently stay above 60% to mimic the Sichuan cloud forests.",
+            "Constant moisture is essential to keep bamboo plants succulent and easy to chew.",
+            "Mist acts as a natural air conditioner, preventing the panda's thick coat from trapping too much heat."
+          ],
+          "image": "habitat_cool_forest",
+          "hint": "Cloud forests are the panda's natural air conditioner and pantry."
+        },
+        {
+          "id": "h_step_4",
+          "title": "Shelter and Seclusion",
+          "content": [
+            "Pandas require dense vegetation and hollow logs to feel secure while sleeping or digesting.",
+            "Natural caves or rock crevices provide essential protection during heavy mountain rains.",
+            "A complex landscape with varying terrain allows them to hide from potential disturbances."
+          ],
+          "image": "habitat_cool_forest",
+          "hint": "A secure panda is a healthy panda; they spend hours hiding while they digest."
+        },
+        {
+          "id": "h_step_5",
+          "title": "Fresh Water Integration",
+          "content": [
+            "A perfect habitat must feature access to running water, such as streams or small waterfalls.",
+            "Water is used not only for drinking but also for cooling down their paws and bellies.",
+            "Stagnant water should be avoided to prevent the spread of parasites in the population."
+          ],
+          "image": "habitat_cool_forest",
+          "hint": "Clean, running water is a non-negotiable requirement for a wild-like habitat."
+        }
+      ],
+      "summary": [
+        "Cool temperatures and high humidity are the two most vital environmental factors.",
+        "Altitude determines the health of both the panda and its bamboo food source.",
+        "A healthy habitat must offer dense cover and clean, running water."
+      ],
+      "faq": [
+        {
+          "question": "Can pandas live in tropical climates?",
+          "answer": "No, they would overheat very quickly due to their extremely dense fur."
+        }
+      ]
+    },
+    {
+      "id": "panda_behavior_01",
+      "title": "Understanding Panda Body Language",
+      "difficulty": "easy",
+      "category": "Behavior",
+      "duration": 15,
+      "tags": [
+        "Communication",
+        "Signs",
+        "Social"
+      ],
+      "steps": [
+        {
+          "id": "b_step_1",
+          "title": "The Scent Marking System",
+          "content": [
+            "Pandas communicate primarily through scent glands located under their tails.",
+            "They rub these glands against trees to mark territory and signal their identity to others.",
+            "By smelling these marks, other pandas can determine the age, sex, and health of the marker."
+          ],
+          "image": "panda_scent_marking",
+          "hint": "Scent is their primary way to 'talk' since they live solitary lives."
+        },
+        {
+          "id": "b_step_2",
+          "title": "Complex Vocalizations",
+          "content": [
+            "Pandas are surprisingly vocal, with 11 distinct sounds used in different social contexts.",
+            "A friendly 'bleat' (like a sheep) is used as a greeting or to show peaceful intentions.",
+            "Honking or barking indicates high levels of stress, annoyance, or a warning to stay away."
+          ],
+          "image": "panda_scent_marking",
+          "hint": "Listen for the bleat—it's the most common sign of a relaxed panda."
+        },
+        {
+          "id": "b_step_3",
+          "title": "Postures and Eye Contact",
+          "content": [
+            "Direct, unblinking eye contact is a sign of aggression and is considered a threat.",
+            "To show submission or shyness, a panda will lower its head or cover its face with its paws.",
+            "Rolling on the ground is often a sign of playfulness or an attempt to spread scent."
+          ],
+          "image": "panda_scent_marking",
+          "hint": "An upright, sitting panda is usually calm and focused on eating."
+        },
+        {
+          "id": "b_step_4",
+          "title": "The Handstand Technique",
+          "content": [
+            "Male pandas often perform a handstand against a tree to leave their scent as high as possible.",
+            "The height of the mark serves as a visual and chemical advertisement of the panda's size.",
+            "This behavior helps avoid physical fights by establishing a hierarchy through 'height' metrics."
+          ],
+          "image": "panda_scent_marking",
+          "hint": "The higher the mark, the more dominant the male appears to rivals."
+        },
+        {
+          "id": "b_step_5",
+          "title": "Mother and Cub Interaction",
+          "content": [
+            "Cubs use a high-pitched 'chirp' or 'whine' to call for their mother's attention.",
+            "Mothers respond with gentle nuzzling and grooming to calm the cub and bond.",
+            "Physical touch is vital during the first few months of a cub's life for thermal regulation."
+          ],
+          "image": "panda_scent_marking",
+          "hint": "Vocal bonding is crucial since cubs are born blind and helpless."
+        }
+      ],
+      "summary": [
+        "Scent is the primary social tool for these solitary animals.",
+        "Vocalizations allow them to communicate over distances in thick bamboo forests.",
+        "Body language and 'handstands' are used to avoid dangerous physical confrontations."
+      ],
+      "faq": [
+        {
+          "question": "Are pandas aggressive?",
+          "answer": "Generally no; they prefer to retreat, but can be dangerous if cornered or if a mother is protecting a cub."
+        }
+      ]
+    },
+    {
+      "id": "panda_health_01",
+      "title": "Essential Health Check-up",
+      "difficulty": "hard",
+      "category": "Health",
+      "duration": 25,
+      "tags": [
+        "Medical",
+        "Wellness",
+        "Teeth"
+      ],
+      "steps": [
+        {
+          "id": "he_step_1",
+          "title": "Dental and Jaw Inspection",
+          "content": [
+            "Veterinarians must check for enamel cracks caused by splintering old bamboo stalks.",
+            "Gum irritation or abscesses can lead to life-threatening starvation if the panda stops eating.",
+            "All 42 teeth must be inspected to ensure the grinding molars are working efficiently."
+          ],
+          "image": "panda_teeth_check",
+          "hint": "A panda's dental health is the single most important factor for its longevity."
+        },
+        {
+          "id": "he_step_2",
+          "title": "Weight and Body Conditioning",
+          "content": [
+            "Weight must be monitored monthly: 85–125 kg for males and 70–100 kg for females.",
+            "Body condition scoring involves checking the fat layers around the ribs and hips.",
+            "Sudden weight loss is often a red flag for poor bamboo quality or gastrointestinal parasites."
+          ],
+          "image": "panda_teeth_check",
+          "hint": "Stable weight indicates that the current diet is nutritionally sufficient."
+        },
+        {
+          "id": "he_step_3",
+          "title": "Coat, Skin, and Parasites",
+          "content": [
+            "The thick fur must be checked for external parasites like mites or ticks.",
+            "Skin under the white patches should be pink and clear of any lesions or fungal infections.",
+            "Oily fur is a healthy sign, as it provides a natural waterproof barrier against the rain."
+          ],
+          "image": "panda_teeth_check",
+          "hint": "Excessive scratching can be a sign of environmental stress or skin allergies."
+        },
+        {
+          "id": "he_step_4",
+          "title": "Digestive Scat Analysis",
+          "content": [
+            "Because they digest so little of what they eat, their waste reveals a lot about their health.",
+            "Analysis looks at the length of the bamboo fibers in the scat to check chewing efficiency.",
+            "Changes in waste consistency can indicate an imbalance in the gut microbiome."
+          ],
+          "image": "panda_teeth_check",
+          "hint": "Healthy scat should consist almost entirely of visible, undigested bamboo fibers."
+        },
+        {
+          "id": "he_step_5",
+          "title": "Joint and Mobility Assessment",
+          "content": [
+            "Older pandas are prone to arthritis in their hips and front paws from climbing and sitting.",
+            "Veterinarians observe the panda's ability to grip bamboo with the pseudo-thumb.",
+            "Checking for range of motion ensures the panda can still navigate mountain terrain."
+          ],
+          "image": "panda_teeth_check",
+          "hint": "Flexibility is key for a panda to reach the best bamboo shoots in the wild."
+        }
+      ],
+      "summary": [
+        "Dental health is the foundation of panda survival.",
+        "Weight monitoring and scat analysis are the best indicators of digestive health.",
+        "Preventive care focuses on parasite control and joint mobility as they age."
+      ],
+      "faq": [
+        {
+          "question": "How long do pandas live?",
+          "answer": "15-20 years in the wild, but up to 30 years or more in captivity due to specialized medical care."
+        }
+      ]
+    },
+    {
+      "id": "panda_fun_01",
+      "title": "How to Identify a Giant Panda",
+      "difficulty": "easy",
+      "category": "Fun Facts",
+      "duration": 10,
+      "tags": [
+        "Anatomy",
+        "Colors",
+        "Identification"
+      ],
+      "steps": [
+        {
+          "id": "f_step_1",
+          "title": "The Iconic Eye Patches",
+          "content": [
+            "Giant pandas are world-famous for the large black circles surrounding their eyes.",
+            "These patches help reduce glare and may play a role in identifying other pandas.",
+            "Each panda's eye patches are slightly different in shape, much like a human fingerprint."
+          ],
+          "image": "panda_markings",
+          "hint": "Scientists use patch shapes to track individual pandas in the wild."
+        },
+        {
+          "id": "f_step_2",
+          "title": "Checking the Tail",
+          "content": [
+            "Unlike most bears, giant pandas have a relatively long tail, measuring 10–15 cm.",
+            "The tail is almost always pure white and is often tucked close to the body.",
+            "This is a key difference from the Red Panda, which has a long, bushy, striped tail."
+          ],
+          "image": "panda_markings",
+          "hint": "It is the second longest tail in the entire bear family."
+        },
+        {
+          "id": "f_step_3",
+          "title": "Stature and Body Shape",
+          "content": [
+            "Adults stand about 60–90 cm at the shoulder and are 1.2 to 1.9 meters in length.",
+            "They have a heavy, round body shape that is designed for maximum heat retention.",
+            "Their front legs and shoulders are much more muscular than their hindquarters."
+          ],
+          "image": "panda_markings",
+          "hint": "Their round appearance makes them look slow, but they are excellent climbers."
+        },
+        {
+          "id": "f_step_4",
+          "title": "The 'Sixth Finger' Anatomy",
+          "content": [
+            "Look closely at their front paws to see the famous pseudo-thumb.",
+            "This isn't a true finger but a modified sesamoid bone that acts as a thumb.",
+            "This anatomical quirk is unique to pandas and allows them to strip bamboo leaves with ease."
+          ],
+          "image": "panda_markings",
+          "hint": "This thumb allows them to hold bamboo just like a human holds a sandwich."
+        },
+        {
+          "id": "f_step_5",
+          "title": "Rare Brown Variations",
+          "content": [
+            "While most are black and white, a very rare subspecies called the Qinling panda exists.",
+            "These rare bears have light brown and tan fur instead of the traditional black.",
+            "Only a few dozen have ever been spotted, making them one of the rarest animals on Earth."
+          ],
+          "image": "panda_markings",
+          "hint": "Brown pandas are only found in a specific mountain range in Shaanxi province."
+        }
+      ],
+      "summary": [
+        "The black-and-white pattern is actually highly effective camouflage in snow and shadow.",
+        "Anatomical features like the tail and pseudo-thumb set them apart from other bears.",
+        "Individual identification is possible through patch patterns and color variations."
+      ],
+      "faq": [
+        {
+          "question": "Are there brown pandas?",
+          "answer": "Yes! The rare Qinling panda has brown and tan fur due to a genetic mutation."
+        }
+      ]
+    },
+    {
+      "id": "panda_diet_02",
+      "title": "Seasonal Bamboo Guide",
+      "difficulty": "medium",
+      "category": "Diet",
+      "duration": 15,
+      "tags": [
+        "Food",
+        "Seasons",
+        "Nutrition"
+      ],
+      "steps": [
+        {
+          "id": "d2_step_1",
+          "title": "Spring: The Shoot Season",
+          "content": [
+            "Spring is the most important feeding time, as bamboo shoots begin to sprout.",
+            "Shoots are very high in protein and sugar, providing a massive energy boost.",
+            "Pandas will often eat faster and more during this time to prepare for the breeding season."
+          ],
+          "image": "bamboo_shoots",
+          "hint": "Shoots are like 'high-energy candy' for pandas."
+        },
+        {
+          "id": "d2_step_2",
+          "title": "Summer: Transition to Leaves",
+          "content": [
+            "As bamboo shoots grow tall and harden into wood, pandas switch their focus to leaves.",
+            "They move to higher altitudes where the air is cooler and the bamboo is fresher.",
+            "Digestion slows down during this time as leaves contain more complex fibers than shoots."
+          ],
+          "image": "bamboo_shoots",
+          "hint": "They 'follow the bamboo growth' up the mountainside to stay fed."
+        },
+        {
+          "id": "d2_step_3",
+          "title": "Winter: The Leaf Struggle",
+          "content": [
+            "In winter, pandas must rely on older, tougher leaves and stalks.",
+            "Because this food is less nutritious, pandas significantly reduce their physical movement.",
+            "They descend to lower valleys where the temperature is slightly warmer and bamboo is still green."
+          ],
+          "image": "bamboo_shoots",
+          "hint": "They conserve energy by sleeping more and moving less during cold months."
+        },
+        {
+          "id": "d2_step_4",
+          "title": "Altitude Migration Patterns",
+          "content": [
+            "Pandas perform a 'vertical migration' based on which bamboo parts are available.",
+            "In early spring, they stay low for the first shoots; by late summer, they are at the peaks.",
+            "This migration ensures they are always eating the most nutritious part of the plant."
+          ],
+          "image": "bamboo_shoots",
+          "hint": "Their survival depends on being able to move freely between different altitudes."
+        },
+        {
+          "id": "d2_step_5",
+          "title": "Nutritional Adaptability",
+          "content": [
+            "Pandas have a unique gut microbiome that shifts slightly between shoot and leaf seasons.",
+            "During shoot season, their bodies are better at storing a small amount of fat.",
+            "This adaptability allows them to survive in a habitat where food quality changes drastically."
+          ],
+          "image": "bamboo_shoots",
+          "hint": "Despite their specialized diet, they are experts at timing their nutrition."
+        }
+      ],
+      "summary": [
+        "Nutrition needs and food sources change dramatically with the seasons.",
+        "Shoots provide the necessary energy for growth and reproduction in spring.",
+        "Vertical migration is a key survival strategy to find the best quality bamboo."
+      ],
+      "faq": [
+        {
+          "question": "Do they drink a lot of water?",
+          "answer": "Yes, they require significant amounts of water, especially when eating dry winter leaves."
+        }
+      ]
+    }
+  ]
 }
